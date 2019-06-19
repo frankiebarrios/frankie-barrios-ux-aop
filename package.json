@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/frankielb/frankie-barrios-ux-iop/issues"
   },
-  "homepage": "https://github.com/frankielb/frankie-barrios-ux-iop#readme"
+  "homepage": "https://github.com/frankielb/frankie-barrios-ux-iop#readme",
+  "dependencies": {
+    "yarn": "^1.16.0"
+  }
 }
