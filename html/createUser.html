@@ -14,5 +14,27 @@
         <li><a href="createUser.html">Create User</a></li>
         <li><a href="editUser.html">Edit User</a></li>
     </ul>
+
+    <h2>Create User</h2>
+
+    <form>
+        <div>
+            <label>First Name:</label>
+            <input type="text" name="firstName" id="firstName">
+        </div>
+        <div>
+            <label>Last Name:</label>
+            <input type="text" name="lastName" id="lastName">
+        </div>
+        <div>
+            <label>Phone:</label>
+            <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="000-000-0000">
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" id="email" placeholder="name@example.com">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
