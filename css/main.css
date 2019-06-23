@@ -1,0 +1,44 @@
+.debugBorder {
+    border-style: dotted;
+    border-color: red;
+}
+
+.div-center {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 25%;
+    border: 1px solid #ddd;
+  }
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(odd) {
+  background-color: #87CEFA
+}
+
+table.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.form {
+    
+}
