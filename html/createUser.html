@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <title>Create User</title>
 </head>
+
 <body>
-    <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="userProfile.html">User Profile</a></li>
-        <li><a href="userList.html">User List</a></li>
-        <li><a href="createUser.html">Create User</a></li>
-        <li><a href="editUser.html">Edit User</a></li>
-    </ul>
+    <main>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="userProfile.html">User Profile</a></li>
+                    <li><a href="userList.html">User List</a></li>
+                    <li><a href="createUser.html">Create User</a></li>
+                    <li><a href="editUser.html">Edit User</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <h2>Create User</h2>
+        <div>
+            <h2 class="div-center">Create User</h2>
+            <div class="container">
+                <div class="form-border">
+                    <form>
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
-    <form class="form">
-        <div>
-            <label for="firstName">First Name:</label>
-            <input type="text" name="firstName" id="firstName">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone" placeholder="Your phone number..">
+
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Your email..">
+                        <div>
+                            <button class="button">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="="lastName>Last Name:</label>
-            <input type="text" name="lastName" id="lastName">
-        </div>
-        <div>
-            <label for="phone">Phone:</label>
-            <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="000-000-0000">
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="name@example.com">
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+    </main>
 </body>
+
 </html>
