@@ -7,11 +7,14 @@
     text-align: center;
 }
 
+
+/*Tables*/
 table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 25%;
     border: 1px solid #ddd;
+    margin-bottom: 25px;
   }
 
 th, td {
@@ -28,6 +31,8 @@ table.center {
     margin-left: auto;
 }
 
+
+/*Buttons*/
 .button {
   background-color: #87CEFA; 
   border: none;
@@ -40,6 +45,7 @@ table.center {
   font-size: 16px;
 }
 
+/*FlexBox*/
 .container {
   display: flex;
   flex-direction: column;
@@ -51,6 +57,8 @@ form {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+  width:50%;
+  margin:auto;
 }
 
 button:hover {
@@ -82,11 +90,13 @@ input[type=submit] {
 /*Nav Bar*/
 ul {
   list-style-type: none;
-  margin: 0;
+  margin: auto;
   padding: 0;
   overflow: hidden;
   border: 1px solid #e7e7e7;
   background-color: #f3f3f3;
+  width:29%;
+  margin-bottom: 25px;
 }
 
 li {
@@ -108,4 +118,12 @@ li a:hover:not(.active) {
 li a.active {
   color: white;
   background-color: #4CAF50;
+}
+
+.border {
+  border: #666 1px solid;
+  width:20%;
+  margin:auto;
+  margin-top: 25px;
+  padding-bottom: 25px;
 }

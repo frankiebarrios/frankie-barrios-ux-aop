@@ -10,44 +10,71 @@
 </head>
 
 <body>
-
-    <ul>
-        <li><a href="userProfile.html">User Profile</a></li>
-        <li><a href="userList.html">User List</a></li>
-        <li><a href="createUser.html">Create User</a></li>
-        <li><a href="editUser.html">Edit User</a></li>
-    </ul>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="userProfile.html">User Profile</a></li>
+                <li><a href="userList.html">User List</a></li>
+                <li><a href="createUser.html">Create User</a></li>
+                <li><a href="editUser.html">Edit User</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div>
-        <div class="container">
-            <div class="div-center">
-                <h2 class="div-center">User Profile</h2>
 
-                <table class="center">
-                    <tr>
-                        <td>ID:</td>
-                        <td>12345</td>
-                    </tr>
-                    <tr>
-                        <td>First Name:</td>
-                        <td>Jane</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td>Doe</td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td>111-111-1111</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>jane.doe@test.com</td>
-                    </tr>
-                </table>
+        <button class="button" onclick="maximizeUserProfile()">Maximize User Profile</button>
+
+        <div class="form-popup" id="userProfileCard">
+            <div class="container border">
+                <div class="div-center">
+                    <h2 class="div-center">User Profile</h2>
+
+
+                    <table class="center">
+                        <tr>
+                            <td>ID:</td>
+                            <td>12345</td>
+                        </tr>
+                        <tr>
+                            <td>First Name:</td>
+                            <td>Jane</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name:</td>
+                            <td>Doe</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>111-111-1111</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>jane.doe@test.com</td>
+                        </tr>
+                    </table>
+
+                    <button type="button" class="button" onclick="minimizeUserProfile()">Minimize User Profile</button>
+
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+
+        function maximizeUserProfile() {
+
+            document.getElementById("userProfileCard").style.display = "block";
+        }
+
+        function minimizeUserProfile() {
+
+            document.getElementById("userProfileCard").style.display = "none";
+        }
+        
+    </script>
+
 </body>
 
 </html>
