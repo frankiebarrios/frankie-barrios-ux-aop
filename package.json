@@ -4,8 +4,6 @@
   "description": "UX Team Intern Onboarding Project",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "say-hello": "echo 'Hello World'",
     "start": "http-server ./src -p 1820"
   },
   "repository": {
