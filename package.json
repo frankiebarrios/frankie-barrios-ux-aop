@@ -4,7 +4,9 @@
   "description": "UX Team Intern Onboarding Project",
   "main": "index.html",
   "scripts": {
-    "start": "http-server ./src -p 1820"
+    "lint": "ux-lint --fix",
+    "start": "yarn lint && http-server ./src -p 1820",
+    "build": "yarn start"
   },
   "repository": {
     "type": "git",
@@ -17,10 +19,11 @@
   },
   "homepage": "https://github.com/frankielb/frankie-barrios-ux-iop#readme",
   "dependencies": {
-    "http-server": "^0.11.1",
+    "eslint-plugin-html": "^5.0.5",
     "yarn": "^1.16.0"
   },
   "devDependencies": {
-    "eslint": "^6.0.1"
+    "eslint": "^6.0.1",
+    "http-server": "^0.11.1"
   }
 }

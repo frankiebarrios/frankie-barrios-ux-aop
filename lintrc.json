@@ -1,0 +1,32 @@
+{
+    "eslint": {
+      "env": {
+        "node": true
+      },
+      "extends": "google",
+      "plugins": ["banno", "html", "banno-web"],
+      "globals": {
+        "fixture": true,
+        "bannoReportsApi": true
+      },
+      "settings": {
+        "html/javascript-mime-types": "/^(module|application/javascript)$/"
+      },
+      "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+      },
+      "rules": {
+        "max-len": [ "error", 120,
+          { "ignoreUrls": true, "ignoreTemplateLiterals": true, "ignoreComments": true} ],
+        "new-cap": ["error",
+          { "capIsNewExceptionPattern": "^Polymer\\.[A-Za-z]+|Mixin$" } ],
+        "no-path-concat": [ "error" ],
+        "no-use-before-define": "off",
+        "dot-notation": "off"
+      }
+    },
+    "htmlhint": {
+      "banno/link-href": false
+    }
+  }
