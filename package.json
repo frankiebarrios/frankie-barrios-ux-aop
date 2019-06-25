@@ -19,5 +19,8 @@
   "dependencies": {
     "http-server": "^0.11.1",
     "yarn": "^1.16.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1"
   }
 }
