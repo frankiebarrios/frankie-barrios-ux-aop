@@ -2,9 +2,9 @@
   "name": "frankie-barrios-ux-iop-1",
   "version": "1.0.0",
   "description": "UX Team Intern Onboarding Project",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server ./src -p 1820"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/frankielb/frankie-barrios-ux-iop#readme",
   "dependencies": {
+    "http-server": "^0.11.1",
     "yarn": "^1.16.0"
   }
 }
