@@ -4,7 +4,7 @@
   "description": "UX Team Intern Onboarding Project",
   "main": "index.html",
   "scripts": {
-    "start": "http-server ./src -p 1820 -a 127.0.0.1 -o"
+    "start": "http-server ./src -p 1820"
   },
   "repository": {
     "type": "git",
