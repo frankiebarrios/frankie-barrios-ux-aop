@@ -3,7 +3,7 @@ UX Team Intern onboarding project.
 # How To Use
 Run npm install to install dependencies
 ```
-$ npm install 
+$ yarn install 
 ``` 
 Run yarn start to start server
 ``` 
