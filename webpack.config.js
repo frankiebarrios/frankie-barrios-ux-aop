@@ -1,39 +1,42 @@
+'use strict'; // Used to resolve linter error
+
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = env => {
-	env = env || {};
-	const config = {
+  const __dirname = ''; // Used to resolve linter error
+  env = env || {};
+  const config = {
     mode: env.mode || 'production',
-		entry: './src/index.js',
-		output: {
-			path: path.resolve(__dirname, 'dist'),
-			filename: 'bundle.js'
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.js'
     },
-		module: {
-			rules: [
-				{
+    module: {
+      rules: [
+        {
           test: /\.html$/,
-					use: [
+          use: [
 						{ loader: 'babel-loader' },
-						{
+            {
               options: {
                 processStyleLinks: true
               },
               loader: 'polymer-webpack-loader'
             },
             { loader: './tools/jha-design-components-loader' }
-					]
+          ]
         },
-				{
+        {
           test: /polymer\.html$/,
           include: [
             path.resolve(__dirname, './node_modules/@banno/polymer')
           ]
         },
-				{
+        {
           test: /\.js$/,
           use: 'babel-loader',
         },
@@ -45,16 +48,16 @@ module.exports = env => {
           test: /\.(png|jpg|gif)$/,
           use: 'file-loader'
         }
-			]
-		},
-		devServer: {
-			contentBase: path.join(__dirname, 'dist'),
-			compress: true,
-			port: 1820
+      ]
+    },
+    devServer: {
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      port: 1820
 
     },
     devtool: 'source-map',
-		plugins: [
+    plugins: [
       new webpack.NormalModuleReplacementPlugin(
         /\/node_modules\/@banno\/polymer\/polymer\.html$/,
         '@banno/polymer/polymer-element.js'
@@ -76,7 +79,7 @@ module.exports = env => {
           to: './assets/css/global.css'
         }
       ]),
-		],
-	};
+    ],
+  };
   return config;
 };
