@@ -19,6 +19,12 @@
   },
   "homepage": "https://github.com/frankielb/frankie-barrios-ux-iop#readme",
   "dependencies": {
+    "yarn": "^1.16.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "http-server": "^0.11.1",
+    "webpack": "^4.35.0",
     "@babel/core": "^7.4.5",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
@@ -29,11 +35,5 @@
     "polymer-webpack-loader": "^2.0.3",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
-    "yarn": "^1.16.0"
-  },
-  "devDependencies": {
-    "eslint": "^6.0.1",
-    "http-server": "^0.11.1",
-    "webpack": "^4.35.0"
   }
 }
