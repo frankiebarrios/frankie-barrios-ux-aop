@@ -5,8 +5,8 @@
   "main": "index.html",
   "scripts": {
     "lint": "ux-lint --fix",
-    "start": "yarn lint && http-server ./src -p 1820",
-    "build": "yarn start"
+    "build": "echo 'Build Complete'",
+    "start": "yarn lint && yarn build && http-server ./src -p 1820"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "eslint": "^6.0.1",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "ux-lint": "^1.8.0"
   }
 }
