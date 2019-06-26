@@ -1,0 +1,78 @@
+<link rel="import" href="~@banno/polymer/polymer-element.js">
+<link rel="import" href="./starter-component/starter-component.html">
+<!-- Imports for icons from jha-design-components -->
+<link rel="import" href="~@banno/jha-design-components/icons/jha-icon-fingerprint.html">
+<link rel="import" href="~@banno/jha-design-components/icons/jha-icon-add.html">
+<link rel="import" href="~@banno/jha-design-components/icons/jha-icon-android.html">
+<link rel="import" href="~@banno/jha-design-components/icons/jha-icon-apple.html">
+<link rel="import" href="~@banno/jha-design-components/icons/jha-icon-assessment.html">
+<link rel="import" href="~@banno/jha-design-components/icons/jha-icon-bookmark.html">
+<dom-module id="intern-app">
+  <template>
+    <!-- An example of an inline stylesheet. This does not require extra Webpack configuration --> 
+    <!-- and these styles are scoped to the element. -->
+    <style>
+      :host {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+        
+        /* Using a variable set in global.css */
+        color: var(--color-gray-base);
+      }
+      header {
+        width: 100%;
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-weight: normal;
+      }
+      p {
+        font-weight: lighter;
+        display: inline-block;
+      }
+      span {
+        font-family: monospace;
+        font-size: 15px;
+      }
+      #intro {
+        max-width: 600px;
+        margin: auto;
+        margin-top: 25px;
+      }
+      .icons {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+    <header>
+      <!-- An example of a custom element being used in a custom component -->
+      <starter-component></starter-component>
+      <h1>You're up and running with Polymer + Webpack 😎</h1>
+    </header>
+    <div id="intro">
+      <p>To get started, edit <span>src/components/intern-app.html</span> and save to reload.</p>
+      <div class="icons">
+        <!-- Icons from jha-design-components -->
+        <!-- Full list available at http://www.jha.design/components/icon/#icons -->
+        <jha-icon-fingerprint></jha-icon-fingerprint>
+        <jha-icon-add></jha-icon-add>
+        <jha-icon-android></jha-icon-android>
+        <jha-icon-apple></jha-icon-apple>
+        <jha-icon-assessment></jha-icon-assessment>
+        <jha-icon-bookmark></jha-icon-bookmark>
+      </div>
+    </div>
+  </template>
+  <script type="module">
+    import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+
+    class InternApp extends PolymerElement {
+      static get is() { return 'intern-app'; }
+    }
+    customElements.define(InternApp.is, InternApp);
+    export default InternApp;
+  </script>
+</dom-module>

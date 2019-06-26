@@ -1,0 +1,21 @@
+:root {
+  --color-blue: #3aaeda;
+  --color-green: #4caf50;
+  --color-yellow: #fca902;
+  --color-red: #f44336;
+  --color-purple: #7d57c1;
+  --color-teal: #00acc3;
+  --color-blue-dark: #0070b7;
+  --color-gray-dark: #272d33;
+  --color-gray-base: #455564;
+  --color-gray-medium: #8d99a0;
+  --color-gray-light: #e4e7ea;
+  --color-gray-lighter: #eef1f4;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fdfbfb;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}

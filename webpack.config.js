@@ -6,7 +6,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = env => {
-  const __dirname = ''; // Used to resolve linter error
+   // Used to resolve linter error
   env = env || {};
   const config = {
     mode: env.mode || 'production',
