@@ -119,6 +119,16 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@banno/jha-design-components@^0.4.0":
+  version "0.4.0"
+  resolved "https://npm.banno-internal.com/@banno%2fjha-design-components/-/jha-design-components-0.4.0.tgz#7de40d8b70358ce9797e2ed2e9ba8cea22f7b955"
+  integrity sha512-Os5zEKPlq9CT6PL3gQJZjxRAvST/GKXUsyhJ/K7P0hBVi9TheMO8VlumPYq5x+yksubPNMRFYrRw9WlaO4iDoQ==
+
+"@banno/polymer@^2.7.0":
+  version "2.7.0"
+  resolved "https://npm.banno-internal.com/@banno%2fpolymer/-/polymer-2.7.0.tgz#9869703eed1b09ce7b0cc6cb3ba71bd393edc186"
+  integrity sha512-+XNJF7afmqGRPZTstrTAxGSkJ7Jc51KivQ4k2QYkde4jqCWTCe/CXVLlNf2oTz0Z/oWxjRNHYqIqEHSy7tUBQg==
+
 "@types/clone@^0.1.29":
   version "0.1.30"
   resolved "https://registry.yarnpkg.com/@types/clone/-/clone-0.1.30.tgz#e7365648c1b42136a59c7d5040637b3b5c83b614"
@@ -2164,9 +2174,9 @@ globby@^7.1.1:
     slash "^1.0.0"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2:
-  version "4.1.15"
-  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
-  integrity sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.0.tgz#8d8fdc73977cb04104721cb53666c1ca64cd328b"
+  integrity sha512-jpSvDPV4Cq/bgtpndIWbI5hmYxhQGHPC4d4cqBPb4DLniCfhJokdXhwhaDuLBGLQdvvRum/UiX6ECVIPvDXqdg==
 
 handle-thing@^2.0.0:
   version "2.0.0"
@@ -5210,8 +5220,3 @@ yargs@13.2.4:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
-
-yarn@^1.16.0:
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.16.0.tgz#5701b58ac555ff91f7b889b7d791b3dc86f8f999"
-  integrity sha512-cfemyGlnWKA1zopUUgebTPf8C4WkPIZ+TJmklwcEAJ4u6oWPtJeAzrsamaGGh/+b1XWe8W51yzAImC4AWbWR1g==
