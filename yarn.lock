@@ -119,15 +119,18 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@banno/jha-design-components@^0.4.0":
+"@banno/jha-design-components@0.4.0":
   version "0.4.0"
   resolved "https://npm.banno-internal.com/@banno%2fjha-design-components/-/jha-design-components-0.4.0.tgz#7de40d8b70358ce9797e2ed2e9ba8cea22f7b955"
   integrity sha512-Os5zEKPlq9CT6PL3gQJZjxRAvST/GKXUsyhJ/K7P0hBVi9TheMO8VlumPYq5x+yksubPNMRFYrRw9WlaO4iDoQ==
 
-"@banno/polymer@^2.7.0":
-  version "2.7.0"
-  resolved "https://npm.banno-internal.com/@banno%2fpolymer/-/polymer-2.7.0.tgz#9869703eed1b09ce7b0cc6cb3ba71bd393edc186"
-  integrity sha512-+XNJF7afmqGRPZTstrTAxGSkJ7Jc51KivQ4k2QYkde4jqCWTCe/CXVLlNf2oTz0Z/oWxjRNHYqIqEHSy7tUBQg==
+"@banno/polymer@2.3.1":
+  version "2.3.1"
+  resolved "https://npm.banno-internal.com/@banno%2fpolymer/-/polymer-2.3.1.tgz#a0d7a4b3198f2e70013436d9fd0f1145a5c410a5"
+  integrity sha512-cnJwDZa3fvadba0NmAhzZTXdxPKz6rdu+HvFHZPPmhM8Tkms5VIQD6iX4EOMtV2FOSIC8TwoF5zPQYjGbMgJ2A==
+  dependencies:
+    "@webcomponents/shadycss" "^1.0.0"
+    "@webcomponents/webcomponentsjs" "^1.0.0"
 
 "@types/clone@^0.1.29":
   version "0.1.30"
@@ -315,6 +318,16 @@
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
+
+"@webcomponents/shadycss@^1.0.0":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@webcomponents/shadycss/-/shadycss-1.9.1.tgz#d769fbadfa504f11b84caeef26701f89070ec49a"
+  integrity sha512-IaZOnWOKXHghqk/WfPNDRIgDBi3RsVPY2IFAw6tYiL9UBGvQRy5R6uC+Fk7qTZsReTJ0xh5MTT8yAcb3MUR4mQ==
+
+"@webcomponents/webcomponentsjs@^1.0.0":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-1.3.3.tgz#5bb82a0d3210c836bd4623e13a4a93145cb9dc27"
+  integrity sha512-eLH04VBMpuZGzBIhOnUjECcQPEPcmfhWEijW9u1B5I+2PPYdWf3vWUExdDxu4Y3GljRSTCOlWnGtS9tpzmXMyQ==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
