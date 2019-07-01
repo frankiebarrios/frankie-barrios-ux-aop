@@ -1,6 +1,8 @@
 <link rel="import" href="~@banno/polymer/polymer-element.js">
 <link rel="import" href="./user-profile.html">
 <link rel="import" href="./user-list.html">
+<link rel="import" href="./edit-user.html">
+<link rel="import" href="./create-user.html">
 
 <dom-module id="intern-app">
 
@@ -34,11 +36,16 @@
     </style>
 
     <header>
+
       <user-list>
         <user-profile></user-profile>
         <user-profile></user-profile>
         <user-profile></user-profile>
       </user-list>
+
+      <create-user></create-user>
+
+      <edit-user></edit-user>
       
     </header>
 

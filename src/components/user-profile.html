@@ -3,11 +3,8 @@
 <dom-module id="user-profile">
 
     <template>
-    
-        <style>
 
-            /* Clean up styling */
-            
+        <style>
             .div-center {
                 text-align: center;
             }
@@ -57,7 +54,8 @@
                 margin-left: auto;
             }
 
-            th, td {
+            th,
+            td {
                 text-align: left;
                 padding: 16px;
             }
@@ -65,14 +63,13 @@
             tr:nth-child(odd) {
                 background-color: #f2f2f2;
             }
-
         </style>
-        
+
         <div class="container">
 
-            <button class="button" on-click="oneButtonFunction">Expand/Collapse Profile</button>
+            <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
 
-            <div class="form-popup" id="userProfileCard">
+            <div class="form" id="userProfileCard">
 
                 <div>
 
@@ -107,7 +104,7 @@
                 </div>
             </div>
         </div>
-        
+
     </template>
 
     <script type="module">
@@ -118,7 +115,7 @@
 
             static get is() { return 'user-profile'; }
                             
-            oneButtonFunction() {
+            expandCollapse() {
 
                 let userCard = this.$.userProfileCard;
 
@@ -127,7 +124,6 @@
                 } else {
                     userCard.style.display = "block";
                 }
-               
             }
         }
 

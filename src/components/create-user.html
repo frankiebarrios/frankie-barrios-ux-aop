@@ -1,0 +1,95 @@
+<link rel="import" href="~@banno/polymer/polymer-element.js">
+
+<dom-module id="create-user">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+
+            .div-center {
+                text-align: center;
+            }
+            
+            input[type=text],
+            select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #87CEFA;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            div {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+            }
+
+            .border {
+                border: #666 1px solid;
+                width: 20%;
+                margin: auto;
+                margin-top: 25px;
+                padding-bottom: 25px;
+            }
+
+            .button {
+                background-color: #87CEFA;
+                border: none;
+                color: white;
+                padding: 5px 12px;
+                text-align: center;
+                text-decoration: none;
+                display: block;
+                margin: auto;
+                font-size: 16px;
+                margin-top: 25px;
+            }
+
+            button:hover {
+                background-color: rgb(196, 226, 245);
+            }
+        </style>
+
+        <h1 class="div-center">Create User</h1>
+        <div>
+            <div class="container">
+                <div class="form-border">
+                    <form>
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone" placeholder="Your phone number..">
+
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Your email..">
+                        <div>
+                            <button class="button">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script type="module">
+
+        import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+
+        class CreateUser extends PolymerElement {
+            
+            static get is() { return 'create-user'; }
+        }
+
+        customElements.define(CreateUser.is, CreateUser);
+
+        export default CreateUser;
+    </script>
+</dom-module>
