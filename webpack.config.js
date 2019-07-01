@@ -23,8 +23,7 @@ module.exports = env => {
                 processStyleLinks: true
               },
               loader: 'polymer-webpack-loader'
-            },
-            { loader: './tools/jha-design-components-loader' }
+            }
 					]
         },
 				{

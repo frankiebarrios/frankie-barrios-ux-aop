@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/frankielb/frankie-barrios-ux-iop#readme",
   "dependencies": {
-    "@banno/jha-design-components": "0.4.0",
     "@banno/polymer": "2.3.1"
   },
   "devDependencies": {
