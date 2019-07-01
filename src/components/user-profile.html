@@ -1,9 +1,13 @@
 <link rel="import" href="~@banno/polymer/polymer-element.js">
 
 <dom-module id="user-profile">
+
     <template>
+    
         <style>
 
+            /* Clean up styling */
+            
             .div-center {
                 text-align: center;
             }
@@ -66,10 +70,12 @@
         
         <div class="container">
 
-            <button class="button" on-click="maximizeUserProfile">Expand User Profile</button>
+            <button class="button" on-click="oneButtonFunction">Expand/Collapse Profile</button>
 
             <div class="form-popup" id="userProfileCard">
+
                 <div>
+
                     <div class="div-center">
 
                         <h3 class="div-center">User Profile</h3>
@@ -97,9 +103,6 @@
                             </tr>
                         </table>
 
-                        <button type="button" class="button" on-click="minimizeUserProfile">Collapse User
-                            Profile</button>
-
                     </div>
                 </div>
             </div>
@@ -114,20 +117,17 @@
         class UserProfile extends PolymerElement {
 
             static get is() { return 'user-profile'; }
-            //need cards to start collapsed within <user-list> component
-                
-            maximizeUserProfile() {
+                            
+            oneButtonFunction() {
 
                 let userCard = this.$.userProfileCard;
 
-                userCard.style.display = 'block';
-            }
-
-            minimizeUserProfile() {
-
-                let userCard = this.$.userProfileCard;
-
-                userCard.style.display = 'none';
+                if (userCard.style.display === "block") {
+                    userCard.style.display = "none";
+                } else {
+                    userCard.style.display = "block";
+                }
+               
             }
         }
 
