@@ -120,11 +120,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@banno/jha-design-components@0.4.0":
-  version "0.4.0"
-  resolved "https://npm.banno-internal.com/@banno%2fjha-design-components/-/jha-design-components-0.4.0.tgz#7de40d8b70358ce9797e2ed2e9ba8cea22f7b955"
-  integrity sha512-Os5zEKPlq9CT6PL3gQJZjxRAvST/GKXUsyhJ/K7P0hBVi9TheMO8VlumPYq5x+yksubPNMRFYrRw9WlaO4iDoQ==
-
 "@banno/polymer@2.3.1":
   version "2.3.1"
   resolved "https://npm.banno-internal.com/@banno%2fpolymer/-/polymer-2.3.1.tgz#a0d7a4b3198f2e70013436d9fd0f1145a5c410a5"
