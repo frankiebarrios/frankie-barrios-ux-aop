@@ -1,9 +1,7 @@
 <link rel="import" href="~@banno/polymer/polymer-element.js">
 
 <dom-module id="user-profile">
-
     <template>
-
         <style>
             .div-center {
                 text-align: center;
@@ -65,19 +63,12 @@
             }
         </style>
 
-        <div class="container">
-
             <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
-
-            <div class="form" id="userProfileCard">
-
+            <div class="form" id="userProfileCard" style="display: block;">
                 <div>
-
                     <div class="div-center">
-
                         <h3 class="div-center">User Profile</h3>
-
-                        <table class="center">
+                        <table class="center" id="test">
                             <tr>
                                 <td>ID:</td>
                                 <td>12345</td>
@@ -99,24 +90,19 @@
                                 <td>jane.doe@test.com</td>
                             </tr>
                         </table>
-
                     </div>
                 </div>
             </div>
-        </div>
-
     </template>
 
     <script type="module">
 
         import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-        
+
         class UserProfile extends PolymerElement {
-
             static get is() { return 'user-profile'; }
-                            
-            expandCollapse() {
 
+            expandCollapse() {
                 let userCard = this.$.userProfileCard;
 
                 if (userCard.style.display === "block") {
@@ -126,10 +112,7 @@
                 }
             }
         }
-
         customElements.define(UserProfile.is, UserProfile);
-        
         export default UserProfile;
-    
     </script>
 </dom-module>
