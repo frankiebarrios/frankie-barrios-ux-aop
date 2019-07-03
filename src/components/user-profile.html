@@ -68,19 +68,19 @@
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td>Jane</td>
+                                <td>[[firstName]]</td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td>Doe</td>
+                                <td>[[lastName]]</td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td>111-111-1111</td>
+                                <td>[[phone]]</td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>jane.doe@test.com</td>
+                                <td>[[email]]</td>
                             </tr>
                         </table>
                     </div>
@@ -94,6 +94,26 @@
 
         class UserProfile extends PolymerElement {
             static get is() { return 'user-profile'; }
+            static get properties() {
+                return {
+                    firstName: {
+                        type: String,
+                        value: 'Frankie'
+                    },
+                    lastName: {
+                        type: String,
+                        value: 'Barrios'
+                    },
+                    phone: {
+                        type: Number,
+                        value: '000-000-0000'
+                    },
+                    email: {
+                        type: String,
+                        value: 'myEmail@email.com'
+                    }
+                };
+            }
 
             expandCollapse() {
                 let userCard = this.$.userProfileCard;
