@@ -5,11 +5,8 @@
 <link rel="import" href="./create-user.html">
 
 <dom-module id="intern-app">
-
   <template>
-
     <style>
-
       header {
         width: 100%;
         padding: 20px 0;
@@ -32,22 +29,12 @@
         font-family: monospace;
         font-size: 15px;
       }
-      
     </style>
-
     <header>
-
+      <user-list></user-list>
       <create-user></create-user>
-
-      <user-list>
-          <user-profile></user-profile>
-          <user-profile></user-profile>
-      </user-list>
-
       <edit-user></edit-user>
-      
     </header>
-
   </template>
 
   <script type="module">

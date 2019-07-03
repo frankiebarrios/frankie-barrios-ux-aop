@@ -1,23 +1,24 @@
 <link rel="import" href="./user-profile.html">
+<link rel="import" href="./user-profile.html">
 
 <dom-module id="user-list">
     
     <template>
-
-        <style>
-        </style>
+        <user-profile></user-profile>
+        <user-profile></user-profile>
+        <user-profile></user-profile>
+    </template>
 
     <script type="module">
-
+        import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+        
         class UserList extends PolymerElement {
-
             static get is() { return 'user-list'; }
         }
 
         customElements.define(UserList.is, UserList);
 
         export default UserList;
-
     </script>
-  </template>
+
 </dom-module>
