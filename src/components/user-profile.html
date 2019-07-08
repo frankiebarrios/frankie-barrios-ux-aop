@@ -64,7 +64,7 @@
                         <table class="center" id="test">
                             <tr>
                                 <td>ID:</td>
-                                <td>12345</td>
+                                <td>[[id]]</td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
@@ -94,23 +94,28 @@
 
         class UserProfile extends PolymerElement {
             static get is() { return 'user-profile'; }
+
             static get properties() {
                 return {
+                    id: {
+                        type: String,
+                        value: ''
+                    },
                     firstName: {
                         type: String,
-                        value: 'Frankie'
+                        value: ''
                     },
                     lastName: {
                         type: String,
-                        value: 'Barrios'
+                        value: ''
                     },
                     phone: {
-                        type: Number,
-                        value: '000-000-0000'
+                        type: String,
+                        value: ''
                     },
                     email: {
                         type: String,
-                        value: 'myEmail@email.com'
+                        value: '@email.com'
                     }
                 };
             }
