@@ -1,4 +1,5 @@
 <link rel="import" href="~@banno/polymer/polymer-element.js">
+<link rel="import" href="../api/localStorage.js">
 
 <dom-module id="user-profile">
     <template>
@@ -56,7 +57,7 @@
             }
         </style>
 
-            <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
+            <button class="button" on-click="testFunction">Expand/Collapse Profile</button>
             <div class="form" id="userProfileCard" style="display: none;">
                 <div>
                     <div class="div-center">
@@ -64,7 +65,7 @@
                         <table class="center" id="test">
                             <tr>
                                 <td>ID:</td>
-                                <td>[[id]]</td>
+                                <td>[[_id]]</td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
@@ -97,7 +98,7 @@
 
             static get properties() {
                 return {
-                    id: {
+                    _id: {
                         type: String,
                         value: ''
                     },
@@ -133,4 +134,5 @@
         customElements.define(UserProfile.is, UserProfile);
         export default UserProfile;
     </script>
+
 </dom-module>

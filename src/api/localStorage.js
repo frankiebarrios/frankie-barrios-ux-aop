@@ -1,10 +1,8 @@
-import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
 // Need to export as a JS Module and import it into user-profile
-class LocalStorage extends PolymerElement {
+class LocalStorage {
 
     //localStorage Object
-    // userAccounts= {
+    // userAccounts = {
     //     _id: String,
     //     firstName: String,
     //     lastName: String,
