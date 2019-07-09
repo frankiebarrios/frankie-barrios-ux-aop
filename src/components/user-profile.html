@@ -1,5 +1,4 @@
 <link rel="import" href="~@banno/polymer/polymer-element.js">
-<link rel="import" href="../api/localStorage.js">
 
 <dom-module id="user-profile">
     <template>
@@ -57,7 +56,7 @@
             }
         </style>
 
-            <button class="button" on-click="testFunction">Expand/Collapse Profile</button>
+            <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
             <div class="form" id="userProfileCard" style="display: none;">
                 <div>
                     <div class="div-center">
@@ -90,9 +89,7 @@
     </template>
 
     <script type="module">
-        
         import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
         class UserProfile extends PolymerElement {
             static get is() { return 'user-profile'; }
 

@@ -70,10 +70,10 @@
 
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" placeholder="Your email..">
-                        <div>
-                            <button class="button">Create</button>
-                        </div>
-                    </form>
+                    </form> 
+                    <div>
+                        <button class="button" on-click="Test">Create</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,9 +83,19 @@
 
         import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
 
+        import { testFunction as Test } from '../api/localStorage.js';
+
+        // Can hit test upon load but cannot hit with eventListener (onclick)?
+        //const test = Test(); // Hits
+        const test = Test; // Doesn't hit? Getting: listener method `Test` not defined
+
         class CreateUser extends PolymerElement {
             
             static get is() { return 'create-user'; }
+
+            testFunction() {
+                alert('Test Function Hit!');
+            }
         }
 
         customElements.define(CreateUser.is, CreateUser);
