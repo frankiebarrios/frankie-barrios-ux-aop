@@ -72,7 +72,7 @@
                         <input type="text" id="email" name="email" placeholder="Your email..">
                     </form> 
                     <div>
-                        <button class="button" on-click="Test">Create</button>
+                        <button class="button" on-click="createUser">Create</button>
                     </div>
                 </div>
             </div>
@@ -80,26 +80,56 @@
     </template>
 
     <script type="module">
-
         import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
-        import { testFunction as Test } from '../api/localStorage.js';
-
-        // Can hit test upon load but cannot hit with eventListener (onclick)?
-        //const test = Test(); // Hits
-        const test = Test; // Doesn't hit? Getting: listener method `Test` not defined
+        import { LocalStorage } from '../api/localStorage.js';
+        
+        let localStorage = new LocalStorage();
 
         class CreateUser extends PolymerElement {
             
             static get is() { return 'create-user'; }
 
             testFunction() {
-                alert('Test Function Hit!');
+                localStorage.tester();
+            }
+
+            createUser(user) {
+                localStorage.createUser(user);
+            }
+
+            getUser(id) {
+                localStorage.getUser(id);
+            }
+
+            getAllUsers() {
+                localStorage.getUsers();
+            }
+
+            updateUser(id, dataToUpdate) {
+                localStorage.updateUser();
+            }
+
+            replaceUser() {
+                localStorage.replaceUser(id, newUser);
+            }
+
+            deleteUser(id) {
+                localStorage.deleteUser();
+            }
+
+            deleteAllUsers() {
+                localStorage.deleteUsers();
+            }
+
+            generateId() {
+                localStorage.generateId();
+            }
+
+            validateUser() {
+                localStorage.validateUser(id);
             }
         }
-
         customElements.define(CreateUser.is, CreateUser);
-
         export default CreateUser;
     </script>
 </dom-module>
