@@ -84,17 +84,19 @@
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
       import { LocalStorage } from '../api/localStorage.js';
       
-      let localStorage = new LocalStorage(
-          Math.floor((Math.random() * 1000) + 1),
-          'Frankie'
-      );
+      function generateId() {
+        return Math.floor((Math.random() * 1000) + 1);
+      }
 
+      let localStorage = new LocalStorage(
+          generateId(),
+          'Ted'
+      );
+   
       class CreateUser extends PolymerElement {
         static get is() { return 'create-user'; }
         constructor() {
           super();
-          // Review on binding prior to PR
-          this.createUser = this.createUser.bind(this);
         }
         
         createUser(user) {
@@ -106,7 +108,7 @@
         }
 
         getAllUsers() {
-          localStorage.getUsers();
+          localStorage.getAllUsers();
         }
 
         updateUser(id, dataToUpdate) {
@@ -118,11 +120,11 @@
         }
 
         deleteUser(id) {
-          localStorage.deleteUser();
+          localStorage.deleteUser(localStorage._id);
         }
 
         deleteAllUsers() {
-          localStorage.deleteUsers();
+          localStorage.deleteAllUsers();
         }
 
         generateId() {
@@ -130,20 +132,18 @@
         }
 
         validateUser() {
-          localStorage.validateUser(id);
+          localStorage.validateUser(localStorage._id);
         }
 
         testLocalStorage() {
-          console.log('_testLocalStorage hit');
-          // Tests all functions above.
-          this.createUser(this.user);
+          this.createUser(localStorage.user);
+          this.getUser(localStorage._id);
+          this.getAllUsers();
+          this.deleteUser(localStorage._id);
+          this.deleteAllUsers();
+          this.generateId();
         }
         
-        /**
-          * Called every time the element is inserted into the DOM. Useful for 
-          * running setup code, such as fetching resources or rendering.
-          * Generally, you should try to delay work until this time.
-          */
         connectedCallback() {
           super.connectedCallback();
           this.testLocalStorage();
