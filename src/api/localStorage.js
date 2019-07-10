@@ -1,120 +1,92 @@
 export class LocalStorage {
-    //localStorage Object
-    constructor(_id, firstName, lastName, phone, email) {
-        this._id = _id;
-        this.firstName = firstName
-        this.lastName = lastName
-        this.phone = phone
-        this.email = email
+  constructor(_id, firstName) {
+    this._id = _id;
+    this.firstName = firstName
+  }
+
+  createUser(user) {
+    localStorage.setItem('User', JSON.stringify(user));
+    let localData = JSON.parse(localStorage.getItem('User'));
+
+    if (localData._id == undefined || null || '') {
+        localStorage.setItem('User._id',
+            localData._id = Math.floor((Math.random() * 1000) + 1));
+    } else if (localData._id == JSON.parse(localStorage.getItem('_id'))) {
+        console.log('User Already Exists, Try Again');
+        return -1;
     }
+    console.log('User Added: ', localData);
+  }
 
-    tester() {
-        alert('Tester Hit!!!');
-    }
+  getUser(id) {
+    let user = localStorage.getItem('User._id', id);
+    if (user) {
+        console.log('User Found: ', localStorage.getItem('User'));  
+    } else 
+        console.log('No User Found, Try Again');
+  }
 
-    createUser(user) {
-        alert('User Created');
-        // Takes one argument, an object.
+  getUsers() {
+    return JSON.parse(localStorage.getItem('User'));
+  }
 
-        // Adds a single object to storage, regardless of content.
-        
-        // Every object is required to have the property _id. If an object is added to storage without this property, it will create an _id. If the provided _id already exists in storage, it will fail to add the object.
-        
-        // If successful, returns the newly created object (including the _id). If failed, returns a string along the lines of 'insert attempt failed.'
-        
-        // storage.createUser({
-        //   name: 'Name',
-        // });
-        // Adds an object to storage with the property 'name' and returns the newly created object.
-    }
+  updateUser(id, newDataToUpdate) {
+      // Takes two arguments:
+      
+      // User ID string to find a user
+      // object data to update
+      // Updates the first matching object in storage with the provided data. If a value has already been set and is not overwritten by the new data, it will remain intact. If a key has not already been defined, it will now be defined.
+      
+      // Returns the newly updated object in its entirety. If no object could be found, an empty object is returned.
+      
+      // storage.updateUser(
+      //   '59825',
+      //   { department: 'HR' }
+      // )
+      // Updates the first object to match the query (id value of '59825')
+      // with the values provided (department: 'HR').
+      // If the value has not already been set, it is assigned.
+      // The newly updated object is returned.
+  }
 
-    getUser(id) {
-        alert('User Received');
-        // Takes one argument: a user ID string to search on.
+  replaceUser(id, newUser) {
+      // Takes two arguments:
 
-        // Returns the first matching result in its entirety. If there are no matching results, returns an empty object.
-        
-        // storage.getUser('59825');
-        // Returns the first object to match the query (_id value of '59825')
-    }
+      // User ID string
+      // object data to replace old object with
+      // Removes all object data except User ID and replaces it with the new object data.
+      
+      // Returns the newly defined object.
+      
+      // storage.replaceOne(
+      //   '59825' ,
+      //   { department: 'HR' }
+      // );
+      // Very similar to updateOne() except that any fields not provided in
+      // the argument are removed from existing user object.
+  }
 
-    getUsers() {
-        alert('Users Received');
-        // Takes no arguments. Returns the full user list.
+  deleteUser(id) {
+    localStorage.removeItem(id);
+    let localData = JSON.parse(localStorage.getItem('User'));
+    return localData;
+  }
 
-        // storage.getUsers();
-        // Returns the users list
-    }
+  deleteUsers() {
+    localStorage.clear();
+    return JSON.parse(localStorage.getItem('User'));
+  }
 
-    updateUser(id, newDataToUpdate) {
-        // Takes two arguments:
-        
-        // User ID string to find a user
-        // object data to update
-        // Updates the first matching object in storage with the provided data. If a value has already been set and is not overwritten by the new data, it will remain intact. If a key has not already been defined, it will now be defined.
-        
-        // Returns the newly updated object in its entirety. If no object could be found, an empty object is returned.
-        
-        // storage.updateUser(
-        //   '59825',
-        //   { department: 'HR' }
-        // )
-        // Updates the first object to match the query (id value of '59825')
-        // with the values provided (department: 'HR').
-        // If the value has not already been set, it is assigned.
-        // The newly updated object is returned.
-    }
+  generateId() {
+    return Math.floor((Math.random() * 1000) + 1);
+  }
 
-    replaceUser(id, newUser) {
-        // Takes two arguments:
-
-        // User ID string
-        // object data to replace old object with
-        // Removes all object data except User ID and replaces it with the new object data.
-        
-        // Returns the newly defined object.
-        
-        // storage.replaceOne(
-        //   '59825' ,
-        //   { department: 'HR' }
-        // );
-        // Very similar to updateOne() except that any fields not provided in
-        // the argument are removed from existing user object.
-    }
-
-    deleteUser(id) {
-        // Takes one argument. Can either be a filter on which to search or an _id string.
-
-        // Removes the first matching object from storage. If there is no matching object, none will be removed.
-        
-        // Returns the newly deleted object. If nothing is deleted, an empty object is returned.
-        
-        // storage.deleteUser('59825');
-        // Deletes the first object to match the query
-        // and returns the just-deleted object
-    }
-
-    deleteUsers() {
-        //Takes no arguments. Deletes all objects
-        //from the users list and returns the users list.
-        //Usage Example:
-        //storage.deleteUsers();
-        // Deletes all entries in the users list
-        // and returns the users list
-
-    }
-
-    generateId() {
-        // Generates a unique ID value to assign to an object.
-        // Returns the generated ID string.
-    }
-
-    validateUser(id) {
-        // A private function that takes one argument,
-        // a User object. Returns a boolean. true if 
-        // the input matches the user model criteria,
-        // false if it does not.
-    }
+  validateUser(id) {
+      // A private function that takes one argument,
+      // a User object. Returns a boolean. true if 
+      // the input matches the user model criteria,
+      // false if it does not.
+  }
 }
 
     
