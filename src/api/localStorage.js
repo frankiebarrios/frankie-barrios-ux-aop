@@ -10,8 +10,8 @@ export class LocalStorage {
     let localUser = JSON.parse(localStorage.getItem('User'));
 
     if (user._id == userData._id) {
-      this.deleteUser(localUser._id);
-      user._id = this.generateId();
+      //this.deleteUser(localUser._id);
+      user._id = Math.floor((Math.random() * 1000) + 1);
       localStorage.setItem('User', JSON.stringify(user));
     }
     console.log('createUser() -> User Added: ', localUser);
