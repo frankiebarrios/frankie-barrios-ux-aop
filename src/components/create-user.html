@@ -139,9 +139,10 @@
           this.createUser(localStorage.user);
           this.getUser(localStorage._id);
           this.getAllUsers();
+          this.generateId();
           this.deleteUser(localStorage._id);
           this.deleteAllUsers();
-          this.generateId();
+          
         }
         
         connectedCallback() {

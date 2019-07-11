@@ -1,52 +1,51 @@
+import Enumerable from '../../node_modules/linq';
 export class LocalStorage {
-  constructor(_id, firstName) {
+  constructor(_id, firstName, users) {
     this._id = _id;
-    this.firstName = firstName
+    this.firstName = firstName;
+  }
+
+  createUser() {
+    let existingUsers = JSON.parse(localStorage.getItem('userAccounts'));
+    if (existingUsers == null) existingUsers = [];
+    this._id = Math.floor((Math.random() * 1000) + 1);
+    let userName = 'Test Name';
+    let userEntry = {
+      '_id': this._id,
+      'name': userName
+    };
+    localStorage.setItem('User', JSON.stringify(userEntry));
+    existingUsers.push(userEntry); 
+    localStorage.setItem('userAccounts', JSON.stringify(existingUsers));
+    console.log('createUser() -> User Added: ', userEntry);
   }
   
-  createUser(user) {
-    localStorage.setItem('User', JSON.stringify(user));
-    let userData = JSON.parse(localStorage.getItem('User'));
-    let localUser = JSON.parse(localStorage.getItem('User'));
-
-    if (user._id == userData._id) {
-      //this.deleteUser(localUser._id);
-      user._id = Math.floor((Math.random() * 1000) + 1);
-      localStorage.setItem('User', JSON.stringify(user));
-    }
-    console.log('createUser() -> User Added: ', localUser);
-  }
-
   getUser(id) {
-    let user = JSON.parse(localStorage.getItem('User'));
-
-    if (user._id == id) {
-      console.log('getUser() -> User Found: ', user);
-    } else
-      console.log('No User Found, Try Again');
+    id = this._id;
+    let users = JSON.parse(localStorage.getItem('userAccounts'));
+    let user = Enumerable
+      .from(users)
+      .where((u) => u._id == id)
+      .firstOrDefault();
+    console.log('getUser() -> User Found: ', user);
+    return user;
   }
 
   getAllUsers() {
-    console.log('getAllUsers() -> Users Found: ', JSON.parse(localStorage.getItem('User')));
+    console.log('getAllUsers() -> Users Found: ', JSON.parse(localStorage.getItem('userAccounts')));
+    return JSON.parse(localStorage.getItem('userAccounts'));
   }
 
-  updateUser(id, newDataToUpdate) {
-    // Takes two arguments:
-
-    // User ID string to find a user
-    // object data to update
-    // Updates the first matching object in storage with the provided data. If a value has already been set and is not overwritten by the new data, it will remain intact. If a key has not already been defined, it will now be defined.
-
-    // Returns the newly updated object in its entirety. If no object could be found, an empty object is returned.
-
-    // storage.updateUser(
-    //   '59825',
-    //   { department: 'HR' }
-    // )
-    // Updates the first object to match the query (id value of '59825')
-    // with the values provided (department: 'HR').
-    // If the value has not already been set, it is assigned.
-    // The newly updated object is returned.
+  updateUser(id, update) {
+    let existingUsers = JSON.parse(localStorage.getItem('userAccounts'));
+    console.log('updateUser() User Accounts: ', existingUsers);
+    for (let i = 0; i < existingUsers.length; i++) {
+      if (existingUsers[i]._id == id) {
+        localStorage.setItem(update); // Need to hardcode an ._id to pass into the function call for testing 
+                                      // To do this, will add an object to the array from the beginning 
+                                      // of this function with hardcoced props that I can pass in to find the match
+      }
+    }
   }
 
   replaceUser(id, newUser) {
@@ -69,6 +68,8 @@ export class LocalStorage {
   deleteUser(id) {
     let user = JSON.parse(localStorage.getItem('User'));
 
+    // Check based on an individual user being in localStorage
+    // Will have to loop through localStorage if multiple users
     if (user._id == id) {
       localStorage.removeItem('User');
     }
