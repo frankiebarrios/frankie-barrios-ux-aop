@@ -1,17 +1,5 @@
 import Enumerable from '../../node_modules/linq';
 import faker from '../../node_modules/faker';
-
-// Looks like utilizing these packages is causing webpack
-// upon compiling due to performance issues. These packages
-// are only in place for testing (getting me names for the new users)
-// and will be removed in next unit since I will be receiving 
-// input from the forms instead.
-
-// Looked into lazy loading/ code-splitting to resolve this
-// issue but didn't wanna go too far on this 1 unit. May 
-// be a good thing for me to try and utilize in the final unit as 
-// one of my 'mini projects'.
-
 export class LocalStorage {
   constructor(_id) {
     this._id = _id;
