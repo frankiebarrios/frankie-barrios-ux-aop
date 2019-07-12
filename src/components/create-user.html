@@ -73,7 +73,7 @@
           </form>
           <div>
             <button class="button" on-click="createUser">Create User</button>
-            <button class="button" on-click="getUser">Get User</button>
+            <button class="button" on-click="deleteAllUsers">Delete All Users</button>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
       import { LocalStorage } from '../api/localStorage.js';
       
       function generateId() {
-        return Math.floor((Math.random() * 1000) + 1);
+        return Math.floor(1000 + Math.random() * 9000);
       }
 
       let localStorage = new LocalStorage(
@@ -111,12 +111,12 @@
           localStorage.getAllUsers();
         }
 
-        updateUser(id, dataToUpdate) {
-          localStorage.updateUser();
+        updateUser(id, update) {
+          localStorage.updateUser(id, {'job title': 'Software Engineer'});
         }
 
-        replaceUser() {
-          localStorage.replaceUser(id, newUser);
+        replaceUser(id, update) {
+          localStorage.replaceUser(id, {'name': 'New Name'});
         }
 
         deleteUser(id) {
@@ -131,18 +131,19 @@
           localStorage.generateId();
         }
 
-        validateUser() {
-          localStorage.validateUser(localStorage._id);
+        validateUser(user) {
+          localStorage.validateUser({ _id: String, name: String});
         }
 
         testLocalStorage() {
-          this.createUser(localStorage.user);
-          this.getUser(localStorage._id);
+          this.createUser();
+          this.validateUser();
+          this.getUser();
           this.getAllUsers();
           this.generateId();
-          this.deleteUser(localStorage._id);
-          this.deleteAllUsers();
-          
+          this.updateUser();
+          this.replaceUser();
+          this.deleteUser();          
         }
         
         connectedCallback() {

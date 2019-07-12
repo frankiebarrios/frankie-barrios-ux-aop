@@ -1,97 +1,123 @@
 import Enumerable from '../../node_modules/linq';
+import faker from '../../node_modules/faker';
+
+// Looks like utilizing these packages is causing webpack
+// upon compiling due to performance issues. These packages
+// are only in place for testing (getting me names for the new users)
+// and will be removed in next unit since I will be receiving 
+// input from the forms instead.
+
+// Looked into lazy loading/ code-splitting to resolve this
+// issue but didn't wanna go too far on this 1 unit. May 
+// be a good thing for me to try and utilize in the final unit as 
+// one of my 'mini projects'.
+
 export class LocalStorage {
-  constructor(_id, firstName, users) {
+  constructor(_id) {
     this._id = _id;
-    this.firstName = firstName;
   }
 
   createUser() {
     let existingUsers = JSON.parse(localStorage.getItem('userAccounts'));
-    if (existingUsers == null) existingUsers = [];
-    this._id = Math.floor((Math.random() * 1000) + 1);
-    let userName = 'Test Name';
+    if (existingUsers === null) existingUsers = [];
+    this._id = Math.floor(10000 + Math.random() * 9000);
+    let userName = faker.fake('{{name.firstName}} {{name.lastName}}');
+
     let userEntry = {
       '_id': this._id,
       'name': userName
     };
-    localStorage.setItem('User', JSON.stringify(userEntry));
+    
     existingUsers.push(userEntry); 
     localStorage.setItem('userAccounts', JSON.stringify(existingUsers));
     console.log('createUser() -> User Added: ', userEntry);
   }
   
   getUser(id) {
-    id = this._id;
     let users = JSON.parse(localStorage.getItem('userAccounts'));
+
     let user = Enumerable
       .from(users)
-      .where((u) => u._id == id)
+      .where((u) => u._id == this._id)
       .firstOrDefault();
+
     console.log('getUser() -> User Found: ', user);
     return user;
   }
 
   getAllUsers() {
-    console.log('getAllUsers() -> Users Found: ', JSON.parse(localStorage.getItem('userAccounts')));
+    console.log('getAllUsers() -> Users Found: ',
+     JSON.parse(localStorage.getItem('userAccounts')));
     return JSON.parse(localStorage.getItem('userAccounts'));
   }
 
   updateUser(id, update) {
     let existingUsers = JSON.parse(localStorage.getItem('userAccounts'));
-    console.log('updateUser() User Accounts: ', existingUsers);
     for (let i = 0; i < existingUsers.length; i++) {
-      if (existingUsers[i]._id == id) {
-        localStorage.setItem(update); // Need to hardcode an ._id to pass into the function call for testing 
-                                      // To do this, will add an object to the array from the beginning 
-                                      // of this function with hardcoced props that I can pass in to find the match
+      if (existingUsers[i]._id === this._id) {
+        const updatedUser = Object.assign(existingUsers[i], update);
+        console.log('updateUser() -> Updated User: ', updatedUser);
       }
     }
   }
 
-  replaceUser(id, newUser) {
-    // Takes two arguments:
-
-    // User ID string
-    // object data to replace old object with
-    // Removes all object data except User ID and replaces it with the new object data.
-
-    // Returns the newly defined object.
-
-    // storage.replaceOne(
-    //   '59825' ,
-    //   { department: 'HR' }
-    // );
-    // Very similar to updateOne() except that any fields not provided in
-    // the argument are removed from existing user object.
+  replaceUser(id, update) {
+    let users = JSON.parse(localStorage.getItem('userAccounts'));
+    for (let i = 0; i < users.length; i++) {
+      if (users[i]._id === this._id) {
+        const replacedUser = Object.assign(users[i], update);
+        console.log('replaceUser() -> User Replaced: ', replacedUser);
+      }
+    }
   }
 
   deleteUser(id) {
-    let user = JSON.parse(localStorage.getItem('User'));
-
-    // Check based on an individual user being in localStorage
-    // Will have to loop through localStorage if multiple users
-    if (user._id == id) {
-      localStorage.removeItem('User');
+    id = this._id;
+    let users = JSON.parse(localStorage.getItem('userAccounts'));
+    for (let i = 0; i < users.length; i++) {
+      if (users[i]._id === id) {
+        let userToDelete = localStorage.key(i);
+        localStorage.removeItem(`'${userToDelete}'`);
+        console.log("deleteUser() -> Delete User: ", users[i]);
+        console.log('To delete all users, click "Delete All Users" button.');
+        console.log('To add new users, click "Create User" button.');
+      }
     }
-
-    let localData = JSON.parse(localStorage.getItem('User'));
-    console.log('deleteUser() -> User Deleted: ', localData);
   }
 
   deleteAllUsers() {
     localStorage.clear();
-    console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ', JSON.parse(localStorage.getItem('User')));
+    console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ',
+    JSON.parse(localStorage.getItem('userAccounts')));
   }
 
   generateId() {
-    console.log('generateId() -> ID Generated: ', Math.floor((Math.random() * 1000) + 1));
+    console.log('generateId() -> ID Generated: ',
+     Math.floor((Math.random() * 1000) + 1));
     return Math.floor((Math.random() * 1000) + 1);
   }
 
-  validateUser(id) {
-    // A private function that takes one argument,
-    // a User object. Returns a boolean. true if 
-    // the input matches the user model criteria,
-    // false if it does not.
+  validateUser(user) {
+    const validationObject = {
+      _id: String,
+      name: String
+    }
+    const userObject = Object.getOwnPropertyNames(user);
+    const testObject = Object.getOwnPropertyNames(validationObject);
+    if (userObject.length != testObject.length) {
+      console.log('Number Of Props Do Not Match, User Invalid');
+      return false;
+    }
+
+    for (let i = 0; i < userObject.length; i++) {
+      let propNames = userObject[i];
+      if (userObject[propNames] !== testObject[propNames]) {
+        console.log('Prop Names Do Not Match, User Invalid');
+        return false;
+      }
+    }
+    console.log('validateUser() -> Results: User Valid');
+    return true;
   }
+    
 }
