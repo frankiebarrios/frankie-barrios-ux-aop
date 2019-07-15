@@ -82,76 +82,76 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-      import { LocalStorage } from '../api/localStorage.js';
+    import { LocalStorage } from '../api/localStorage.js';
+    
+    function generateId() {
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
+    let localStorage = new LocalStorage(
+        generateId(),
+        'Ted'
+    );
+  
+    class CreateUser extends PolymerElement {
+      static get is() { return 'create-user'; }
+      constructor() {
+        super();
+      }
       
-      function generateId() {
-        return Math.floor(1000 + Math.random() * 9000);
+      createUser(user) {
+        localStorage.createUser(localStorage);
       }
 
-      let localStorage = new LocalStorage(
-          generateId(),
-          'Ted'
-      );
-   
-      class CreateUser extends PolymerElement {
-        static get is() { return 'create-user'; }
-        constructor() {
-          super();
-        }
-        
-        createUser(user) {
-          localStorage.createUser(localStorage);
-        }
-
-        getUser(id) {
-          localStorage.getUser(localStorage._id);
-        }
-
-        getAllUsers() {
-          localStorage.getAllUsers();
-        }
-
-        updateUser(id, update) {
-          localStorage.updateUser(id, {'job title': 'Software Engineer'});
-        }
-
-        replaceUser(id, update) {
-          localStorage.replaceUser(id, {'name': 'New Name'});
-        }
-
-        deleteUser(id) {
-          localStorage.deleteUser(localStorage._id);
-        }
-
-        deleteAllUsers() {
-          localStorage.deleteAllUsers();
-        }
-
-        generateId() {
-          localStorage.generateId();
-        }
-
-        validateUser(user) {
-          localStorage.validateUser({ _id: String, name: String});
-        }
-
-        testLocalStorage() {
-          this.createUser();
-          this.validateUser();
-          this.getUser();
-          this.getAllUsers();
-          this.generateId();
-          this.updateUser();
-          this.replaceUser();
-          this.deleteUser();          
-        }
-        
-        connectedCallback() {
-          super.connectedCallback();
-          this.testLocalStorage();
-        }
+      getUser(id) {
+        localStorage.getUser(localStorage._id);
       }
-      customElements.define(CreateUser.is, CreateUser);
-      export default CreateUser;
+
+      getAllUsers() {
+        localStorage.getAllUsers();
+      }
+
+      updateUser(id, update) {
+        localStorage.updateUser(id, {'job title': 'Software Engineer'});
+      }
+
+      replaceUser(id, update) {
+        localStorage.replaceUser(id, {'name': 'New Name'});
+      }
+
+      deleteUser(id) {
+        localStorage.deleteUser(localStorage._id);
+      }
+
+      deleteAllUsers() {
+        localStorage.deleteAllUsers();
+      }
+
+      generateId() {
+        localStorage.generateId();
+      }
+
+      validateUser(user) {
+        localStorage.validateUser({ _id: String, name: String});
+      }
+
+      testLocalStorage() {
+        this.createUser();
+        this.validateUser();
+        this.getUser();
+        this.getAllUsers();
+        this.generateId();
+        this.updateUser();
+        this.replaceUser();
+        this.deleteUser();          
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+        this.testLocalStorage();
+      }
+    }
+    customElements.define(CreateUser.is, CreateUser);
+    export default CreateUser;
   </script>
 </dom-module>
