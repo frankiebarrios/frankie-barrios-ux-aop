@@ -53,6 +53,14 @@ export class LocalStorage {
     let users = JSON.parse(localStorage.getItem('userAccounts'));
     const index = users.indexOf(users.find(user => user._id === id));
     Object.assign(users[index], update);
+<<<<<<< HEAD
+=======
+      if (users[i]._id === this._id) {
+        const replacedUser = Object.assign(users[i], update);
+        console.log('replaceUser() -> User Replaced: ', replacedUser);
+      }
+    }
+>>>>>>> dd2c8b7092bf19c81ad10f3741c114718d70ca6b
   }
 
   deleteUser(id) {
