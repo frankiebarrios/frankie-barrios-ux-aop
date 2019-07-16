@@ -1,8 +1,7 @@
-import Enumerable from '../../node_modules/linq';
 import faker from '../../node_modules/faker';
 export class LocalStorage {
-  constructor(_id) {
-    this._id = _id;
+  constructor() {
+    this.users = JSON.parse(localStorage.getItem('userAccounts'));
   }
 
   createUser() {
@@ -17,70 +16,46 @@ export class LocalStorage {
     };
     
     existingUsers.push(userEntry); 
-    localStorage.setItem('userAccounts', JSON.stringify(existingUsers));
+    localStorage.setItem('userAccounts', 
+      JSON.stringify(existingUsers));
     console.log('createUser() -> User Added: ', userEntry);
   }
   
-  getUser(id) {
-    let users = JSON.parse(localStorage.getItem('userAccounts'));
-
-    let user = Enumerable
-      .from(users)
-      .where((u) => u._id == this._id)
-      .firstOrDefault();
-
+  getUser(id) { 
+    const user = this.findMatch(id);
     console.log('getUser() -> User Found: ', user);
     return user;
   }
 
   getAllUsers() {
-    console.log('getAllUsers() -> Users Found: ',
-     JSON.parse(localStorage.getItem('userAccounts')));
-    return JSON.parse(localStorage.getItem('userAccounts'));
+    console.log('getAllUsers() -> Users Found: ', this.users);
+    return this.users;
   }
 
   updateUser(id, update) {
-    let existingUsers = JSON.parse(localStorage.getItem('userAccounts'));
-    for (let i = 0; i < existingUsers.length; i++) {
-      if (existingUsers[i]._id === this._id) {
-        const updatedUser = Object.assign(existingUsers[i], update);
-        console.log('updateUser() -> Updated User: ', updatedUser);
-      }
-    }
+    const index = this.users.indexOf(
+      this.users.find(() => this.users._id === id));    
+    const updatedUser = Object.assign(this.users[index], update);
+    console.log('updateUser() -> User Updated: ', updatedUser);
   }
 
   replaceUser(id, update) {
-    let users = JSON.parse(localStorage.getItem('userAccounts'));
-    const index = users.indexOf(users.find(user => user._id === id));
-    Object.assign(users[index], update);
-<<<<<<< HEAD
-=======
-      if (users[i]._id === this._id) {
-        const replacedUser = Object.assign(users[i], update);
-        console.log('replaceUser() -> User Replaced: ', replacedUser);
-      }
-    }
->>>>>>> dd2c8b7092bf19c81ad10f3741c114718d70ca6b
+    const index = this.users.indexOf(this.users.find(user => this.users._id === id));
+    let replacedUser = Object.assign(this.users[index], update);
+    console.log('replaceUser() -> Replaced User: ', replacedUser)
+    return replacedUser;
   }
 
   deleteUser(id) {
-    id = this._id;
-    let users = JSON.parse(localStorage.getItem('userAccounts'));
-    for (let i = 0; i < users.length; i++) {
-      if (users[i]._id === id) {
-        let userToDelete = localStorage.key(i);
-        localStorage.removeItem(`'${userToDelete}'`);
-        console.log("deleteUser() -> Delete User: ", users[i]);
-        console.log('To delete all users, click "Delete All Users" button.');
-        console.log('To add new users, click "Create User" button.');
-      }
-    }
+    const index = this.users.indexOf(
+      this.users.find(() => this.users._id === id));    
+    console.log('deleteUser() -> User Deleted: ', this.users[index]);
+    delete this.users[index];
   }
 
   deleteAllUsers() {
     localStorage.clear();
-    console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ',
-    JSON.parse(localStorage.getItem('userAccounts')));
+    console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ', this.users);
   }
 
   generateId() {
@@ -110,6 +85,12 @@ export class LocalStorage {
     }
     console.log('validateUser() -> Results: User Valid');
     return true;
+  }  
+
+  findMatch(id) {
+    const index = this.users.indexOf(
+      this.users.find(() => this.users._id === id));
+    const user = this.users[index];
+    return user;
   }
-    
 }
