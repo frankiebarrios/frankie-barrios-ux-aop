@@ -1,4 +1,3 @@
-import faker from '../../node_modules/faker';
 export class LocalStorage {
   constructor(_id) {
     this._id = _id;
@@ -6,19 +5,12 @@ export class LocalStorage {
   }
 
   createUser(user) {
-    // Still needs some work...
+    this.validateUser(user);
     if (this.users === null) this.users = [];
-    //this.users = this.users ? this.users: [];
-    this._id = Math.floor(10000 + Math.random() * 9000);
-    let userName = faker.fake('{{name.firstName}} {{name.lastName}}');
-    let userEntry = {
-      '_id': this._id,
-      'name': userName
-    };
-    this.users.push(userEntry);
+    this.users.push(user);
     localStorage.setItem('UserAccounts',
       JSON.stringify(this.users));
-    console.log('createUser() -> User Added: ', userEntry);
+    console.log('createUser() -> User Added: ', user);
   }
 
   getUser(id) {

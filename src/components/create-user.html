@@ -83,16 +83,21 @@
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
-    
+    import faker from '../../node_modules/faker';
+
     function generateId() {
       return Math.floor(1000 + Math.random() * 9000);
     }
 
-    let localStorage = new LocalStorage(
-        generateId(),
-        'Ted'
-    );
-  
+    let LocalUsers = new LocalStorage();
+    
+    let _id = Math.floor(10000 + Math.random() * 9000);
+    let userName = faker.fake('{{name.firstName}} {{name.lastName}}');
+    const userEntry = {
+      '_id': _id,
+      'name': userName
+    };
+
     class CreateUser extends PolymerElement {
       static get is() { return 'create-user'; }
       constructor() {
@@ -100,7 +105,7 @@
       }
       
       createUser(user) {
-        localStorage.createUser(localStorage);
+        LocalUsers.createUser(userEntry);
       }
 
       getUser(id) {
@@ -136,14 +141,14 @@
       }
 
       testLocalStorage() {
-        this.createUser();
-        this.validateUser();
-        this.getUser();
-        this.getAllUsers();
-        this.generateId();
-        this.updateUser();
-        this.replaceUser();
-        this.deleteUser();          
+        this.createUser();        
+        // this.validateUser();
+        // this.getUser();
+        // this.getAllUsers();
+        // this.generateId();
+        // this.updateUser();
+        // this.replaceUser();
+        // this.deleteUser();          
       }
       
       connectedCallback() {
