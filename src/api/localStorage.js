@@ -1,12 +1,11 @@
 export class LocalStorage {
-  constructor(_id) {
-    this._id = _id;
+  constructor() {
     this.users = JSON.parse(localStorage.getItem('userAccounts'));
   }
 
   createUser(user) {
-    this.validateUser(user);
     if (this.users === null) this.users = [];
+    user._id = Math.floor(10000 + Math.random() * 9000);
     this.users.push(user);
     localStorage.setItem('UserAccounts',
       JSON.stringify(this.users));
@@ -85,8 +84,7 @@ export class LocalStorage {
   }
 
   getUserIndex(id) {
-    const index = this.users.indexOf(
-      this.users.find(user => this.users._id === id));
+    const index = this.users.indexOf(this.users.find(index => index._id === id));
     return index;
   }
 }
