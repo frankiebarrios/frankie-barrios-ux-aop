@@ -83,10 +83,4 @@ export class LocalStorage {
     const index = this.users.indexOf(this.users.find(index => index._id === id));
     return index;
   }
-
-  // setUsers() {
-  //   const storageUsers = localStorage.getItem('userAccounts');
-  //   storageUsers.stringify
-  //   this.users = storageUsers ? JSON.parse(storageUsers) : [];
-  // }
 }
