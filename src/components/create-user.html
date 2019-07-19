@@ -60,16 +60,16 @@
         <div class="form-border">
           <form>
             <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+            <input type="text" id="fname" name="firstname" placeholder="Your name.." value="{{user.firstName::input}}">
 
             <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+            <input type="text" id="lname" name="lastname" placeholder="Your last name.." value="{{user.lastName::input}}">
 
             <label for="phone">Phone</label>
-            <input type="text" id="phone" name="phone" placeholder="Your phone number..">
+            <input type="text" id="phone" name="phone" placeholder="Your phone number.." value="{{user.phone::input}}">
 
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Your email..">
+            <input type="text" id="email" name="email" placeholder="Your email.." value="{{user.email::input}}">
           </form>
           <div>
             <button class="button" on-click="createUser">Create User</button>
@@ -83,71 +83,26 @@
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
-    import faker from '../../node_modules/faker';
 
     let LocalUsers = new LocalStorage();
-    
-    let userEntry = {
-      '_id': Math.floor(10000 + Math.random() * 9000),
-      'name': faker.fake('{{name.firstName}} {{name.lastName}}')
-    };
 
     class CreateUser extends PolymerElement {
       static get is() { return 'create-user'; }
       
+      static get properties() {
+        return {
+          user: {
+            type: Object,
+            value() {
+              return {
+                firstName: '',
+                lastName: '',
+                phone: '',
+                email: ''
+      } } } } }
+
       createUser() {
-        LocalUsers.createUser(userEntry);
-      }
-
-      getUser() {
-        LocalUsers.getUser(userEntry._id);
-      }
-
-      getAllUsers() {
-        LocalUsers.getAllUsers();
-      }
-
-      updateUser() {
-        LocalUsers.updateUser(userEntry._id, 
-          {'job title': 'Software Engineer'});
-      }
-
-      replaceUser() {
-        LocalUsers.replaceUser(userEntry._id, {'name': 'New Name'});
-      }
-
-      deleteUser() {
-        LocalUsers.deleteUser(userEntry._id);
-      }
-
-      deleteAllUsers() {
-        LocalUsers.deleteAllUsers();
-      }
-
-      generateId() {
-        LocalUsers.generateId();
-      }
-
-      validateUser() {
-        LocalUsers.validateUser(
-          { _id: String, name: String }
-        );
-      }
-
-      testLocalStorage() {
-        this.createUser();        
-        this.validateUser();
-        this.getUser();
-        this.getAllUsers();
-        this.generateId();
-        this.updateUser();
-        this.replaceUser();
-        this.deleteUser();          
-      }
-      
-      connectedCallback() {
-        super.connectedCallback();
-        this.testLocalStorage();
+        LocalUsers.createUser(this.user);
       }
     }
     customElements.define(CreateUser.is, CreateUser);

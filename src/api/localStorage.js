@@ -9,6 +9,9 @@ export class LocalStorage {
     this.users.push(user);
     localStorage.setItem('UserAccounts',
       JSON.stringify(this.users));
+      // this.users is being updated and more users
+      // added to it every time this is ran.
+      // Need to figure this out.....
     console.log('createUser() -> User Added: ', user);
   }
 
