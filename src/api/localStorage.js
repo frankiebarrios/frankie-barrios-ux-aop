@@ -1,18 +1,11 @@
 export class LocalStorage {
   constructor() {
-    this.users = JSON.parse(localStorage.getItem('userAccounts'));
+    this.users = JSON.parse(localStorage.getItem('userAccounts')) || [];
   }
 
   createUser(user) {
-    if (this.users === null) this.users = [];
-    user._id = Math.floor(10000 + Math.random() * 9000);
-    this.users.push(user);
-    localStorage.setItem('UserAccounts',
-      JSON.stringify(this.users));
-      // this.users is being updated and more users
-      // added to it every time this is ran.
-      // Need to figure this out.....
-    console.log('createUser() -> User Added: ', user);
+    this.users.push(JSON.stringify(user));
+    localStorage.setItem('UserAccounts', JSON.stringify(this.users));
   }
 
   getUser(id) {
@@ -90,4 +83,10 @@ export class LocalStorage {
     const index = this.users.indexOf(this.users.find(index => index._id === id));
     return index;
   }
+
+  // setUsers() {
+  //   const storageUsers = localStorage.getItem('userAccounts');
+  //   storageUsers.stringify
+  //   this.users = storageUsers ? JSON.parse(storageUsers) : [];
+  // }
 }
