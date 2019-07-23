@@ -1,135 +1,112 @@
-<link rel="import" href="~@banno/polymer/polymer-element.js">
+<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 
 <dom-module id="user-profile">
-    <template>
-        <style>
-            .div-center {
-                text-align: center;
-            }
-            
-            .border {
-                border: #666 1px solid;
-                width: 20%;
-                margin: auto;
-                margin-top: 25px;
-                padding-bottom: 25px;
-            }
+  <template>
+    <style>
+      .div-center {
+        text-align: center;
+      }
 
-            form {
-                border: 1 px black solid;
-                border-radius: 5px;
-                background-color: #f2f2f2;
-                padding: 20px;
-                width: 50%;
-                margin: auto;
-            }
+      .border {
+        border: #666 1px solid;
+        width: 20%;
+        margin: auto;
+        margin-top: 25px;
+        padding-bottom: 25px;
+      }
 
-            .button {
-                background-color: #87CEFA;
-                border: none;
-                color: white;
-                padding: 5px 12px;
-                text-align: center;
-                text-decoration: none;
-                display: block;
-                margin: auto;
-                font-size: 16px;
-                margin-top: 25px;
-            }
+      form {
+        border: 1 px black solid;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        width: 50%;
+        margin: auto;
+      }
 
-            button:hover {
-                background-color: rgb(196, 226, 245);
-            }
+      .button {
+        background-color: #87CEFA;
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        font-size: 16px;
+        margin-top: 25px;
+      }
 
-            table.center {
-                margin-right: auto;
-                margin-left: auto;
-            }
+      button:hover {
+        background-color: rgb(196, 226, 245);
+      }
 
-            th, td {
-                text-align: left;
-                padding: 16px;
-            }
+      table.center {
+        margin-right: auto;
+        margin-left: auto;
+      }
 
-            tr:nth-child(odd) {
-                background-color: #f2f2f2;
-            }
-        </style>
+      th,
+      td {
+        text-align: left;
+        padding: 16px;
+      }
 
-            <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
-            <div class="form" id="userProfileCard" style="display: none;">
-                <div>
-                    <div class="div-center">
-                        <h3 class="div-center">User Profile</h3>
-                        <table class="center" id="test">
-                            <tr>
-                                <td>ID:</td>
-                                <td>[[_id]]</td>
-                            </tr>
-                            <tr>
-                                <td>First Name:</td>
-                                <td>[[firstName]]</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name:</td>
-                                <td>[[lastName]]</td>
-                            </tr>
-                            <tr>
-                                <td>Phone:</td>
-                                <td>[[phone]]</td>
-                            </tr>
-                            <tr>
-                                <td>Email:</td>
-                                <td>[[email]]</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-    </template>
+      tr:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+    </style>
 
-    <script type="module">
-        import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-        class UserProfile extends PolymerElement {
-            static get is() { return 'user-profile'; }
+    <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
+    <div class="form" id="userProfileCard" style="display: none;">
+      <div>
+        <div class="div-center">
+          <h3 class="div-center">User Profile</h3>
+          <table class="center" id="test">
+            <tr>
+              <td>ID:</td>
+              <td>{{id}}</td>
+            </tr>
+            <tr>
+              <td>First Name:</td>
+              <td>{{first}}</td>
+            </tr>
+            <tr>
+              <td>Last Name:</td>
+              <td>{{last}}</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>{{phone}}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>{{email}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </template>
 
-            static get properties() {
-                return {
-                    _id: {
-                        type: String,
-                        value: ''
-                    },
-                    firstName: {
-                        type: String,
-                        value: ''
-                    },
-                    lastName: {
-                        type: String,
-                        value: ''
-                    },
-                    phone: {
-                        type: String,
-                        value: ''
-                    },
-                    email: {
-                        type: String,
-                        value: '@email.com'
-                    }
-                };
-            }
+  <script type="module">
+    import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';  
+    
+    class UserProfile extends PolymerElement {
+      static get is() { return 'user-profile'; }
 
-            expandCollapse() {
-                let userCard = this.$.userProfileCard;
+      expandCollapse() {
+        let userCard = this.$.userProfileCard;
 
-                if (userCard.style.display === "block") {
-                    userCard.style.display = "none";
-                } else {
-                    userCard.style.display = "block";
-                }
-            }
+        if (userCard.style.display === "block") {
+          userCard.style.display = "none";
+        } else {
+          userCard.style.display = "block";
         }
-        customElements.define(UserProfile.is, UserProfile);
-        export default UserProfile;
-    </script>
+      }
+    }
+    customElements.define(UserProfile.is, UserProfile);
+    export default UserProfile;
+  </script>
 
 </dom-module>

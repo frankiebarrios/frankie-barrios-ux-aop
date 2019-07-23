@@ -1,11 +1,14 @@
 export class LocalStorage {
   constructor() {
-    this.users = JSON.parse(localStorage.getItem('userAccounts')) || [];
+    this.users = JSON.parse(
+      localStorage.getItem('UserAccounts')) || [];
   }
 
   createUser(user) {
     this.users.push(JSON.stringify(user));
-    localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+    localStorage.setItem(
+      'UserAccounts', JSON.stringify(this.users));
+    console.log('createUser() -> User Added: ', user);
   }
 
   getUser(id) {
@@ -19,7 +22,7 @@ export class LocalStorage {
     return this.users;
   }
 
-  updateUser(id, update) {
+  updateUser(id, update) {  
     const index = this.getUserIndex(id);
     const updatedUser = Object.assign(this.users[index], update);
     console.log('updateUser() -> User Updated: ', updatedUser);
@@ -27,7 +30,8 @@ export class LocalStorage {
 
   replaceUser(id, update) {
     const index = this.getUserIndex(id);
-    const replacedUser = Object.assign(this.users[index], update);
+    const replacedUser = Object.assign(
+      this.users[index], update);
     console.log('replaceUser() -> Replaced User: ', replacedUser)
     return replacedUser;
   }
@@ -39,14 +43,13 @@ export class LocalStorage {
   }
 
   deleteAllUsers() {
+    this.users = [];
     localStorage.clear();
     console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ',
      this.users);
   }
 
   generateId() {
-    console.log('generateId() -> ID Generated: ',
-      Math.floor((Math.random() * 1000) + 1));
     return Math.floor((Math.random() * 1000) + 1);
   }
 
@@ -79,8 +82,10 @@ export class LocalStorage {
     return user;
   }
 
-  getUserIndex(id) {
-    const index = this.users.indexOf(this.users.find(index => index._id === id));
-    return index;
+  getUserIndex(id) {  
+    //const index = JSON.parse(this.users).find(index => index.id == id);
+    console.log(this.users);
+    //Left off needing to be able to search through this.users...
   }
+
 }
