@@ -9,11 +9,11 @@
     <h2> User list: </h2>
     <dom-repeat items="{{users}}">
       <template>
-        <div class="border">
+        <div>
           <user-profile 
             id="{{item.id}}" 
-            first="{{item.firstName}}" 
-            last="{{item.lastname}}" 
+            firstname="{{item.firstName}}" 
+            lastname="{{item.lastname}}"
             phone="{{item.phone}}"
             email="{{item.email}}">
           </user-profile>
@@ -44,6 +44,7 @@
 
       getUsers() {
         LocalUsers.getAllUsers();
+        console.log('this.users', this.users);
       }
 
     }
