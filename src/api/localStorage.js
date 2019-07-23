@@ -1,7 +1,6 @@
 export class LocalStorage {
   constructor() {
-    this.users = JSON.parse(
-      localStorage.getItem('UserAccounts')) || [];
+    this.users = JSON.parse(localStorage.getItem('UserAccounts')) || [];
   }
 
   createUser(user) {

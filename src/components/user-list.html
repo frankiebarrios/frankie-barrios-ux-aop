@@ -12,14 +12,15 @@
         <div class="border">
           <user-profile 
             id="{{item.id}}" 
-            first="{{item.first}}" 
-            last="{{item.last}}" 
+            first="{{item.firstName}}" 
+            last="{{item.lastname}}" 
             phone="{{item.phone}}"
             email="{{item.email}}">
           </user-profile>
         </div>
       </template>
     </dom-repeat>
+    <button on-click="getUsers">Test getAllUsers()</button>
   </template>
 
   <script type="module">
@@ -30,18 +31,21 @@
 
     class UserList extends PolymerElement {
       static get is() { return 'user-list'; }
+
       static get properties() {
         return {
           users: {
             value() {
-              return [
-                { id: LocalUsers.generateId(), first: 'Bob', last: 'Smith', phone: '111-111-1111', email: 'test@test.com' },
-                { id: LocalUsers.generateId(), first: 'Sally', last: 'Johnson', phone: '111-111-1111', email: 'test@test.com' }
-              ];
+              return LocalUsers.getAllUsers();
             }
           }
         };
       }
+
+      getUsers() {
+        LocalUsers.getAllUsers();
+      }
+
     }
     customElements.define(UserList.is, UserList);
     export default UserList;
