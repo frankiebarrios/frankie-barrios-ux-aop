@@ -31,42 +31,19 @@
       }
     </style>
     <header>
-      <user-list user-accounts="{{userAccounts}}"></user-list>
+      <user-list></user-list>
       <create-user></create-user>
       <edit-user></edit-user>
     </header>
   </template>
 
   <script type="module">
-
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
 
-    const LocalUsers = new LocalStorage();
-
+    const Storage = new LocalStorage();
     class InternApp extends PolymerElement {
-      constructor() {
-        super();
-        this.users = LocalUsers.getAllUsers();
-      }
-
       static get is() { return 'intern-app'; }
-
-      static get properties() {
-        return {
-          userAccounts: {
-            type: Array,
-            value: () => {
-              return this.users;
-            },
-            notify: true
-          }
-        };
-      }
-
-      getUsers() {
-        console.log(this.users);
-      }
     }
     customElements.define(InternApp.is, InternApp);
     export default InternApp;

@@ -65,23 +65,23 @@
           <table class="center" id="test">
             <tr>
               <td>ID:</td>
-              <td>{{id}}</td>
+              <td>[[id]]</td>
             </tr>
             <tr>
               <td>First Name:</td>
-              <td>{{first}}</td>
+              <td>[[firstname]]</td>
             </tr>
             <tr>
               <td>Last Name:</td>
-              <td>{{last}}</td>
+              <td>[[lastname]]</td>
             </tr>
             <tr>
               <td>Phone:</td>
-              <td>{{phone}}</td>
+              <td>[[phone]]</td>
             </tr>
             <tr>
               <td>Email:</td>
-              <td>{{email}}</td>
+              <td>[[email]]</td>
             </tr>
           </table>
         </div>
@@ -94,7 +94,7 @@
 
     class UserProfile extends PolymerElement {
       static get is() { return 'user-profile'; }
-
+      // define properties here as well
       expandCollapse() {
         let userCard = this.$.userProfileCard;
 

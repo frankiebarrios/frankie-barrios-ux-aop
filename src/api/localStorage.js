@@ -4,7 +4,7 @@ export class LocalStorage {
   }
 
   createUser(user) {
-    this.users.push(JSON.stringify(user));
+    this.users.push(user);
     localStorage.setItem(
       'UserAccounts', JSON.stringify(this.users));
     console.log('createUser() -> User Added: ', user);

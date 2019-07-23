@@ -84,7 +84,7 @@
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
 
-    const LocalUsers = new LocalStorage();
+    const Storage = new LocalStorage();
 
     class CreateUser extends PolymerElement {
       static get is() { return 'create-user'; }
@@ -107,11 +107,11 @@
       }
 
       createUser() {
-        LocalUsers.createUser(this.user);
+        Storage.createUser(this.user);
       }
 
       deleteAllUsers() {
-        LocalUsers.deleteAllUsers();
+        Storage.deleteAllUsers();
       }
     }
     customElements.define(CreateUser.is, CreateUser);

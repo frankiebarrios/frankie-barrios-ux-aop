@@ -59,11 +59,14 @@
       <div class="container">
         <div class="form-border">
           <form>
+            <label for="fname">User To Edit</label>
+            <input type="text" placeholder="Enter User Id.." value="{{user.editUser::input}}">
+
             <label for="fname">Edit Name</label>
-            <input type="text" placeholder="Edit name.." value="{{user.editName::input}}">
+            <input type="text" placeholder="Enter Edit name.." value="{{user.editName::input}}">
 
             <label for="lname">Edit Value</label>
-            <input type="text" placeholder="Edit Value.." value="{{user.editValue::input}}">
+            <input type="text" placeholder="Enter Edit Value.." value="{{user.editValue::input}}">
           </form>
         </div>
         <button class="button" on-click="getIndex">Edit User</button>
@@ -75,7 +78,7 @@
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
 
-    let LocalUsers = new LocalStorage();
+    let Storage = new LocalStorage();
 
     class CreateUser extends PolymerElement {
       static get is() { return 'edit-user'; }
@@ -86,6 +89,7 @@
             type: Object,
             value() {
               return {
+                editUser: '',
                 editName: '',
                 editValue: ''
               }
@@ -95,11 +99,11 @@
       }
 
       editUser() {
-        LocalUsers.updateUser('123', `{ ${this.user.editName}: ${this.user.editValue} }`);
+        Storage.updateUser(this.user.editUser, `{ ${this.user.editName}: ${this.user.editValue} }`);
       }
 
       getIndex() {
-        LocalUsers.getUserIndex('123');
+        Storage.getUserIndex('123');
       }
     }
     customElements.define(CreateUser.is, CreateUser);
