@@ -4,24 +4,23 @@
 
 <dom-module id="user-list">
   <style>
+    
   </style>
   <template>
-    <h2> User list: </h2>
-    <dom-repeat items="{{users}}">
-      <template>
-        <div>
-          <user-profile 
-            id="{{item.id}}" 
-            firstname="{{item.firstName}}" 
-            lastname="{{item.lastName}}"
-            phone="{{item.phone}}"
-            email="{{item.email}}">
-          </user-profile>
-        </div>
-      </template>
-    </dom-repeat>
-    <button on-click="getUsers">Test getAllUsers()</button>
+    <h2>User List:</h2>
+    <template is="dom-repeat" items="[[users]]" as="user">
+      <div>
+        <user-profile 
+          id="[[user.id]]"
+          firstname="[[user.firstName]]"
+          lastname="[[user.lastName]]"
+          phone="[[user.phone]]"
+          email="[[user.email]]">
+        </user-profile>
+      </div>
+    </template>
   </template>
+  <button on-click="getUsers">Test getAllUsers()</button>
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
