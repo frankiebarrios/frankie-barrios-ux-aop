@@ -100,8 +100,7 @@
       }
 
       editUser() {
-        const update = '{"' + this.user.editName + '": "' + this.user.editValue + '"}';
-        Storage.editUser(this.user.userId, update);
+        Storage.editUser(this.user.userId, this.user.editName, this.user.editValue);
       }
 
       deleteUser() {

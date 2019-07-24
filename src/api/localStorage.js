@@ -21,9 +21,9 @@ export class LocalStorage {
     return this.users;
   }
 
-  editUser(id, update) {
+  editUser(id, editName, editValue) {
     const user = this.getUser(id);
-    Object.assign(user, update);
+    Object.assign(user, `{"${editName}": "${editValue}"}`);
     console.log('User: ', user);
   }
 
