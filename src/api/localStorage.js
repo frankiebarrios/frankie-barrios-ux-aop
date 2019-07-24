@@ -21,10 +21,10 @@ export class LocalStorage {
     return this.users;
   }
 
-  updateUser(id, update) {  
-    const index = this.getUserIndex(id);
-    const updatedUser = Object.assign(this.users[index], update);
-    console.log('updateUser() -> User Updated: ', updatedUser);
+  editUser(id, update) {
+    const user = this.getUser(id);
+    Object.assign(user, update);
+    console.log('User: ', user);
   }
 
   replaceUser(id, update) {
@@ -81,10 +81,9 @@ export class LocalStorage {
     return user;
   }
 
-  getUserIndex(id) {  
-    //const index = JSON.parse(this.users).find(index => index.id == id);
-    console.log(this.users);
-    //Left off needing to be able to search through this.users...
+  getUserIndex(id) { 
+    const index = this.users.indexOf(this.users.find(user => user.id === id)); 
+    return index;
   }
 
 }

@@ -58,6 +58,7 @@
     <div>
       <div class="container">
         <div class="form-border">
+          <button class="button" on-click="getUserIndex">Get Index Test</button>
           <form>
             <label for="fname">First Name</label>
             <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
@@ -99,11 +100,15 @@
                 lastName: '',
                 phone: '',
                 email: '',
-                id: '123'
+                id: '1234'
               }
             }
           }
         }
+      }
+
+      getUserIndex() {
+        Storage.getUserIndex(this.user.id);
       }
 
       createUser() {

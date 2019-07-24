@@ -4,10 +4,16 @@
 
 <dom-module id="user-list">
   <style>
-    
+   /* Add Styles , not taking so far???*/
+   .centered{
+     text-align: center;
+   }
   </style>
+  
   <template>
-    <h2>User List:</h2>
+    <div class="centered">
+      <h2 class="centered">User List:</h2>
+    </div>
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
         <user-profile 

@@ -59,8 +59,8 @@
       <div class="container">
         <div class="form-border">
           <form>
-            <label for="fname">User To Edit</label>
-            <input type="text" placeholder="Enter User Id.." value="{{user.editUser::input}}">
+            <label for="fname">Enter User Id</label>
+            <input type="text" placeholder="User Id.." value="{{user.userId::input}}">
 
             <label for="fname">Edit Name</label>
             <input type="text" placeholder="Enter Edit name.." value="{{user.editName::input}}">
@@ -69,7 +69,8 @@
             <input type="text" placeholder="Enter Edit Value.." value="{{user.editValue::input}}">
           </form>
         </div>
-        <button class="button" on-click="getIndex">Edit User</button>
+        <button class="button" on-click="editUser">Edit User</button>
+        <button class="button" on-click="deleteUser">Delete User</button>
       </div>
     </div>
   </template>
@@ -89,7 +90,7 @@
             type: Object,
             value() {
               return {
-                editUser: '',
+                userId: '',
                 editName: '',
                 editValue: ''
               }
@@ -99,7 +100,12 @@
       }
 
       editUser() {
-        Storage.updateUser(this.user.editUser, `{ ${this.user.editName}: ${this.user.editValue} }`);
+        const update = '{"' + this.user.editName + '": "' + this.user.editValue + '"}';
+        Storage.editUser(this.user.userId, update);
+      }
+
+      deleteUser() {
+        Storage.deleteUser(this.user.userId);
       }
 
       getIndex() {
