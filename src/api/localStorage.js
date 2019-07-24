@@ -22,9 +22,10 @@ export class LocalStorage {
   }
 
   editUser(id, editName, editValue) {
-    const user = this.getUser(id);
-    Object.assign(user, `{"${editName}": "${editValue}"}`);
-    console.log('User: ', user);
+    const editObj = {};
+    editObj[`${editName}`] = `${editValue}`;
+    Object.assign(this.getUser(id), editObj);
+    // Next step is to get the new user in LS
   }
 
   replaceUser(id, update) {
