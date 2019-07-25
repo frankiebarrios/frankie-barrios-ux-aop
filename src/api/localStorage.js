@@ -7,14 +7,18 @@ export class LocalStorage {
     this.updateUsers();
     user.id = this.generateId();
     this.users.push(user);
-    localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+    this.setLocalStorageData();
     console.log('User Added: ', user);
-  } 
+  }
+
+  setLocalStorageData() {
+    localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+  }
 
   updateUsers() {
     this.users = JSON.parse(localStorage.getItem('UserAccounts')) || [];
   }
- 
+
   getUser(id) {
     const user = this.users.find(user => String(user.id) === String(id));
     console.log('getUser() -> User Found: ', user);
@@ -46,7 +50,7 @@ export class LocalStorage {
     this.users.forEach((user, index) => {
       if (String(user.id) === String(id)) {
         this.users.splice(index, 1);
-        localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+        this.setLocalStorageData();
       }
     });
   }
@@ -55,7 +59,7 @@ export class LocalStorage {
     this.users = [];
     localStorage.clear();
     console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ',
-     this.users);
+      this.users);
   }
 
   generateId() {
