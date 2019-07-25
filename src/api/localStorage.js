@@ -16,7 +16,7 @@ export class LocalStorage {
   }
  
   getUser(id) {
-    const user = this.findUserMatch(id);
+    const user = this.users.find(user => String(user.id) === String(id));
     console.log('getUser() -> User Found: ', user);
     return user;
   }
@@ -35,9 +35,8 @@ export class LocalStorage {
   }
 
   replaceUser(id, update) {
-    const index = this.getUserIndex(id);
-    const replacedUser = Object.assign(
-      this.users[index], update);
+    const user = this.users.find(user => String(user.id) === String(id));
+    const replacedUser = Object.assign(user, update);
     console.log('replaceUser() -> Replaced User: ', replacedUser)
     return replacedUser;
   }
@@ -84,16 +83,6 @@ export class LocalStorage {
     }
     console.log('validateUser() -> Results: User Valid');
     return true;
-  }
-
-  findUserMatch(id) {
-    try {
-      const index = this.getUserIndex(id);
-      const user = this.users[index];
-      return user;
-    } catch (err) {
-      console.log('Error Finding User: ', err);
-    }
   }
 
   getUserIndex(id) {
