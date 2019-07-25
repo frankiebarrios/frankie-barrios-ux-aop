@@ -45,8 +45,9 @@ export class LocalStorage {
   }
 
   deleteUser(id) {
+    this.updateUsers();
     this.users.forEach((user, index) => {
-      if (user.id === id) {
+      if (user.id.toString() === id.toString()) {
         this.users.splice(index, 1);
         localStorage.setItem('UserAccounts', JSON.stringify(this.users));
       }
@@ -99,7 +100,7 @@ export class LocalStorage {
 
   getUserIndex(id) {
     try {
-      const index = this.users.indexOf(this.users.find(user => user.id === id));
+      const index = this.users.indexOf(this.users.find(user => user.id.toString() === id.toString()));
       return index;
     } catch (err) {
       console.log('Error Finding Index: ', err);
