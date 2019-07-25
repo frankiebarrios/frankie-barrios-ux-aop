@@ -9,12 +9,10 @@ export class LocalStorage {
     this.users.push(user);
     localStorage.setItem('UserAccounts', JSON.stringify(this.users));
     console.log('User Added: ', user);
-    return this.users;
   } 
 
   updateUsers() {
     this.users = JSON.parse(localStorage.getItem('UserAccounts')) || [];
-    return this.users;
   }
  
   getUser(id) {
@@ -47,7 +45,7 @@ export class LocalStorage {
   deleteUser(id) {
     this.updateUsers();
     this.users.forEach((user, index) => {
-      if (user.id.toString() === id.toString()) {
+      if (String(user.id) === String(id)) {
         this.users.splice(index, 1);
         localStorage.setItem('UserAccounts', JSON.stringify(this.users));
       }
