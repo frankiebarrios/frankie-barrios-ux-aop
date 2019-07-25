@@ -24,7 +24,8 @@ export class LocalStorage {
   editUser(id, editName, editValue) {
     const editObj = {};
     editObj[`${editName}`] = `${editValue}`;
-    Object.assign(this.getUser(id), editObj);
+    const updatedUser = Object.assign(this.getUser(id), editObj);
+    console.log('Updated User: ', updatedUser);
     // Next step is to get the new user in LS
   }
 
@@ -37,9 +38,12 @@ export class LocalStorage {
   }
 
   deleteUser(id) {
-    const index = this.getUserIndex(id);
-    console.log('deleteUser() -> User Deleted: ', this.users[index]);
-    delete this.users[index];
+    this.users.forEach((user, index) => {
+      if (user.id === id) {
+        this.users.splice(index, 1);
+        localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+      }
+    });
   }
 
   deleteAllUsers() {
@@ -77,14 +81,22 @@ export class LocalStorage {
   }
 
   findUserMatch(id) {
-    const index = this.getUserIndex(id);
-    const user = this.users[index];
-    return user;
+    try {
+      const index = this.getUserIndex(id);
+      const user = this.users[index];
+      return user;
+    } catch (err) {
+      console.log('Error Finding User: ', err);
+    }
   }
 
-  getUserIndex(id) { 
-    const index = this.users.indexOf(this.users.find(user => user.id === id)); 
-    return index;
+  getUserIndex(id) {
+    try {
+      const index = this.users.indexOf(this.users.find(user => user.id === id));
+      return index;
+    } catch (err) {
+      console.log('Error Finding Index: ', err);
+    }
   }
 
 }
