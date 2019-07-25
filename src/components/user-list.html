@@ -8,11 +8,29 @@
    .centered{
      text-align: center;
    }
+   
+   .button {
+        background-color: #87CEFA;
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        font-size: 16px;
+        margin-top: 25px;
+      }
+
+      button:hover {
+        background-color: rgb(196, 226, 245);
+      }
   </style>
   
   <template>
     <div class="centered">
       <h2 class="centered">User List:</h2>
+      <button class="button" value="Refresh Page" onClick="window.location.reload();">Generate User List</button>
     </div>
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>

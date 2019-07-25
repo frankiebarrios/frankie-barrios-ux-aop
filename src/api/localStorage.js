@@ -4,12 +4,19 @@ export class LocalStorage {
   }
 
   createUser(user) {
+    this.updateUsers();
+    user.id = this.generateId();
     this.users.push(user);
-    localStorage.setItem(
-      'UserAccounts', JSON.stringify(this.users));
-    console.log('createUser() -> User Added: ', user);
-  }
+    localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+    console.log('User Added: ', user);
+    return this.users;
+  } 
 
+  updateUsers() {
+    this.users = JSON.parse(localStorage.getItem('UserAccounts')) || [];
+    return this.users;
+  }
+ 
   getUser(id) {
     const user = this.findUserMatch(id);
     console.log('getUser() -> User Found: ', user);
@@ -26,7 +33,7 @@ export class LocalStorage {
     editObj[`${editName}`] = `${editValue}`;
     const updatedUser = Object.assign(this.getUser(id), editObj);
     console.log('Updated User: ', updatedUser);
-    // Next step is to get the new user in LS
+    this.createUser(updatedUser);
   }
 
   replaceUser(id, update) {

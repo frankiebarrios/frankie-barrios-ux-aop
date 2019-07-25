@@ -63,10 +63,10 @@
             <input type="text" placeholder="User Id.." value="{{user.userId::input}}">
 
             <label for="fname">Edit Name</label>
-            <input type="text" placeholder="Enter Edit name.." value="{{user.editName::input}}">
+            <input type="text" placeholder="Enter Edit name..(key)" value="{{user.editName::input}}">
 
             <label for="lname">Edit Value</label>
-            <input type="text" placeholder="Enter Edit Value.." value="{{user.editValue::input}}">
+            <input type="text" placeholder="Enter Edit Value..(value)" value="{{user.editValue::input}}">
           </form>
         </div>
         <button class="button" on-click="editUser">Edit User</button>
@@ -100,7 +100,10 @@
       }
 
       editUser() {
-        Storage.editUser(this.user.userId, this.user.editName, this.user.editValue);
+        Storage.editUser(
+          this.user.userId, 
+          this.user.editName, 
+          this.user.editValue);
       }
 
       deleteUser() {
