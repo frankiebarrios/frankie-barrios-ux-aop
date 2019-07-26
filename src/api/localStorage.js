@@ -8,7 +8,6 @@ export class LocalStorage {
     user.id = this.generateId();
     this.users.push(user);
     this.setLocalStorageData();
-    console.log('User Added: ', user);
   }
 
   setLocalStorageData() {
@@ -21,27 +20,26 @@ export class LocalStorage {
 
   getUser(id) {
     const user = this.users.find(user => String(user.id) === String(id));
-    console.log('getUser() -> User Found: ', user);
     return user;
   }
 
   getAllUsers() {
-    console.log('getAllUsers() -> Users Found: ', this.users);
     return this.users;
   }
 
   editUser(id, editName, editValue) {
-    const editObj = {};
-    editObj[`${editName}`] = `${editValue}`;
-    const updatedUser = Object.assign(this.getUser(id), editObj);
-    console.log('Updated User: ', updatedUser);
-    this.createUser(updatedUser);
+    try{
+      const editObj = {};
+      editObj[`${editName}`] = `${editValue}`;
+      const updatedUser = Object.assign(this.getUser(id), editObj);
+      this.deleteUser(id);
+      this.createUser(updatedUser);
+    } catch (err) {console.log('Error Editing User: ', err);}
   }
 
   replaceUser(id, update) {
     const user = this.users.find(user => String(user.id) === String(id));
     const replacedUser = Object.assign(user, update);
-    console.log('replaceUser() -> Replaced User: ', replacedUser)
     return replacedUser;
   }
 
@@ -58,8 +56,6 @@ export class LocalStorage {
   deleteAllUsers() {
     this.users = [];
     localStorage.clear();
-    console.log('deleteAllUsers() -> All localStorage Data Destroyed!: ',
-      this.users);
   }
 
   generateId() {
@@ -85,7 +81,6 @@ export class LocalStorage {
         return false;
       }
     }
-    console.log('validateUser() -> Results: User Valid');
     return true;
   }
 
