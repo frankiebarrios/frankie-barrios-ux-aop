@@ -3,6 +3,10 @@
 <dom-module id="user-profile">
   <template>
     <style>
+      .debugBorder {
+        border: #666 1px solid;
+      }
+
       .div-center {
         text-align: center;
       }
@@ -34,7 +38,8 @@
         display: block;
         margin: auto;
         font-size: 16px;
-        margin-top: 25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
 
       button:hover {
@@ -42,6 +47,7 @@
       }
 
       table.center {
+        margin-top: 20px;
         margin-right: auto;
         margin-left: auto;
       }
@@ -56,8 +62,26 @@
         background-color: #f2f2f2;
       }
     </style>
+    <div class="debugBorder"></div>
+    <div id="minimizedCard" style="display: block;">
+      <div>
+        <div class="div-center">
+          <table class="center" id="test">
+            <tr>
+              <td>User:</td>
+              <td>[[firstname]] [[lastname]]</td>
+            </tr>
+            <tr>
+              <td>ID:</td>
+              <td>[[id]]</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
 
     <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
+
     <div class="form" id="userProfileCard" style="display: none;">
       <div>
         <div class="div-center">
@@ -87,6 +111,8 @@
         </div>
       </div>
     </div>
+
+    </div>
   </template>
 
   <script type="module">
@@ -94,14 +120,19 @@
 
     class UserProfile extends PolymerElement {
       static get is() { return 'user-profile'; }
-      // define properties here as well
+
       expandCollapse() {
         let userCard = this.$.userProfileCard;
-
+        let minimizedCard = this.$.minimizedCard;
         if (userCard.style.display === "block") {
           userCard.style.display = "none";
         } else {
           userCard.style.display = "block";
+        }
+        if (minimizedCard.style.display === "block") {
+          minimizedCard.style.display = "none";
+        } else {
+          minimizedCard.style.display = "block";
         }
       }
     }
