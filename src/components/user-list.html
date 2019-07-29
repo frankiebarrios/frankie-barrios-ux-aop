@@ -30,7 +30,6 @@
   <template>
     <div class="centered">
       <h2 class="centered">User List:</h2>
-      <button class="button" value="Refresh Page" onClick="window.location.reload();">Generate User List</button>
     </div>
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
@@ -44,7 +43,6 @@
       </div>
     </template>
   </template>
-  <button on-click="getUsers">Test getAllUsers()</button>
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
@@ -65,9 +63,7 @@
 
       getUsers() {
         Storage.getAllUsers();
-        console.log('this.users', this.users);
       }
-
     }
     customElements.define(UserList.is, UserList);
     export default UserList;

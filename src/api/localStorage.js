@@ -4,14 +4,14 @@ export class LocalStorage {
   }
 
   createUser(user) {
-    this.updateUsers();
     user.id = this.generateId();
     this.users.push(user);
-    this.setLocalStorageData();
+    this.syncStorage();
   }
 
-  setLocalStorageData() {
+  syncStorage() {
     localStorage.setItem('UserAccounts', JSON.stringify(this.users));
+    this.updateUsers();
   }
 
   updateUsers() {
@@ -28,19 +28,13 @@ export class LocalStorage {
   }
 
   editUser(id, editName, editValue) {
-    try{
+    try {
       const editObj = {};
       editObj[`${editName}`] = `${editValue}`;
       const updatedUser = Object.assign(this.getUser(id), editObj);
       this.deleteUser(id);
       this.createUser(updatedUser);
-    } catch (err) {console.log('Error Editing User: ', err);}
-  }
-
-  replaceUser(id, update) {
-    const user = this.users.find(user => String(user.id) === String(id));
-    const replacedUser = Object.assign(user, update);
-    return replacedUser;
+    } catch (err) { console.error('Error Editing User: ', err); }
   }
 
   deleteUser(id) {
@@ -48,7 +42,7 @@ export class LocalStorage {
     this.users.forEach((user, index) => {
       if (String(user.id) === String(id)) {
         this.users.splice(index, 1);
-        this.setLocalStorageData();
+        this.syncStorage();
       }
     });
   }
@@ -67,16 +61,15 @@ export class LocalStorage {
       _id: String,
       name: String
     }
-    const userObject = Object.getOwnPropertyNames(user);
-    const testObject = Object.getOwnPropertyNames(validationObject);
-    if (userObject.length != testObject.length) {
+    const userProps = Object.getOwnPropertyNames(user);
+    const testProps = Object.getOwnPropertyNames(validationObject);
+    if (userProps.length !== testProps.length) {
       console.log('Number Of Props Do Not Match, User Invalid');
       return false;
     }
-
-    for (let i = 0; i < userObject.length; i++) {
-      let propNames = userObject[i];
-      if (userObject[propNames] !== testObject[propNames]) {
+    for (let i = 0; i < userProps.length; i++) {
+      let propNames = userProps[i];
+      if (userProps[propNames] !== testProps[propNames]) {
         console.log('Prop Names Do Not Match, User Invalid');
         return false;
       }
@@ -89,7 +82,7 @@ export class LocalStorage {
       const index = this.users.indexOf(this.users.find(user => user.id.toString() === id.toString()));
       return index;
     } catch (err) {
-      console.log('Error Finding Index: ', err);
+      console.error('Error Finding Index: ', err);
     }
   }
 
