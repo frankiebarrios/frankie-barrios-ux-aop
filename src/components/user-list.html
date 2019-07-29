@@ -4,41 +4,37 @@
 
 <dom-module id="user-list">
   <style>
-   /* Add Styles , not taking so far???*/
-   .centered{
-     text-align: center;
-   }
-   
-   .button {
-        background-color: #87CEFA;
-        border: none;
-        color: white;
-        padding: 5px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: auto;
-        font-size: 16px;
-        margin-top: 25px;
-      }
+    /* Add Styles , not taking so far???*/
+    .centered {
+      text-align: center;
+    }
 
-      button:hover {
-        background-color: rgb(196, 226, 245);
-      }
+    .button {
+      background-color: #87CEFA;
+      border: none;
+      color: white;
+      padding: 5px 12px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      margin: auto;
+      font-size: 16px;
+      margin-top: 25px;
+    }
+
+    button:hover {
+      background-color: rgb(196, 226, 245);
+    }
   </style>
-  
+
   <template>
     <div class="centered">
       <h2 class="centered">User List:</h2>
     </div>
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
-        <user-profile 
-          id="[[user.id]]"
-          firstname="[[user.firstName]]"
-          lastname="[[user.lastName]]"
-          phone="[[user.phone]]"
-          email="[[user.email]]">
+        <user-profile id="[[user.id]]" firstname="[[user.firstName]]" lastname="[[user.lastName]]"
+          phone="[[user.phone]]" email="[[user.email]]">
         </user-profile>
       </div>
     </template>
