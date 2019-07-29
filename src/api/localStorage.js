@@ -29,22 +29,16 @@ export class LocalStorage {
 
   editUser(id, editName, editValue) {
     try {
-      const editObj = {};
-      editObj[`${editName}`] = `${editValue}`;
-      const updatedUser = Object.assign(this.getUser(id), editObj);
+      const updatedUser = Object.assign(this.getUser(id), {[editName]: editValue});
       this.deleteUser(id);
       this.createUser(updatedUser);
     } catch (err) { console.error('Error Editing User: ', err); }
   }
 
   deleteUser(id) {
-    this.updateUsers();
-    this.users.forEach((user, index) => {
-      if (String(user.id) === String(id)) {
-        this.users.splice(index, 1);
-        this.syncStorage();
-      }
-    });
+    const userIndex = this.getUserIndex(id);
+    this.users.splice(userIndex, 1);
+    this.syncStorage();
   }
 
   deleteAllUsers() {
@@ -79,7 +73,7 @@ export class LocalStorage {
 
   getUserIndex(id) {
     try {
-      const index = this.users.indexOf(this.users.find(user => user.id.toString() === id.toString()));
+      const index = this.users.indexOf(this.users.find(user => String(user.id) === String(id)));
       return index;
     } catch (err) {
       console.error('Error Finding Index: ', err);
