@@ -36,7 +36,7 @@ export class LocalStorage {
   }
 
   deleteUser(id) {
-    const userIndex = this.getUserIndex(id);
+    const userIndex = this.users.findIndex(user => String(user.id) === id);
     this.users.splice(userIndex, 1);
     this.syncStorage();
   }
@@ -59,14 +59,4 @@ export class LocalStorage {
     const testProps = Object.getOwnPropertyNames(validationObject);
     return !Boolean(userObject.find(prop => userProps[prop] !== testProps[prop]));
   }
-
-  getUserIndex(id) {
-    try {
-      const index = this.users.indexOf(this.users.find(user => String(user.id) === String(id)));
-      return index;
-    } catch (err) {
-      console.error('Error Finding Index: ', err);
-    }
-  }
-
 }
