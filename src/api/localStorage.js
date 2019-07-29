@@ -57,18 +57,7 @@ export class LocalStorage {
     }
     const userProps = Object.getOwnPropertyNames(user);
     const testProps = Object.getOwnPropertyNames(validationObject);
-    if (userProps.length !== testProps.length) {
-      console.log('Number Of Props Do Not Match, User Invalid');
-      return false;
-    }
-    for (let i = 0; i < userProps.length; i++) {
-      let propNames = userProps[i];
-      if (userProps[propNames] !== testProps[propNames]) {
-        console.log('Prop Names Do Not Match, User Invalid');
-        return false;
-      }
-    }
-    return true;
+    return !Boolean(userObject.find(prop => userProps[prop] !== testProps[prop]));
   }
 
   getUserIndex(id) {
