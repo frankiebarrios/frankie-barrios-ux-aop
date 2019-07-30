@@ -1,4 +1,6 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-if.js">
+
 
 <dom-module id="user-profile">
   <template>
@@ -62,56 +64,35 @@
         background-color: #f2f2f2;
       }
     </style>
-    <div class="debugBorder"></div>
-    <div id="minimizedCard" style="display: block;">
-      <div>
-        <div class="div-center">
-          <table class="center" id="test">
-            <tr>
-              <td>User:</td>
-              <td>[[firstname]] [[lastname]]</td>
-            </tr>
-            <tr>
-              <td>ID:</td>
-              <td>[[id]]</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
-
-    <div class="form" id="userProfileCard" style="display: none;">
+    <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
+    <div class="form" id="userProfileCard">
       <div>
         <div class="div-center">
           <h3 class="div-center">User Profile</h3>
           <table class="center" id="test">
             <tr>
-              <td>ID:</td>
+              <td>User Id:</td>
               <td>[[id]]</td>
             </tr>
             <tr>
-              <td>First Name:</td>
-              <td>[[firstname]]</td>
+              <td>Name:</td>
+              <td>[[firstname]] [[lastname]]</td>
             </tr>
-            <tr>
-              <td>Last Name:</td>
-              <td>[[lastname]]</td>
-            </tr>
-            <tr>
-              <td>Phone:</td>
-              <td>[[phone]]</td>
-            </tr>
-            <tr>
-              <td>Email:</td>
-              <td>[[email]]</td>
-            </tr>
+
+            <template is="dom-if" if="[[profileExpanded]]">
+              <tr>
+                <td>Phone:</td>
+                <td>[[phone]]</td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>[[email]]</td>
+              </tr>
+            </template>
+
           </table>
         </div>
       </div>
-    </div>
-
     </div>
   </template>
 
@@ -121,18 +102,30 @@
     class UserProfile extends PolymerElement {
       static get is() { return 'user-profile'; }
 
-      expandCollapse() {
-        let userCard = this.$.userProfileCard;
-        let minimizedCard = this.$.minimizedCard;
-        if (userCard.style.display === "block") {
-          userCard.style.display = "none";
-        } else {
-          userCard.style.display = "block";
+      static get properties() {
+        return {
+          profileExpanded: {
+            type: Boolean,
+            value: false
+          },
+          buttonText: {
+            type: String,
+            value: 'Expand'
+          }
         }
-        if (minimizedCard.style.display === "block") {
-          minimizedCard.style.display = "none";
+      } 
+     
+      expandCollapseCard() {
+        // Refactor using different conditional statement
+        if (this.profileExpanded) {
+          this.profileExpanded = false;
         } else {
-          minimizedCard.style.display = "block";
+          this.profileExpanded = true;
+        }
+        if (this.buttonText === 'Expand') {
+          this.buttonText = 'Collapse';
+        } else {
+          this.buttonText = 'Expand';
         }
       }
     }
