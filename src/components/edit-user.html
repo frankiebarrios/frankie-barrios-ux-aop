@@ -60,17 +60,17 @@
         <div class="form-border">
           <form>
             <label for="fname">Enter User Id</label>
-            <input type="text" placeholder="User Id for edit and delete functions tests.."
+            <input type="text" placeholder="Enter the user's id to delete or edit..."
               value="{{user.userId::input}}">
 
             <label for="fname">Edit Name</label>
-            <input type="text" placeholder="Enter Edit name..(key)" value="{{user.editName::input}}">
+            <input type="text" placeholder="Enter edit name..(key)" value="{{user.editName::input}}">
 
             <label for="lname">Edit Value</label>
-            <input type="text" placeholder="Enter Edit Value..(value)" value="{{user.editValue::input}}">
+            <input type="text" placeholder="Enter edit value..(value)" value="{{user.editValue::input}}">
           </form>
         </div>
-        <button class="button" on-click="editUser">Edit User</button>
+        <button class="button" on-click="updateUser">Edit User</button>
         <button class="button" on-click="deleteUser">Delete User</button>
       </div>
     </div>
@@ -100,8 +100,8 @@
         }
       }
 
-      editUser() {
-        Storage.editUser(
+      updateUser() {
+        Storage.updateUser(
           this.user.userId,
           {[this.user.editName]: this.user.editValue}
         )

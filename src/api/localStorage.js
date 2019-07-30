@@ -27,7 +27,7 @@ export class LocalStorage {
     return this.users;
   }
 
-  editUser(id, update) {
+  updateUser(id, update) {
     try {
       const updatedUser = Object.assign(this.getUser(id), update);
       this.users.splice(this.users.findIndex(user => String(user.id) === id), 1, updatedUser);
