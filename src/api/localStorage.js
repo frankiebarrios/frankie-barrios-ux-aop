@@ -27,9 +27,9 @@ export class LocalStorage {
     return this.users;
   }
 
-  editUser(id, editName, editValue) {
+  editUser(id, update) {
     try {
-      const updatedUser = Object.assign(this.getUser(id), {[editName]: editValue});
+      const updatedUser = Object.assign(this.getUser(id), update);
       this.users.splice(this.users.findIndex(user => String(user.id) === id), 1, updatedUser);
       this.syncStorage();
     } catch (err) { console.error('Error Editing User: ', err); }

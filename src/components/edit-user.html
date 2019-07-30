@@ -102,9 +102,9 @@
 
       editUser() {
         Storage.editUser(
-          this.user.userId, 
-          this.user.editName, 
-          this.user.editValue);
+          this.user.userId,
+          {[this.user.editName]: this.user.editValue}
+        )
       }
 
       deleteUser() {
