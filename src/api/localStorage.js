@@ -47,7 +47,7 @@ export class LocalStorage {
   }
 
   generateId() {
-    return Math.floor((Math.random() * 1000) + 1);
+    return Math.floor(10000 + Math.random() * 9000);
   }
 
   validateUser(user) {
