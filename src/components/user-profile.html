@@ -114,19 +114,10 @@
           }
         }
       } 
-     
+
       expandCollapseCard() {
-        // Refactor using different conditional statement
-        if (this.profileExpanded) {
-          this.profileExpanded = false;
-        } else {
-          this.profileExpanded = true;
-        }
-        if (this.buttonText === 'Expand') {
-          this.buttonText = 'Collapse';
-        } else {
-          this.buttonText = 'Expand';
-        }
+        this.profileExpanded ? this.profileExpanded = false : this.profileExpanded = true;
+        this.buttonText === 'Expand' ? this.buttonText = 'Collapse' : this.buttonText = 'Expand';
       }
     }
     customElements.define(UserProfile.is, UserProfile);

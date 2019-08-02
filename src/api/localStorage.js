@@ -1,6 +1,7 @@
 export class LocalStorage {
   constructor() {
-    this.users = JSON.parse(localStorage.getItem('UserAccounts')) || [];
+    this.users = JSON.parse(
+      localStorage.getItem('UserAccounts')) || [];
   }
 
   createUser(user) {
@@ -30,7 +31,9 @@ export class LocalStorage {
   updateUser(id, update) {
     try {
       const updatedUser = Object.assign(this.getUser(id), update);
-      this.users.splice(this.users.findIndex(user => String(user.id) === id), 1, updatedUser);
+      this.users.splice(
+        this.users.findIndex(
+          user => String(user.id) === id), 1, updatedUser);
       this.syncStorage();
     } catch (err) { console.error('Error Editing User: ', err); }
   }
@@ -57,6 +60,7 @@ export class LocalStorage {
     }
     const userProps = Object.getOwnPropertyNames(user);
     const testProps = Object.getOwnPropertyNames(validationObject);
-    return !Boolean(userObject.find(prop => userProps[prop] !== testProps[prop]));
+    return !Boolean(
+      userObject.find(prop => userProps[prop] !== testProps[prop]));
   }
 }
