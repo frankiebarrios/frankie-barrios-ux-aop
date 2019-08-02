@@ -27,9 +27,6 @@
   </style>
 
   <template>
-    <div class="centered">
-      <h2 class="centered">User List:</h2>
-    </div>
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
         <user-profile id="[[user.id]]" firstname="[[user.firstName]]" lastname="[[user.lastName]]"
