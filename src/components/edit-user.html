@@ -52,10 +52,24 @@
       button:hover {
         background-color: rgb(196, 226, 245);
       }
+      
+      .container {
+        padding: 0 16px;
+      }
+
+      .container::after, .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
     </style>
 
     <h1 class="div-center">Edit User</h1>
-    <div>
+    <div class="card">
       <div class="container">
         <div class="form-border">
           <form>
@@ -72,6 +86,8 @@
         </div>
         <button class="button" on-click="updateUser">Edit User</button>
         <button class="button" on-click="deleteUser">Delete User</button>
+        <button class="button" on-click="deleteAllUsers">Delete All Users</button>
+
       </div>
     </div>
   </template>
@@ -109,6 +125,10 @@
 
       deleteUser() {
         Storage.deleteUser(this.user.userId);
+      }
+
+      deleteAllUsers() {
+        Storage.deleteAllUsers();
       }
     }
     customElements.define(CreateUser.is, CreateUser);

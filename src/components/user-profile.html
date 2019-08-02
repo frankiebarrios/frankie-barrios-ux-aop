@@ -5,10 +5,6 @@
 <dom-module id="user-profile">
   <template>
     <style>
-      .debugBorder {
-        border: #666 1px solid;
-      }
-
       .div-center {
         text-align: center;
       }
@@ -62,14 +58,30 @@
 
       tr:nth-child(odd) {
         background-color: #f2f2f2;
+      } 
+
+      .container {
+        padding: 0 16px;
       }
+
+      .container::after, .row::after {
+        content: "";
+        clear: both;
+        display: table;
+
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+
     </style>
     <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
     <div class="form" id="userProfileCard">
-      <div>
+      <div class="card">
         <div class="div-center">
           <h3 class="div-center">User Profile</h3>
-          <table class="center" id="test">
+          <table class="container" id="test">
             <tr>
               <td>User Id:</td>
               <td>[[id]]</td>
