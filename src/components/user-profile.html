@@ -5,7 +5,12 @@
 <dom-module id="user-profile">
   <template>
     <style>
+
       .div-center {
+        text-align: center;
+      }
+
+      .center {
         text-align: center;
       }
 
@@ -18,6 +23,7 @@
         margin: auto;
       }
 
+      /* Clean up some of this, some values may be unused? */
       .button {
         background-color: #87CEFA;
         border: none;
@@ -51,13 +57,15 @@
 
       tr:nth-child(odd) {
         background-color: #f2f2f2;
-      } 
+      }
 
       .container {
         padding: 0 16px;
+        display: flex;
       }
 
-      .container::after, .row::after {
+      .container::after,
+      .row::after {
         content: "";
         clear: both;
         display: table;
@@ -68,47 +76,58 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         border-radius: 20px;
       }
+
+      
     </style>
     <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
-    <div class="form" id="userProfileCard">
+    <div class="div-center" id="userProfileCard">
       <div class="card">
-        <div class="div-center">
-          <h3 class="div-center">User Profile</h3>
-          <table class="container" id="test">
+        <h3 class="div-center">User Profile</h3>
+       
+          <table class="container center" id="test">
             <tr>
               <td>User Id:</td>
-              <td>[[id]]</td>
+              <td>[[user.id]]</td>
             </tr>
             <tr>
               <td>Name:</td>
-              <td>[[firstname]] [[lastname]]</td>
+              <td>[[user.firstName]] [[user.lastName]]</td>
             </tr>
 
             <template is="dom-if" if="[[profileExpanded]]">
               <tr>
                 <td>Phone:</td>
-                <td>[[phone]]</td>
+                <td>[[user.phone]]</td>
               </tr>
               <tr>
                 <td>Email:</td>
-                <td>[[email]]</td>
+                <td>[[user.email]]</td>
               </tr>
+              <button class="button" on-click="updateUser">Edit</button>
+              <button class="button" on-click="deleteUser">Delete</button>
+              <button class="button" on-click="expandCollapseCard">Collapse</button> 
             </template>
 
           </table>
-        </div>
+        
       </div>
     </div>
   </template>
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    import { LocalStorage } from '../api/localStorage.js';
+
+    const Storage = new LocalStorage();
 
     class UserProfile extends PolymerElement {
       static get is() { return 'user-profile'; }
 
       static get properties() {
         return {
+          user: { 
+            type: Object
+          }, 
           profileExpanded: {
             type: Boolean,
             value: false
@@ -123,6 +142,15 @@
       expandCollapseCard() {
         this.profileExpanded ? this.profileExpanded = false : this.profileExpanded = true;
         this.buttonText === 'Expand' ? this.buttonText = 'Collapse' : this.buttonText = 'Expand';
+      }
+
+      updateUser() {
+        Storage.updateUser(); // Need to pass in correct params
+      }
+
+      deleteUser() {
+        console.log(this.user);
+        Storage.deleteUser(this.user.userId);
       }
     }
     customElements.define(UserProfile.is, UserProfile);

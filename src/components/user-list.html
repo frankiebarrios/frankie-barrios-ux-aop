@@ -29,8 +29,7 @@
   <template>
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
-        <user-profile id="[[user.id]]" firstname="[[user.firstName]]" lastname="[[user.lastName]]"
-          phone="[[user.phone]]" email="[[user.email]]">
+        <user-profile user="[[user]]">
         </user-profile>
       </div>
     </template>
