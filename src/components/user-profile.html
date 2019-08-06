@@ -75,40 +75,101 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         border-radius: 20px;
       }
+
+      /* Edit Form */
+      .edit-div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        margin: 25px auto 25px auto;
+        width: 60%;
+      }
+
+      .edit-container {
+        padding: 10px 16px;
+        width: 60%;
+      }
+
+      .edit-Card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding-top: initial;
+      }
+
+      .edit-container::after,
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      input[type=text],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #87CEFA;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
     </style>
     <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
-    <div class="div-center" id="userProfileCard">
-      <div class="card">
-        <h3 class="div-center">User Profile</h3>
 
-        <table class="container center" id="test">
-          <tr>
-            <td>User Id:</td>
-            <td>[[user.id]]</td>
-          </tr>
-          <tr>
-            <td>Name:</td>
-            <td>[[user.firstName]] [[user.lastName]]</td>
-          </tr>
+    <template is="dom-if" if="[[!editButtonClicked]]">
+      <div class="div-center" id="userProfileCard">
+        <div class="card">
+          <h3 class="div-center">User Profile</h3>
 
-          <template is="dom-if" if="[[profileExpanded]]">
+          <table class="container center" id="test">
             <tr>
-              <td>Phone:</td>
-              <td>[[user.phone]]</td>
+              <td>User Id:</td>
+              <td>[[user.id]]</td>
             </tr>
             <tr>
-              <td>Email:</td>
-              <td>[[user.email]]</td>
+              <td>Name:</td>
+              <td>[[user.firstName]] [[user.lastName]]</td>
             </tr>
-            <button class="button" on-click="updateUser">Edit</button>
-            <button class="button" on-click="deleteUser">Delete</button>
-            <button class="button" on-click="expandCollapseCard">Collapse</button>
-          </template>
-        </table>
 
-
+            <template is="dom-if" if="[[profileExpanded]]">
+              <tr>
+                <td>Phone:</td>
+                <td>[[user.phone]]</td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>[[user.email]]</td>
+              </tr>
+              <button class="button" on-click="editButtonClick">Edit</button>
+              <button class="button" on-click="deleteUser">Delete</button>
+              <button class="button" on-click="expandCollapseCard">Collapse</button>
+            </template>
+          </table>
+        </div>
       </div>
-    </div>
+    </template>
+
+    <template is="dom-if" if="[[editButtonClicked]]">
+        <div class="edit-div edit-container edit-card">
+          <form>
+            <label for="fname">First Name</label>
+            <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
+  
+            <label for="lname">Last Name</label>
+            <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
+  
+            <label for="phone">Phone</label>
+            <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
+  
+            <label for="email">Email</label>
+            <input type="text" placeholder="Your email.." value="{{user.email::input}}">
+          </form>
+          <div>
+            <button class="button" on-click="saveButtonClick">Save</button>
+            <button class="button" on-click="cancelButtonClick">Cancel</button>
+          </div>
+        </div>
+    </template>
+    
   </template>
 
   <script type="module">
@@ -149,23 +210,27 @@
       } 
 
       expandCollapseCard() {
-        this.profileExpanded ? this.profileExpanded = false : this.profileExpanded = true;
-        this.buttonText === 'Expand' ? this.buttonText = 'Collapse' : this.buttonText = 'Expand';
+        this.profileExpanded ? this.profileExpanded = false :
+         this.profileExpanded = true;
+        this.buttonText === 'Expand' ? this.buttonText = 'Collapse' :
+         this.buttonText = 'Expand';
       }
 
       editButtonClick() {
+        // Also need to hide main table/ card if this.editButtonClicked = true;
         this.editButtonClicked ? this.editButtonClicked = false :
          this.editButtonClicked = true;
       }
 
       saveButtonClick() {
+        console.log(this.saveButtonClicked);
         this.saveButtonClicked ? this.saveButtonClicked = false :
          this.saveButtonClicked = true;
       }
 
       cancelButtonClick() {
-        this.cancelButtonClicked ? this.cancelButtonClicked = false :
-         this.cancelButtonClicked = true;
+        this.editButtonClicked ? this.editButtonClicked = false :
+          this.editButtonClicked = true;
       }
 
       updateUser() {
