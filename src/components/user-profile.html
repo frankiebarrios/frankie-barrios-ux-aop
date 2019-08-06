@@ -149,8 +149,7 @@
       }
 
       deleteUser() {
-        console.log(this.user);
-        Storage.deleteUser(this.user.userId);
+        Storage.deleteUser(`${this.user.id}`);
       }
     }
     customElements.define(UserProfile.is, UserProfile);
