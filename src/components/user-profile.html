@@ -104,8 +104,8 @@
             <button class="button" on-click="deleteUser">Delete</button>
             <button class="button" on-click="expandCollapseCard">Collapse</button>
           </template>
-
         </table>
+
 
       </div>
     </div>
@@ -132,6 +132,18 @@
           buttonText: {
             type: String,
             value: 'Expand'
+          },
+          editButtonClicked: {
+            type: Boolean,
+            value: false
+          },
+          saveButtonClicked: {
+            type: Boolean,
+            value: false
+          },
+          cancelButtonClicked: {
+            type: Boolean,
+            value: false
           }
         }
       } 
@@ -139,6 +151,21 @@
       expandCollapseCard() {
         this.profileExpanded ? this.profileExpanded = false : this.profileExpanded = true;
         this.buttonText === 'Expand' ? this.buttonText = 'Collapse' : this.buttonText = 'Expand';
+      }
+
+      editButtonClick() {
+        this.editButtonClicked ? this.editButtonClicked = false :
+         this.editButtonClicked = true;
+      }
+
+      saveButtonClick() {
+        this.saveButtonClicked ? this.saveButtonClicked = false :
+         this.saveButtonClicked = true;
+      }
+
+      cancelButtonClick() {
+        this.cancelButtonClicked ? this.cancelButtonClicked = false :
+         this.cancelButtonClicked = true;
       }
 
       updateUser() {
