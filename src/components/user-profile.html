@@ -5,7 +5,6 @@
 <dom-module id="user-profile">
   <template>
     <style>
-
       .div-center {
         text-align: center;
       }
@@ -76,40 +75,38 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         border-radius: 20px;
       }
-
-      
     </style>
     <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
     <div class="div-center" id="userProfileCard">
       <div class="card">
         <h3 class="div-center">User Profile</h3>
-       
-          <table class="container center" id="test">
+
+        <table class="container center" id="test">
+          <tr>
+            <td>User Id:</td>
+            <td>[[user.id]]</td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td>[[user.firstName]] [[user.lastName]]</td>
+          </tr>
+
+          <template is="dom-if" if="[[profileExpanded]]">
             <tr>
-              <td>User Id:</td>
-              <td>[[user.id]]</td>
+              <td>Phone:</td>
+              <td>[[user.phone]]</td>
             </tr>
             <tr>
-              <td>Name:</td>
-              <td>[[user.firstName]] [[user.lastName]]</td>
+              <td>Email:</td>
+              <td>[[user.email]]</td>
             </tr>
+            <button class="button" on-click="updateUser">Edit</button>
+            <button class="button" on-click="deleteUser">Delete</button>
+            <button class="button" on-click="expandCollapseCard">Collapse</button>
+          </template>
 
-            <template is="dom-if" if="[[profileExpanded]]">
-              <tr>
-                <td>Phone:</td>
-                <td>[[user.phone]]</td>
-              </tr>
-              <tr>
-                <td>Email:</td>
-                <td>[[user.email]]</td>
-              </tr>
-              <button class="button" on-click="updateUser">Edit</button>
-              <button class="button" on-click="deleteUser">Delete</button>
-              <button class="button" on-click="expandCollapseCard">Collapse</button> 
-            </template>
+        </table>
 
-          </table>
-        
       </div>
     </div>
   </template>
