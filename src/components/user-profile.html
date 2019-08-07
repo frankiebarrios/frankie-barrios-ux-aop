@@ -239,13 +239,14 @@
         this.editButtonClicked ? this.editButtonClicked = false :
           this.editButtonClicked = true;
       }
-      
+
       updateUser() {
         Storage.updateUser(this.user.id, this.user)
       }
 
       deleteUser() {
         Storage.deleteUser(`${this.user.id}`);
+        window.location.reload();
       }
     }
     customElements.define(UserProfile.is, UserProfile);
