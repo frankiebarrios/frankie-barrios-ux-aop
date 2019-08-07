@@ -168,7 +168,14 @@
             <button class="button" on-click="cancelButtonClick">Cancel</button>
           </div>
         </div>
+        <template is="dom-if" if="[[saveButtonClicked]]">
+          <tr>
+            <td>New Data Saved</td>
+          </tr>
+        </template>
     </template>
+
+    
     
   </template>
 
@@ -217,24 +224,24 @@
       }
 
       editButtonClick() {
-        // Also need to hide main table/ card if this.editButtonClicked = true;
         this.editButtonClicked ? this.editButtonClicked = false :
          this.editButtonClicked = true;
       }
 
       saveButtonClick() {
-        console.log(this.saveButtonClicked);
         this.saveButtonClicked ? this.saveButtonClicked = false :
          this.saveButtonClicked = true;
+         this.updateUser();
+        this.editButtonClick();
       }
 
       cancelButtonClick() {
         this.editButtonClicked ? this.editButtonClicked = false :
           this.editButtonClicked = true;
       }
-
+      
       updateUser() {
-        Storage.updateUser(); // Need to pass in correct params
+        Storage.updateUser(this.user.id, this.user)
       }
 
       deleteUser() {

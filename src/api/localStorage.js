@@ -40,6 +40,18 @@ export class LocalStorage {
     }
   }
 
+  // updateUser(id, update) {
+  //   try {
+  //     const updatedUser = Object.assign(this.getUser(id), update);
+  //     this.users.splice(
+  //       this.users.findIndex(
+  //         user => String(user.id) === id), 1, updatedUser);
+  //     this.syncStorage();
+  //   } catch (err) {
+  //     console.error('Error Editing User: ', err);
+  //   }
+  // }
+
   deleteUser(id) {
     const userIndex = this.users.findIndex(user => String(user.id) === id);
     this.users.splice(userIndex, 1);
