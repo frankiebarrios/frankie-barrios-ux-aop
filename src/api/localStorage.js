@@ -20,8 +20,7 @@ export class LocalStorage {
   }
 
   getUser(id) {
-    const user = this.users.find(user => String(user.id) === String(id));
-    return user;
+    return this.users.find(user => String(user.id) === String(id));
   }
 
   getAllUsers() {
