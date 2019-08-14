@@ -169,8 +169,7 @@
       }
 
       editButtonClick() {
-        this.editButtonClicked ? this.editButtonClicked = false:
-         this.editButtonClicked = true;
+        this.editButtonClicked = !this.editButtonClicked;
       }
 
       saveButtonClick() {
@@ -179,8 +178,7 @@
       }
 
       cancelButtonClick() {
-        this.editButtonClicked ? this.editButtonClicked = false :
-          this.editButtonClicked = true;
+        this.editButtonClicked = !this.editButtonClicked;
       }
 
       updateUser() {

@@ -134,20 +134,17 @@
       }
 
       editButtonClick() {
-        this.editButtonClicked ? this.editButtonClicked = false:
-         this.editButtonClicked = true;
+        this.editButtonClicked = !this.editButtonClicked;
       }
 
       saveButtonClick() {
         this.updateUser();
         this.editButtonClick();
+        window.location.reload();
       }
 
       cancelButtonClick() {
-        // Need to link the 'Cancel' button the <user-profile>'s 
-        // editButtonClicked prop somehow?
-        this.editButtonClicked ? this.editButtonClicked = false:
-         this.editButtonClicked = true;
+        this.editButtonClicked = !this.editButtonClicked;
       }
 
       updateUser() {

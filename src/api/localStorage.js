@@ -12,10 +12,6 @@ export class LocalStorage {
 
   syncStorage() {
     localStorage.setItem('UserAccounts', JSON.stringify(this.users));
-    this.updateUsers();
-  }
-
-  updateUsers() {
     this.users = JSON.parse(localStorage.getItem('UserAccounts')) || [];
   }
 
@@ -27,13 +23,10 @@ export class LocalStorage {
     return this.users;
   }
 
-  // When updateUser() used, all users in LS are duplicated.
   updateUser(id, update) {
     try {
       const updatedUser = Object.assign(this.getUser(id), update);
-      this.users.splice(
-        this.users.findIndex(
-          user => String(user.id) === id), 1, updatedUser);
+      this.users.splice(this.getUserIndex(id), 1, updatedUser);
       this.syncStorage();
     } catch (err) {
       console.error('Error Editing User: ', err);
@@ -41,14 +34,17 @@ export class LocalStorage {
   }
 
   deleteUser(id) {
-    const userIndex = this.users.findIndex(user => String(user.id) === id);
-    this.users.splice(userIndex, 1);
+    this.users.splice(this.getUserIndex(id), 1);
     this.syncStorage();
   }
 
+  getUserIndex(id) {
+    return this.users.findIndex(user => user.id === id);;
+  }
+
   deleteAllUsers() {
-    this.users = [];
     localStorage.clear();
+    this.users = [];
   }
 
   generateId() {
