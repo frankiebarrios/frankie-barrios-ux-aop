@@ -27,6 +27,7 @@ export class LocalStorage {
     return this.users;
   }
 
+  // When updateUser() used, all users in LS are duplicated.
   updateUser(id, update) {
     try {
       const updatedUser = Object.assign(this.getUser(id), update);
@@ -61,7 +62,6 @@ export class LocalStorage {
     }
     const userProps = Object.getOwnPropertyNames(user);
     const testProps = Object.getOwnPropertyNames(validationObject);
-    return !Boolean(
-      userObject.find(prop => userProps[prop] !== testProps[prop]));
+    return !Boolean(userObject.find(prop => userProps[prop] !== testProps[prop]));
   }
 }

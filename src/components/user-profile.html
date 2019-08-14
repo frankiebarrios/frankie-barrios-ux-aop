@@ -169,15 +169,9 @@
             <button class="button" on-click="cancelButtonClick">Cancel</button>
           </div>
         </div>
-        <template is="dom-if" if="[[saveButtonClicked]]">
-          <tr>
-            <td>New Data Saved</td>
-          </tr>
-        </template>
+
     </template>
 
-    
-    
   </template>
 
   <script type="module">
@@ -206,10 +200,6 @@
             type: Boolean,
             value: false
           },
-          saveButtonClicked: {
-            type: Boolean,
-            value: false
-          },
           cancelButtonClicked: {
             type: Boolean,
             value: false
@@ -225,14 +215,12 @@
       }
 
       editButtonClick() {
-        this.editButtonClicked ? this.editButtonClicked = false :
+        this.editButtonClicked ? !this.editButtonClicked:
          this.editButtonClicked = true;
       }
 
       saveButtonClick() {
-        this.saveButtonClicked ? this.saveButtonClicked = false :
-         this.saveButtonClicked = true;
-         this.updateUser();
+        this.updateUser();
         this.editButtonClick();
       }
 
@@ -242,7 +230,6 @@
       }
 
       updateUser() {
-        console.log(this.user);
         Storage.updateUser(this.user.id, this.user)
       }
 
