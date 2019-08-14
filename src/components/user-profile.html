@@ -1,6 +1,6 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-if.js">
-
+<link rel="import" href="./edit-user.html">
 
 <dom-module id="user-profile">
   <template>
@@ -77,30 +77,6 @@
         margin-bottom: 25px;
       }
 
-      /* Edit Form */
-      .edit-div {
-        border-radius: 5px;
-        margin: 25px auto 25px auto;
-        width: 60%;
-      }
-
-      .edit-container {
-        padding: 10px 16px;
-        width: 60%;
-      }
-
-      .edit-Card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        padding-top: initial;
-      }
-
-      .edit-container::after,
-      .row::after {
-        content: "";
-        clear: both;
-        display: table;
-      }
-
       input[type=text],
       select {
         width: 100%;
@@ -112,7 +88,6 @@
         box-sizing: border-box;
       }
     </style>
-
 
     <template is="dom-if" if="[[!editButtonClicked]]">
       <div class="div-center" id="userProfileCard">
@@ -148,27 +123,7 @@
     </template>
 
     <template is="dom-if" if="[[editButtonClicked]]">
-      <div class="edit-div edit-container edit-Card">
-        <h1 class="center">Edit User</h1>
-        <form>
-          <label for="fname">First Name</label>
-          <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
-
-          <label for="lname">Last Name</label>
-          <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
-
-          <label for="phone">Phone</label>
-          <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
-
-          <label for="email">Email</label>
-          <input type="text" placeholder="Your email.." value="{{user.email::input}}">
-        </form>
-        <div>
-          <button class="button" on-click="saveButtonClick">Save</button>
-          <button class="button" on-click="cancelButtonClick">Cancel</button>
-        </div>
-      </div>
-
+      <edit-user user="[[user]]"></edit-user>
     </template>
 
   </template>
