@@ -3,38 +3,41 @@
 <link rel="import" href="./user-profile.html">
 
 <dom-module id="user-list">
-  <style>
-    .centered {
-      text-align: center;
-    }
-
-    .button {
-      background-color: #87CEFA;
-      border: none;
-      color: white;
-      padding: 5px 12px;
-      text-align: center;
-      text-decoration: none;
-      display: block;
-      margin: auto;
-      font-size: 16px;
-      margin-top: 25px;
-    }
-
-    button:hover {
-      background-color: rgb(196, 226, 245);
-    }
-  </style>
-
   <template>
+    <style>
+      .centered {
+        text-align: center;
+      }
+
+      .button {
+        background-color: #87CEFA;
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        font-size: 16px;
+        margin-top: 25px;
+        border-radius: 8px;
+      }
+
+      button:hover {
+        background-color: rgb(196, 226, 245);
+      }
+    </style>
+
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
         <user-profile user="[[user]]">
         </user-profile>
       </div>
     </template>
-  </template>
 
+    <button class="button" on-click="deleteAllUsers">Delete All Users</button>
+
+  </template>
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
@@ -50,6 +53,11 @@
             value: () => Storage.getAllUsers()
           }
         };
+      }
+
+      deleteAllUsers() {
+        Storage.deleteAllUsers();
+        window.location.reload();
       }
     }
     customElements.define(UserList.is, UserList);

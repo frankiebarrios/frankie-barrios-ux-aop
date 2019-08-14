@@ -11,12 +11,12 @@
 
       .center {
         text-align: center;
+        padding-top: 25px;
       }
 
       form {
         border: 1 px black solid;
         border-radius: 5px;
-        background-color: #f2f2f2;
         padding: 20px;
         width: 50%;
         margin: auto;
@@ -33,7 +33,7 @@
         display: block;
         margin: auto;
         font-size: 16px;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 20px;
         border-radius: 8px;
       }
@@ -74,12 +74,12 @@
         padding: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         border-radius: 20px;
+        margin-bottom: 25px;
       }
 
       /* Edit Form */
       .edit-div {
         border-radius: 5px;
-        background-color: #f2f2f2;
         margin: 25px auto 25px auto;
         width: 60%;
       }
@@ -111,15 +111,13 @@
         border-radius: 4px;
         box-sizing: border-box;
       }
-
     </style>
-    <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
+
 
     <template is="dom-if" if="[[!editButtonClicked]]">
       <div class="div-center" id="userProfileCard">
         <div class="card">
           <h3 class="div-center">User Profile</h3>
-
           <table class="container center" id="test">
             <tr>
               <td>User Id:</td>
@@ -140,35 +138,36 @@
                 <td>[[user.email]]</td>
               </tr>
               <button class="button" on-click="editButtonClick">Edit</button>
-              <button class="button" on-click="deleteUser">Delete</button>
-              <button class="button" on-click="expandCollapseCard">Collapse</button>
+              <button class="button" on-click="deleteUser">Delete User</button>
             </template>
+
           </table>
+          <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
         </div>
       </div>
     </template>
 
     <template is="dom-if" if="[[editButtonClicked]]">
-        <div class="edit-div edit-container edit-card">
-          <h1 class="center">Edit User</h1>
-          <form>
-            <label for="fname">First Name</label>
-            <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
-  
-            <label for="lname">Last Name</label>
-            <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
-  
-            <label for="phone">Phone</label>
-            <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
-  
-            <label for="email">Email</label>
-            <input type="text" placeholder="Your email.." value="{{user.email::input}}">
-          </form>
-          <div>
-            <button class="button" on-click="saveButtonClick">Save</button>
-            <button class="button" on-click="cancelButtonClick">Cancel</button>
-          </div>
+      <div class="edit-div edit-container edit-Card">
+        <h1 class="center">Edit User</h1>
+        <form>
+          <label for="fname">First Name</label>
+          <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
+
+          <label for="lname">Last Name</label>
+          <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
+
+          <label for="phone">Phone</label>
+          <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
+
+          <label for="email">Email</label>
+          <input type="text" placeholder="Your email.." value="{{user.email::input}}">
+        </form>
+        <div>
+          <button class="button" on-click="saveButtonClick">Save</button>
+          <button class="button" on-click="cancelButtonClick">Cancel</button>
         </div>
+      </div>
 
     </template>
 
@@ -215,7 +214,7 @@
       }
 
       editButtonClick() {
-        this.editButtonClicked ? !this.editButtonClicked:
+        this.editButtonClicked ? this.editButtonClicked = false:
          this.editButtonClicked = true;
       }
 
@@ -234,7 +233,7 @@
       }
 
       deleteUser() {
-        Storage.deleteUser(`${this.user.id}`);
+        Storage.deleteUser(this.user.id);
         window.location.reload();
       }
     }
