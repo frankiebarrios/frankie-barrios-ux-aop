@@ -153,10 +153,6 @@
           editButtonClicked: {
             type: Boolean,
             value: false
-          },
-          cancelButtonClicked: {
-            type: Boolean,
-            value: false
           }
         }
       } 
@@ -175,10 +171,6 @@
       saveButtonClick() {
         this.updateUser();
         this.editButtonClick();
-      }
-
-      cancelButtonClick() {
-        this.editButtonClicked = !this.editButtonClicked;
       }
 
       updateUser() {

@@ -106,7 +106,6 @@
       </form>
       <div>
         <button class="button" on-click="saveButtonClick">Save</button>
-        <button class="button" on-click="cancelButtonClick">Cancel</button>
       </div>
     </div>
   </template>
@@ -125,10 +124,6 @@
           editButtonClicked: {
             type: Boolean,
             value: false
-          },
-          cancelButtonClicked: {
-            type: Boolean,
-            value: false
           }
         }
       }
@@ -141,10 +136,6 @@
         this.updateUser();
         this.editButtonClick();
         window.location.reload();
-      }
-
-      cancelButtonClick() {
-        this.editButtonClicked = !this.editButtonClicked;
       }
 
       updateUser() {
