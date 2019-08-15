@@ -112,15 +112,13 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import { LocalStorage } from '../api/localStorage.js';
-
-    let Storage = new LocalStorage();
 
     class CreateUser extends PolymerElement {
       static get is() { return 'edit-user'; }
 
       static get properties() {
         return {
+          storage: Object,
           editButtonClicked: {
             type: Boolean,
             value: false
@@ -139,7 +137,7 @@
       }
 
       updateUser() {
-        Storage.updateUser(this.user.id, this.user)
+        this.storage.updateUser(this.user.id, this.user)
       }
     }
     customElements.define(CreateUser.is, CreateUser);

@@ -123,22 +123,20 @@
     </template>
 
     <template is="dom-if" if="[[editButtonClicked]]">
-      <edit-user user="[[user]]"></edit-user>
+      <edit-user storage="[[storage]]" user="[[user]]"></edit-user>
     </template>
 
   </template>
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import { LocalStorage } from '../api/localStorage.js';
-
-    const Storage = new LocalStorage();
 
     class UserProfile extends PolymerElement {
       static get is() { return 'user-profile'; }
 
       static get properties() {
         return {
+          storage: Object,
           user: { 
             type: Object
           }, 
@@ -174,11 +172,11 @@
       }
 
       updateUser() {
-        Storage.updateUser(this.user.id, this.user)
+        this.storage.updateUser(this.user.id, this.user)
       }
 
       deleteUser() {
-        Storage.deleteUser(this.user.id);
+        this.storage.deleteUser(this.user.id);
         window.location.reload();
       }
     }

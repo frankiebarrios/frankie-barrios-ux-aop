@@ -30,33 +30,27 @@
 
     <template is="dom-repeat" items="[[users]]" as="user">
       <div>
-        <user-profile user="[[user]]">
-        </user-profile>
-      </div>
+        <user-profile user="[[user]]" storage="[[storage]]"></user-profile> 
+      </div> 
+    </template> 
+    <button class="button" on-click="deleteAllUsers">Delete AllUsers</button>
     </template>
+
+    <script type="module">
+      import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     
-    <button class="button" on-click="deleteAllUsers">Delete All Users</button>
-
-  </template>
-  <script type="module">
-    import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import { LocalStorage } from '../api/localStorage.js';
-
-    const Storage = new LocalStorage();
-
     class UserList extends PolymerElement {
       static get is() { return 'user-list'; }
 
       static get properties() {
         return {
-          users: {
-            value: () => Storage.getAllUsers()
-          }
+          users: Object,
+          storage: Object
         };
       }
 
       deleteAllUsers() {
-        Storage.deleteAllUsers();
+        this.storage.deleteAllUsers();
         window.location.reload();
       }
     }
