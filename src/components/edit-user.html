@@ -118,21 +118,12 @@
 
       static get properties() {
         return {
-          storage: Object,
-          editButtonClicked: {
-            type: Boolean,
-            value: false
-          }
+          storage: Object
         }
-      }
-
-      editButtonClick() {
-        this.editButtonClicked = !this.editButtonClicked;
       }
 
       saveButtonClick() {
         this.updateUser();
-        this.editButtonClick();
         window.location.reload();
       }
 
