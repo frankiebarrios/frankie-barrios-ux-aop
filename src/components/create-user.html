@@ -89,7 +89,7 @@
           <input type="text" placeholder="Your email.." value="{{user.email::input}}">
         </form>
         <div>
-          <button class="button" on-click="createUser">Create User</button>
+          <button class="button" on-click="updateUserList">Create User</button>
         </div>
       </div>
     </div>
@@ -118,10 +118,23 @@
           }
         }
       }
-
+        
       createUser() {
         this.storage.createUser(this.user);
       }
+
+      updateUserList() {
+        this.createUser();
+        this.dispatchEvent(new CustomEvent('updateUserList',
+          { bubbles: true,
+            composed: true,
+            detail: {
+               data: { 
+                updatedUsers: this.storage.getAllUsers()
+              }
+            }
+          }));
+      };
     }
     customElements.define(CreateUser.is, CreateUser);
     export default CreateUser;

@@ -33,7 +33,7 @@
         <user-profile user="[[user]]" storage="[[storage]]"></user-profile> 
       </div> 
     </template> 
-    <button class="button" on-click="deleteAllUsers">Delete AllUsers</button>
+    <button class="button" on-click="updateUserList">Delete All Users</button>
     </template>
 
     <script type="module">
@@ -49,9 +49,21 @@
         };
       }
 
+      updateUserList() {
+        this.deleteAllUsers();
+        this.dispatchEvent(new CustomEvent('updateUserList',
+          { bubbles: true,
+            composed: true,
+            detail: {
+               data: { 
+                updatedUsers: this.storage.getAllUsers()
+              }
+            }
+          }));
+      };
+
       deleteAllUsers() {
         this.storage.deleteAllUsers();
-        window.location.reload();
       }
     }
     customElements.define(UserList.is, UserList);

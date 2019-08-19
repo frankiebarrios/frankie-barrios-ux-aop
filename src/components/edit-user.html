@@ -105,7 +105,7 @@
         <input type="text" placeholder="Your email.." value="{{user.email::input}}">
       </form>
       <div>
-        <button class="button" on-click="saveButtonClick">Save</button>
+        <button class="button" on-click="updateUserList">Save</button>
       </div>
     </div>
   </template>
@@ -122,13 +122,32 @@
         }
       }
 
-      saveButtonClick() {
-        this.updateUser();
-        window.location.reload();
+      updateUserList() {
+        this.saveButtonClick();
+        this.dispatchEvent(new CustomEvent('updateUserList',
+          { bubbles: true,
+            composed: true,
+            detail: {
+               data: { 
+                updatedUsers: this.storage.getAllUsers()
+              }
+            }
+          }));
+      };
+
+      userEdited() {
+        this.dispatchEvent(new CustomEvent('userEdited', {
+          bubbles: true,
+          editButtonClicked: false
+        }))
+      }
+
+      saveButtonClick() {        
+        this.updateUser(); 
       }
 
       updateUser() {
-        this.storage.updateUser(this.user.id, this.user)
+        this.storage.updateUser(this.user.id, this.user);
       }
     }
     customElements.define(CreateUser.is, CreateUser);

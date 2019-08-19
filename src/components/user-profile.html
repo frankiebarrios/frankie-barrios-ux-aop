@@ -113,7 +113,7 @@
                 <td>[[user.email]]</td>
               </tr>
               <button class="button" on-click="editButtonClick">Edit</button>
-              <button class="button" on-click="deleteUser">Delete User</button>
+              <button class="button" on-click="updateUserList">Delete User</button>
             </template>
 
           </table>
@@ -164,6 +164,7 @@
 
       editButtonClick() {
         this.editButtonClicked = !this.editButtonClicked;
+        console.log('Edit');
       }
 
       saveButtonClick() {
@@ -175,9 +176,22 @@
         this.storage.updateUser(this.user.id, this.user)
       }
 
+      updateUserList() {
+        this.deleteUser();
+        this.editButtonClick();
+        this.dispatchEvent(new CustomEvent('updateUserList',
+          { bubbles: true,
+            composed: true,
+            detail: {
+               data: { 
+                updatedUsers: this.storage.getAllUsers()
+              }
+            }
+          }));
+      };
+
       deleteUser() {
         this.storage.deleteUser(this.user.id);
-        window.location.reload();
       }
     }
     customElements.define(UserProfile.is, UserProfile);
