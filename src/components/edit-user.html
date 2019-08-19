@@ -135,13 +135,6 @@
           }));
       };
 
-      userEdited() {
-        this.dispatchEvent(new CustomEvent('userEdited', {
-          bubbles: true,
-          editButtonClicked: false
-        }))
-      }
-
       saveButtonClick() {        
         this.updateUser(); 
       }

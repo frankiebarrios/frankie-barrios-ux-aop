@@ -155,6 +155,11 @@
         }
       } 
 
+      ready() {
+        super.ready();
+        this.addEventListener('updateUserList', this.editButtonClick);
+      }
+
       expandCollapseCard() {
         this.profileExpanded ? this.profileExpanded = false :
          this.profileExpanded = true;
@@ -164,12 +169,6 @@
 
       editButtonClick() {
         this.editButtonClicked = !this.editButtonClicked;
-        console.log('Edit');
-      }
-
-      saveButtonClick() {
-        this.updateUser();
-        this.editButtonClick();
       }
 
       updateUser() {
@@ -178,7 +177,6 @@
 
       updateUserList() {
         this.deleteUser();
-        this.editButtonClick();
         this.dispatchEvent(new CustomEvent('updateUserList',
           { bubbles: true,
             composed: true,
