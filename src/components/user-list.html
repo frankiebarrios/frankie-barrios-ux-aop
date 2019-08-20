@@ -51,16 +51,8 @@
 
       updateUserList() {
         this.deleteAllUsers();
-        this.dispatchEvent(new CustomEvent('updateUserList',
-          { bubbles: true,
-            composed: true,
-            detail: {
-               data: { 
-                updatedUsers: this.storage.getAllUsers()
-              }
-            }
-          }));
-      };
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
 
       deleteAllUsers() {
         this.storage.deleteAllUsers();

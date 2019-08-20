@@ -125,17 +125,10 @@
 
       updateUserList() {
         this.createUser();
-        this.dispatchEvent(new CustomEvent('updateUserList',
-          { bubbles: true,
-            composed: true,
-            detail: {
-               data: { 
-                updatedUsers: this.storage.getAllUsers()
-              }
-            }
-          }));
-      };
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
     }
+      
     customElements.define(CreateUser.is, CreateUser);
     export default CreateUser;
   </script>
