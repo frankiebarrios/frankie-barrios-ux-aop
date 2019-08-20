@@ -1,4 +1,4 @@
-<link rel="import" href="~@banno/polymer/polymer-element.js">
+<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="./user-profile.html">
 <link rel="import" href="./user-list.html">
 <link rel="import" href="./edit-user.html">
@@ -31,18 +31,45 @@
       }
     </style>
     <header>
-      <user-list></user-list>
-      <create-user></create-user>
-      <edit-user></edit-user>
+      <create-user storage="[[storage]]"></create-user>
+      <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
   </template>
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    import { LocalStorage } from '../api/localStorage.js';
+
+    const storage = new LocalStorage();
+    
     class InternApp extends PolymerElement {
       static get is() { return 'intern-app'; }
-    }
+      
+      static get properties() {
+        return {
+          storage: {
+            value: () => storage
+          },
+          users: {
+            value: () => []
+          }
+        }
+      }
 
+      connectedCallback() {
+        super.connectedCallback();
+        this.users = this.storage.getAllUsers();
+      }
+
+      ready() {
+        super.ready();
+        this.addEventListener('updateUserList', this.updateUserList);
+      }
+      
+      updateUserList(e) {
+        this.users = this.storage.getAllUsers();
+      }
+    }
     customElements.define(InternApp.is, InternApp);
     export default InternApp;
   </script>

@@ -1,95 +1,135 @@
-<link rel="import" href="~@banno/polymer/polymer-element.js">
+<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 
 <dom-module id="create-user">
-    <template>
-        <style>
-            :host {
-                display: block
-            }
+  <template>
+    <style>
+      :host {
+        display: block
+      }
 
-            .div-center {
-                text-align: center;
-            }
-            
-            input[type=text],
-            select {
-                width: 100%;
-                padding: 12px 20px;
-                margin: 8px 0;
-                display: inline-block;
-                border: 1px solid #87CEFA;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
+      .div-center {
+        text-align: center;
+      }
 
-            div {
-                border-radius: 5px;
-                background-color: #f2f2f2;
-                padding: 20px;
-            }
+      input[type=text],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #87CEFA;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
 
-            .border {
-                border: #666 1px solid;
-                width: 20%;
-                margin: auto;
-                margin-top: 25px;
-                padding-bottom: 25px;
-            }
+      div {
+        border-radius: 5px;
+        margin: 25px auto 25px auto;
+        width: 60%;
+      }
 
-            .button {
-                background-color: #87CEFA;
-                border: none;
-                color: white;
-                padding: 5px 12px;
-                text-align: center;
-                text-decoration: none;
-                display: block;
-                margin: auto;
-                font-size: 16px;
-                margin-top: 25px;
-            }
+      .border {
+        border: #666 1px solid;
+        width: 20%;
+        margin: auto;
+        margin-top: 25px;
+        padding-bottom: 25px;
+      }
 
-            button:hover {
-                background-color: rgb(196, 226, 245);
-            }
-        </style>
+      .button {
+        background-color: #87CEFA;
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        font-size: 16px;
+        margin-top: 25px;
+        border-radius: 8px;
+      }
 
+      button:hover {
+        background-color: rgb(196, 226, 245);
+      }
+
+      .container {
+        padding: 10px 16px;
+        width: 80%;
+      }
+
+      .container::after,
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding-top: initial;
+      }
+    </style>
+
+    <div class="card">
+      <div class="container">
         <h1 class="div-center">Create User</h1>
+        <form>
+          <label for="fname">First Name</label>
+          <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
+
+          <label for="lname">Last Name</label>
+          <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
+
+          <label for="phone">Phone</label>
+          <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
+
+          <label for="email">Email</label>
+          <input type="text" placeholder="Your email.." value="{{user.email::input}}">
+        </form>
         <div>
-            <div class="container">
-                <div class="form-border">
-                    <form>
-                        <label for="fname">First Name</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                        <label for="lname">Last Name</label>
-                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-                        <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone" placeholder="Your phone number..">
-
-                        <label for="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="Your email..">
-                        <div>
-                            <button class="button">Create</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          <button class="button" on-click="updateUserList">Create User</button>
         </div>
-    </template>
+      </div>
+    </div>
+  </template>
 
-    <script type="module">
+  <script type="module">
+    import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
 
-        import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    class CreateUser extends PolymerElement {
+      static get is() { return 'create-user'; }
 
-        class CreateUser extends PolymerElement {
-            
-            static get is() { return 'create-user'; }
+      static get properties() {
+        return {
+          storage: Object,
+          user: {
+            type: Object,
+            value() {
+              return {
+                firstName: '',
+                lastName: '',
+                phone: '',
+                email: '',
+                id: ''
+              }
+            }
+          }
         }
+      }
+        
+      createUser() {
+        this.storage.createUser(this.user);
+      }
 
-        customElements.define(CreateUser.is, CreateUser);
-
-        export default CreateUser;
-    </script>
+      updateUserList() {
+        this.createUser();
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+    }
+      
+    customElements.define(CreateUser.is, CreateUser);
+    export default CreateUser;
+  </script>
 </dom-module>

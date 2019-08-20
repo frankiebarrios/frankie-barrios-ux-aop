@@ -1,24 +1,64 @@
-<link rel="import" href="./user-profile.html">
+<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-repeat.js">
 <link rel="import" href="./user-profile.html">
 
 <dom-module id="user-list">
-    
-    <template>
-        <user-profile></user-profile>
-        <user-profile></user-profile>
-        <user-profile></user-profile>
+  <template>
+    <style>
+      .centered {
+        text-align: center;
+      }
+
+      .button {
+        background-color: #87CEFA;
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        font-size: 16px;
+        margin-top: 25px;
+        border-radius: 8px;
+      }
+
+      button:hover {
+        background-color: rgb(196, 226, 245);
+      }
+    </style>
+
+    <template is="dom-repeat" items="[[users]]" as="user">
+      <div>
+        <user-profile user="[[user]]" storage="[[storage]]"></user-profile> 
+      </div> 
+    </template> 
+    <button class="button" on-click="updateUserList">Delete All Users</button>
     </template>
 
     <script type="module">
-        import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-        
-        class UserList extends PolymerElement {
-            static get is() { return 'user-list'; }
-        }
+      import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    
+    class UserList extends PolymerElement {
+      static get is() { return 'user-list'; }
 
-        customElements.define(UserList.is, UserList);
+      static get properties() {
+        return {
+          users: Object,
+          storage: Object
+        };
+      }
 
-        export default UserList;
-    </script>
+      updateUserList() {
+        this.deleteAllUsers();
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
 
+      deleteAllUsers() {
+        this.storage.deleteAllUsers();
+      }
+    }
+    customElements.define(UserList.is, UserList);
+    export default UserList;
+  </script>
 </dom-module>

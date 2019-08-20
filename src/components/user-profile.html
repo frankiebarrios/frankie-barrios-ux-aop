@@ -1,111 +1,191 @@
-<link rel="import" href="~@banno/polymer/polymer-element.js">
+<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-if.js">
+<link rel="import" href="./edit-user.html">
 
 <dom-module id="user-profile">
-    <template>
-        <style>
-            .div-center {
-                text-align: center;
-            }
-            
-            .border {
-                border: #666 1px solid;
-                width: 20%;
-                margin: auto;
-                margin-top: 25px;
-                padding-bottom: 25px;
-            }
+  <template>
+    <style>
+      .div-center {
+        text-align: center;
+      }
 
-            form {
-                border: 1 px black solid;
-                border-radius: 5px;
-                background-color: #f2f2f2;
-                padding: 20px;
-                width: 50%;
-                margin: auto;
-            }
+      .center {
+        text-align: center;
+        padding-top: 25px;
+      }
 
-            .button {
-                background-color: #87CEFA;
-                border: none;
-                color: white;
-                padding: 5px 12px;
-                text-align: center;
-                text-decoration: none;
-                display: block;
-                margin: auto;
-                font-size: 16px;
-                margin-top: 25px;
-            }
+      form {
+        border: 1 px black solid;
+        border-radius: 5px;
+        padding: 20px;
+        width: 50%;
+        margin: auto;
+      }
 
-            button:hover {
-                background-color: rgb(196, 226, 245);
-            }
+      /* Clean up some of this, some values may be unused? */
+      .button {
+        background-color: #87CEFA;
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
 
-            table.center {
-                margin-right: auto;
-                margin-left: auto;
-            }
+      button:hover {
+        background-color: rgb(196, 226, 245);
+      }
 
-            th, td {
-                text-align: left;
-                padding: 16px;
-            }
+      table.center {
+        margin-top: 20px;
+        margin-right: auto;
+        margin-left: auto;
+      }
 
-            tr:nth-child(odd) {
-                background-color: #f2f2f2;
-            }
-        </style>
+      th,
+      td {
+        text-align: left;
+        padding: 16px;
+      }
 
-            <button class="button" on-click="expandCollapse">Expand/Collapse Profile</button>
-            <div class="form" id="userProfileCard" style="display: none;">
-                <div>
-                    <div class="div-center">
-                        <h3 class="div-center">User Profile</h3>
-                        <table class="center" id="test">
-                            <tr>
-                                <td>ID:</td>
-                                <td>12345</td>
-                            </tr>
-                            <tr>
-                                <td>First Name:</td>
-                                <td>Jane</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name:</td>
-                                <td>Doe</td>
-                            </tr>
-                            <tr>
-                                <td>Phone:</td>
-                                <td>111-111-1111</td>
-                            </tr>
-                            <tr>
-                                <td>Email:</td>
-                                <td>jane.doe@test.com</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+      tr:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        padding: 0 16px;
+        display: flex;
+      }
+
+      .container::after,
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .card {
+        padding: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin-bottom: 25px;
+      }
+
+      input[type=text],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #87CEFA;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+    </style>
+
+    <template is="dom-if" if="[[!editButtonClicked]]">
+      <div class="div-center" id="userProfileCard">
+        <div class="card">
+          <h3 class="div-center">User Profile</h3>
+          <table class="container center" id="test">
+            <tr>
+              <td>User Id:</td>
+              <td>[[user.id]]</td>
+            </tr>
+            <tr>
+              <td>Name:</td>
+              <td>[[user.firstName]] [[user.lastName]]</td>
+            </tr>
+
+            <template is="dom-if" if="[[profileExpanded]]">
+              <tr>
+                <td>Phone:</td>
+                <td>[[user.phone]]</td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>[[user.email]]</td>
+              </tr>
+              <button class="button" on-click="editButtonClick">Edit</button>
+              <button class="button" on-click="updateUserList">Delete User</button>
+            </template>
+
+          </table>
+          <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
+        </div>
+      </div>
     </template>
 
-    <script type="module">
-        
-        import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    <template is="dom-if" if="[[editButtonClicked]]">
+      <edit-user storage="[[storage]]" user="[[user]]"></edit-user>
+    </template>
 
-        class UserProfile extends PolymerElement {
-            static get is() { return 'user-profile'; }
+  </template>
 
-            expandCollapse() {
-                let userCard = this.$.userProfileCard;
+  <script type="module">
+    import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
 
-                if (userCard.style.display === "block") {
-                    userCard.style.display = "none";
-                } else {
-                    userCard.style.display = "block";
-                }
-            }
+    class UserProfile extends PolymerElement {
+      static get is() { return 'user-profile'; }
+
+      static get properties() {
+        return {
+          storage: Object,
+          user: { 
+            type: Object
+          }, 
+          profileExpanded: {
+            type: Boolean,
+            value: false
+          },
+          buttonText: {
+            type: String,
+            value: 'Expand'
+          },
+          editButtonClicked: {
+            type: Boolean,
+            value: false
+          }
         }
-        customElements.define(UserProfile.is, UserProfile);
-        export default UserProfile;
-    </script>
+      } 
+
+      ready() {
+        super.ready();
+        this.addEventListener('updateUserList', this.editButtonClick);
+      }
+
+      expandCollapseCard() {
+        this.profileExpanded ? this.profileExpanded = false :
+         this.profileExpanded = true;
+        this.buttonText === 'Expand' ? this.buttonText = 'Collapse' :
+         this.buttonText = 'Expand';
+      }
+
+      editButtonClick() {
+        this.editButtonClicked = !this.editButtonClicked;
+      }
+
+      updateUser() {
+        this.storage.updateUser(this.user.id, this.user)
+      }
+
+      updateUserList() {
+        this.deleteUser();
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+
+      deleteUser() {
+        this.storage.deleteUser(this.user.id);
+      }
+    }
+    customElements.define(UserProfile.is, UserProfile);
+    export default UserProfile;
+  </script>
+
 </dom-module>
