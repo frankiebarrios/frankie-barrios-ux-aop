@@ -62,6 +62,13 @@
 
     // Get a reference to the database service
     const database = firebase.database();
+
+    // Create reference for test element in FB DB
+    const dbRefObject = firebase.database().ref().child('object');
+
+    // Sync Object Changes
+    dbRefObject.on('value', snap => console.log(snap.val()));
+    
   </script>
 
   <script type="module">
