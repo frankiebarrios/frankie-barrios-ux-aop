@@ -3,6 +3,10 @@
 <link rel="import" href="./user-list.html">
 <link rel="import" href="./edit-user.html">
 <link rel="import" href="./create-user.html">
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+<!-- Firebase Database Link -->
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
 
 <dom-module id="intern-app">
   <template>
@@ -36,34 +40,6 @@
     </header>
   </template>
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
-
-  <!-- Firebase Database Link -->
-  <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
-  
-  <script>
-    import * as firebase from "firebase/app";
-    import "firebase/database";
-
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyDRBM0bV9alkQ5Lc7VM8rWkZGLgkd75vfA",
-      authDomain: "onboarding-project-d1154.firebaseapp.com",
-      databaseURL: "https://onboarding-project-d1154.firebaseio.com",
-      projectId: "onboarding-project-d1154",
-      storageBucket: "",
-      messagingSenderId: "461134238683",
-      appId: "1:461134238683:web:629a864bdaf08301"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Get a reference to the database service
-    const database = firebase.database();
-  </script>
-
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
@@ -96,6 +72,11 @@
       
       updateUserList(e) {
         this.users = this.storage.getAllUsers();
+        this.testFirebase();
+      }
+
+      testFirebase() {
+        this.storage.testFirebase();
       }
     }
     
