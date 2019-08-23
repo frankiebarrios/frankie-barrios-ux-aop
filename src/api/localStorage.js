@@ -60,8 +60,4 @@ export class LocalStorage {
     const testProps = Object.getOwnPropertyNames(validationObject);
     return !Boolean(userObject.find(prop => userProps[prop] !== testProps[prop]));
   }
-
-  testFirebase() {
-    
-  }
 }
