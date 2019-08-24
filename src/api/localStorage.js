@@ -67,7 +67,7 @@ export class LocalStorage {
   testFirebase() {
     // Your web app's Firebase configuration
     var firebaseConfig = {
-      apiKey: "AIzaSyDRBM0bV9alkQ5Lc7VM8rWkZGLgkd75vfA",
+      apiKey: "",
       authDomain: "onboarding-project-d1154.firebaseapp.com",
       databaseURL: "https://onboarding-project-d1154.firebaseio.com",
       projectId: "onboarding-project-d1154",
