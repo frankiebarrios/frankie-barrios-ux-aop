@@ -90,6 +90,7 @@
         </form>
         <div>
           <button class="button" on-click="updateUserList">Create User</button>
+          <button class="button" on-click="getUsers">Get Users</button>
         </div>
       </div>
     </div>
@@ -125,7 +126,12 @@
 
       updateUserList() {
         this.createUser();
+        this.storage.getAllUsers();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+
+      getUsers() {
+        this.storage.getAllUsers();
       }
     }
       

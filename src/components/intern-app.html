@@ -43,8 +43,26 @@
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     import { LocalStorage } from '../api/localStorage.js';
+    import * as firebase from "firebase/app";
+    import "firebase/database";
 
     const storage = new LocalStorage();
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDRBM0bV9alkQ5Lc7VM8rWkZGLgkd75vfA",
+      authDomain: "onboarding-project-d1154.firebaseapp.com",
+      databaseURL: "https://onboarding-project-d1154.firebaseio.com",
+      projectId: "onboarding-project-d1154",
+      storageBucket: "",
+      messagingSenderId: "461134238683",
+      appId: "1:461134238683:web:629a864bdaf08301"
+    };
+
+    // Initialize Firebase
+    // Pulling in this.users in constructor in API
+    
+    firebase.initializeApp(firebaseConfig);
     
     class InternApp extends PolymerElement {
       static get is() { return 'intern-app'; }
@@ -76,7 +94,7 @@
       }
 
       testFirebase() {
-        this.storage.testFirebase();
+        this.storage.getFirebaseUsers();
       }
     }
     
