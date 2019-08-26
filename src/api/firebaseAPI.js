@@ -6,9 +6,10 @@ export class FirebaseAPI {
     //this.users = (method to get all data from FBDB);
   }
 
-  createUser(userObject) {
+  createUser(user) {
     // Writes new user to FBDB
     // Takes in data from <create-user> form 
+    firebase.database().ref('users/').push({user});
   }
 
   updateUser(id, update) {

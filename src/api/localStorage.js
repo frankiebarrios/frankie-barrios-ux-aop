@@ -3,13 +3,8 @@ import "firebase/database";
 
 export class LocalStorage {
   constructor() {
-    // Need to change this.users to pull in all of FB DB data vs LS Data
-    // Was getting an error stating Firebase wasn't initialized yet when
-    // trying to add this directly to the constructor. Need to look at how I am 
-    // initializing firebase-app.
     this.users = JSON.parse(
       localStorage.getItem('UserAccounts')) || [];
-    // this.users = this.getAllUsers();
   }
 
   createUser(test) {
@@ -39,22 +34,19 @@ export class LocalStorage {
   // }
 
   getAllUsers() {
-    // For testing before switching over getAllUser() to this logic
     const database = firebase.database();
     const ref= database.ref('users');
-    // Look at if I should be using 'value' here
-    // since this will be triggered with my event listeners
     ref.on('value', this.getData); 
   }
 
   getData(data) {
    const firebaseData = data.val();
    const keys = Object.keys(firebaseData);
-   const userObj = {};    
+   const userObj = [];    
    for(let i = 0; i < keys.length; i++) {
      let key = keys[i];
-     //let user = firebaseData[key];
-     userObj[key] = firebaseData[key];
+     let user = firebaseData[key];
+     userObj.push(user);
    }
    console.log('Users Object:', userObj);
   }
@@ -101,16 +93,7 @@ export class LocalStorage {
     return !Boolean(userObject.find(prop => userProps[prop] !== testProps[prop]));
   }
 
-  getFirebaseUsers() {
-    // Get a reference to the database service
-    const database = firebase.database();
-
-    // Create reference to test data in FB DB
-    const dbRefObject = firebase.database().ref().child('users');
-
-    // Log Data 
-    // Wrong call for this but works for now, technically
-    // not listening for a value change to trigger this
-    // dbRefObject.on('value', snap => console.log(snap.val()));
+  getFirebaseUser() {
+    return firebase.database().ref('/users/' + userId);
   }
 }

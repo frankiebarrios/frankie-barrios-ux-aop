@@ -42,11 +42,11 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import { LocalStorage } from '../api/localStorage.js';
+    import { FirebaseAPI } from '../api/firebaseAPI.js';
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-    const storage = new LocalStorage();
+    const storage = new FirebaseAPI();
 
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -59,9 +59,7 @@
       appId: "1:461134238683:web:629a864bdaf08301"
     };
 
-    // Initialize Firebase
-    // Pulling in this.users in constructor in API
-    
+    // Initialize Firebase    
     firebase.initializeApp(firebaseConfig);
     
     class InternApp extends PolymerElement {
@@ -90,11 +88,6 @@
       
       updateUserList(e) {
         this.users = this.storage.getAllUsers();
-        this.testFirebase();
-      }
-
-      testFirebase() {
-        this.storage.getFirebaseUsers();
       }
     }
     
