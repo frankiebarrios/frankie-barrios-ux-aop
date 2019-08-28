@@ -132,7 +132,9 @@
       }
 
       updateUser() {
+        console.log('User ID: ', this.user.id);
         this.storage.updateUser(this.user.id, this.user);
+        console.log(this.user);
       }
     }
     customElements.define(CreateUser.is, CreateUser);
