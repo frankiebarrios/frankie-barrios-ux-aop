@@ -90,7 +90,11 @@
         </form>
         <div>
           <button class="button" on-click="updateUserList">Create User</button>
-          <button class="button" on-click="getUsers">Get Users</button>
+          <button class="button" on-click="getUsers">Get User List</button>
+          <button class="button" on-click="deleteAllUsers">Delete All Users</button>
+          <button class="button" on-click="getUser">Get User</button>
+
+
         </div>
       </div>
     </div>
@@ -119,19 +123,24 @@
           }
         }
       }
-        
-      createUser() {
-        this.storage.createUser(this.user);
-      }
 
+      // Some functions just here for testing, will be moved 
+      // to create better UX eventually
       updateUserList() {
-        this.createUser();
-        this.storage.getAllUsers();
+        this.storage.createUser(this.user);
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       getUsers() {
-        this.storage.getAllUsers();
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+
+      deleteAllUsers() {
+        this.storage.deleteAllUsers();
+      }
+
+      getUser() {
+        this.storage.getUser();
       }
     }
       

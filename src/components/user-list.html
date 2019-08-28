@@ -49,13 +49,11 @@
         };
       }
 
+      // Causes error once getAllUsers() is ran after the 
+      // db is cleared. Need to catch in getAllUsers().
       updateUserList() {
-        this.deleteAllUsers();
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
-      }
-
-      deleteAllUsers() {
         this.storage.deleteAllUsers();
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
     }
     customElements.define(UserList.is, UserList);

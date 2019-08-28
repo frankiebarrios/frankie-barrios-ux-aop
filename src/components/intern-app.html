@@ -48,7 +48,7 @@
 
     const storage = new FirebaseAPI();
 
-    // Your web app's Firebase configuration
+    // Firebase configuration
     var firebaseConfig = {
       apiKey: "AIzaSyDRBM0bV9alkQ5Lc7VM8rWkZGLgkd75vfA",
       authDomain: "onboarding-project-d1154.firebaseapp.com",
@@ -71,23 +71,18 @@
             value: () => storage
           },
           users: {
-            value: () => []
+            value: () => storage.getAllUsers()
           }
         }
       }
 
       connectedCallback() {
         super.connectedCallback();
-        this.users = this.storage.getAllUsers();
-      }
-
-      ready() {
-        super.ready();
         this.addEventListener('updateUserList', this.updateUserList);
       }
-      
-      updateUserList(e) {
-        this.users = this.storage.getAllUsers();
+
+      updateUserList() {
+        this.users = this.storage.getAllUsers();      
       }
     }
     
