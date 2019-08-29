@@ -29,7 +29,6 @@ export class LocalStorage {
   }
 
   getAllUsers () {
-    console.log('Users: ', this.users)
     return this.users
   }
 

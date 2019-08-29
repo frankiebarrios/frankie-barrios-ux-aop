@@ -90,10 +90,7 @@
         </form>
         <div>
           <button class="button" on-click="updateUserList">Create User</button>
-          <button class="button" on-click="getUsers">Get User List</button>
-          <button class="button" on-click="deleteAllUsers">Delete All Users</button>
-          <button class="button" on-click="getUser">Get User</button>
-
+          <button class="button" on-click="getUsers">Show User List</button>
 
         </div>
       </div>
@@ -137,10 +134,6 @@
 
       deleteAllUsers() {
         this.storage.deleteAllUsers();
-      }
-
-      getUser() {
-        this.storage.getUser();
       }
     }
       
