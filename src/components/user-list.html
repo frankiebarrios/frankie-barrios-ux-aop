@@ -26,18 +26,22 @@
       button:hover {
         background-color: rgb(196, 226, 245);
       }
+
+      /* div {
+        border: solid 1px black;
+        overflow: scroll;
+        max-height: 100%;
+      } */
     </style>
+    <div>
+      <template is="dom-repeat" items="[[users]]" as="user">
+          <user-profile user="[[user]]" storage="[[storage]]"></user-profile> 
+      </template> 
+    </div>
+  </template>
 
-    <template is="dom-repeat" items="[[users]]" as="user">
-      <div>
-        <user-profile user="[[user]]" storage="[[storage]]"></user-profile> 
-      </div> 
-    </template> 
-    <button class="button" on-click="updateUserList">Delete All Users</button>
-    </template>
-
-    <script type="module">
-      import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+  <script type="module">
+    import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
     
     class UserList extends PolymerElement {
       static get is() { return 'user-list'; }
@@ -49,8 +53,6 @@
         };
       }
 
-      // Causes error once getAllUsers() is ran after the 
-      // db is cleared. Need to catch in getAllUsers().
       updateUserList() {
         this.storage.deleteAllUsers();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));

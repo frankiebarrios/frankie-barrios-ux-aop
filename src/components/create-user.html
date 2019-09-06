@@ -17,14 +17,13 @@
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        /* border: 1px solid #87CEFA; */
         border-radius: 4px;
         box-sizing: border-box;
       }
 
       div {
         border-radius: 5px;
-        margin: 25px auto 25px auto;
+        margin: auto;
         width: 60%;
       }
 
@@ -38,7 +37,6 @@
 
       .button {
         background-color: #87CEFA;
-        /* border: none; */
         color: white;
         padding: 5px 12px;
         text-align: center;
@@ -78,7 +76,8 @@
 
     <div class="card">
       <div class="container">
-        <h1 class="div-center">Create User</h1>
+        <h1 class="div-center">Onboarding App</h1>
+        <h2 class="div-center">Create New User</h2>
         <form>
           <label>First Name</label>
           <input type="text" id="firstName" hasError="validateInput" 
@@ -99,6 +98,7 @@
         <div>
           <button class="button" on-click="createUser">Create User</button>
           <button class="button" on-click="getUsers">Show User List</button>
+          <button class="button" on-click="deleteAllUsers">Delete All Users</button>    
         </div>
       </div>
     </div>
@@ -162,10 +162,10 @@
       }
 
       deleteAllUsers() {
-        this.storage.deleteAllUsers();
+        this.storage.deleteAllUsers();        
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
-      // Stopping user from being created but not adding error styles yet
       validateInput() {
         const phoneRegex = /^\d{10}$/;
         if (!this.user.firstName) {
