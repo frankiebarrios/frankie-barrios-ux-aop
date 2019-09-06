@@ -68,7 +68,7 @@ export class FirebaseAPI {
       }
       this.users = userObj;
     } catch (error) {
-      console.log('Error Pulling In Users: ', error);
+      console.log('Error Pulling In Users: Database Empty ', error);
     }
   }
 

@@ -17,7 +17,7 @@
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #87CEFA;
+        /* border: 1px solid #87CEFA; */
         border-radius: 4px;
         box-sizing: border-box;
       }
@@ -38,7 +38,7 @@
 
       .button {
         background-color: #87CEFA;
-        border: none;
+        /* border: none; */
         color: white;
         padding: 5px 12px;
         text-align: center;
@@ -70,28 +70,35 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         padding-top: initial;
       }
+
+      .hasError {
+        border: 2px solid red;     
+      }
     </style>
 
     <div class="card">
       <div class="container">
         <h1 class="div-center">Create User</h1>
         <form>
-          <label for="fname">First Name</label>
-          <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
+          <label>First Name</label>
+          <input type="text" id="firstName" hasError="validateInput" 
+            placeholder="Your name.." value="{{user.firstName::input}}">
 
-          <label for="lname">Last Name</label>
-          <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
+          <label>Last Name</label>
+          <input type="text" id="lastName" hasError="validateInput" 
+            placeholder="Your last name.." value="{{user.lastName::input}}">
 
-          <label for="phone">Phone</label>
-          <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
-
-          <label for="email">Email</label>
-          <input type="text" placeholder="Your email.." value="{{user.email::input}}">
+          <label>Phone</label>
+          <input type="text" id="phone" hasError="validateInput"   
+            placeholder="Your phone number.." value="{{user.phone::input}}">
+          
+          <label>Email</label>
+          <input type="text" id="email" hasError="validateInput" 
+            placeholder="Your email.." value="{{user.email::input}}">
         </form>
         <div>
-          <button class="button" on-click="updateUserList">Create User</button>
+          <button class="button" on-click="createUser">Create User</button>
           <button class="button" on-click="getUsers">Show User List</button>
-
         </div>
       </div>
     </div>
@@ -117,23 +124,78 @@
                 id: ''
               }
             }
+          },
+          hasError: {
+            type: Boolean,
+            value: false
+          }, 
+          firstNameError: {
+            type: String,
+            value: ''
+          }, 
+          lastNameError: {
+            type: String,
+            value: ''
+          }, 
+          phoneError : {
+            type: String,
+            value: ''
+          }, 
+          emailError: {
+            type: String,
+            value: ''
           }
         }
-      }
-
-      // Some functions just here for testing, will be moved 
-      // to create better UX eventually
-      updateUserList() {
-        this.storage.createUser(this.user);
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       getUsers() {
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
+      createUser() {
+        this.validateInput();
+        if(!this.hasError) {
+          this.storage.createUser(this.user);
+        }
+        this.hasError = false;
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+
       deleteAllUsers() {
         this.storage.deleteAllUsers();
+      }
+
+      // Stopping user from being created but not adding error styles yet
+      validateInput() {
+        const phoneRegex = /^\d{10}$/;
+        if (!this.user.firstName) {
+          this.firstNameError = 'Must Enter A First Name';
+          this.hasError = true;
+          this.$.firstName.setAttribute('class', 'hasError');
+          this.$.firstName.setAttribute('placeholder', this.firstNameError);
+        } else {this.$.firstName.setAttribute('class', '')}
+        if (!this.user.lastName) {
+          this.lastNameError = 'Must Enter A Last Name';
+          this.hasError = true;
+          this.$.lastName.setAttribute('class', 'hasError');
+          this.$.lastName.setAttribute('placeholder', this.lastNameError);
+        } else {this.$.lastName.setAttribute('class', '')}
+        if (!this.user.phone || !this.user.phone.match(phoneRegex)) {
+          this.phoneError = 'Invalid Phone Number Entered';
+          this.hasError = true;
+          this.$.phone.setAttribute('class', 'hasError');
+          this.$.phone.setAttribute('placeholder', this.phoneError);
+        } else {this.$.phone.setAttribute('class', '')}
+        if (!this.user.email.includes('@')) {
+          this.emailError = 'Invalid Email Address Entered';
+          this.hasError = true;
+          this.$.email.setAttribute('class', 'hasError');
+          this.$.email.setAttribute('placeholder', this.emailError);
+        } else {this.$.email.setAttribute('class', '')}
+        if (this.firstNameError || this.lastNameError || this.phoneError || this.emailError) {
+          console.log(this.firstNameError, this.lastNameError, this.phoneError, this.emailError);
+          return false;
+        }
       }
     }
       
