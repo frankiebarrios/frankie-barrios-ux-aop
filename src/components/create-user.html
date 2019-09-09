@@ -193,7 +193,7 @@
           this.$.email.setAttribute('placeholder', this.emailError);
         } else {this.$.email.setAttribute('class', '')}
         if (this.firstNameError || this.lastNameError || this.phoneError || this.emailError) {
-          console.log(this.firstNameError, this.lastNameError, this.phoneError, this.emailError);
+          console.error(this.firstNameError, this.lastNameError, this.phoneError, this.emailError);
           return false;
         }
       }

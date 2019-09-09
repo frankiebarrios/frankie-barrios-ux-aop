@@ -61,14 +61,10 @@ export class FirebaseAPI {
       const firebaseData = data.val();
       const keys = Object.keys(firebaseData);
       const userObj = [];
-      for (let i = 0; i < keys.length; i++) {
-        let key = keys[i];
-        let user = firebaseData[key];
-        userObj.push(user);
-      }
+      keys.forEach(key => { userObj.push(firebaseData[key]) });
       this.users = userObj;
     } catch (error) {
-      console.log('Error Pulling In Users: Database Empty ', error);
+      console.error('Error Pulling In Users: Database Empty ', error);
     }
   }
 
@@ -76,12 +72,16 @@ export class FirebaseAPI {
     const user = this.getUser(id);
     const ref = firebase.database().ref('users');
     let match = '';
-    ref
-      .orderByChild('id')
-      .equalTo(user.id)
-      .on('child_added', function (snapshot) {
-        match = snapshot.key
+    try {
+      ref
+        .orderByChild('id')
+        .equalTo(user.id)
+        .on('child_added', function (snapshot) {
+          match = snapshot.key
       });
+    } catch (error) {
+      console.error('Error Finding Match: ', error);
+    }
     firebase
       .database()
       .ref('users/' + match)
