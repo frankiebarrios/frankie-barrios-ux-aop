@@ -68,10 +68,6 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         padding-top: initial;
       }
-
-      .hasError {
-        border: 2px solid red;     
-      }
     </style>
 
     <div class="card">
@@ -80,20 +76,16 @@
         <h2 class="div-center">Create New User</h2>
         <form>
           <label>First Name</label>
-          <input type="text" id="firstName" hasError="validateInput" 
-            placeholder="Your name.." value="{{user.firstName::input}}">
+          <input type="text" id="firstName" placeholder="Your name.." value="{{user.firstName::input}}">
 
           <label>Last Name</label>
-          <input type="text" id="lastName" hasError="validateInput" 
-            placeholder="Your last name.." value="{{user.lastName::input}}">
+          <input type="text" id="lastName" placeholder="Your last name.." value="{{user.lastName::input}}">
 
           <label>Phone</label>
-          <input type="text" id="phone" hasError="validateInput"   
-            placeholder="Your phone number.." value="{{user.phone::input}}">
+          <input type="text" id="phone" placeholder="Your phone number.." value="{{user.phone::input}}">
           
           <label>Email</label>
-          <input type="text" id="email" hasError="validateInput" 
-            placeholder="Your email.." value="{{user.email::input}}">
+          <input type="text" id="email" placeholder="Your email.." value="{{user.email::input}}">
         </form>
         <div>
           <button class="button" on-click="createUser">Create User</button>
@@ -124,26 +116,6 @@
                 id: ''
               }
             }
-          },
-          hasError: {
-            type: Boolean,
-            value: false
-          }, 
-          firstNameError: {
-            type: String,
-            value: ''
-          }, 
-          lastNameError: {
-            type: String,
-            value: ''
-          }, 
-          phoneError : {
-            type: String,
-            value: ''
-          }, 
-          emailError: {
-            type: String,
-            value: ''
           }
         }
       }
@@ -154,48 +126,12 @@
 
       createUser() {
         this.validateInput();
-        if(!this.hasError) {
-          this.storage.createUser(this.user);
-        }
-        this.hasError = false;
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       deleteAllUsers() {
         this.storage.deleteAllUsers();        
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
-      }
-
-      validateInput() {
-        const phoneRegex = /^\d{10}$/;
-        if (!this.user.firstName) {
-          this.firstNameError = 'Must Enter A First Name';
-          this.hasError = true;
-          this.$.firstName.setAttribute('class', 'hasError');
-          this.$.firstName.setAttribute('placeholder', this.firstNameError);
-        } else {this.$.firstName.setAttribute('class', '')}
-        if (!this.user.lastName) {
-          this.lastNameError = 'Must Enter A Last Name';
-          this.hasError = true;
-          this.$.lastName.setAttribute('class', 'hasError');
-          this.$.lastName.setAttribute('placeholder', this.lastNameError);
-        } else {this.$.lastName.setAttribute('class', '')}
-        if (!this.user.phone || !this.user.phone.match(phoneRegex)) {
-          this.phoneError = 'Invalid Phone Number Entered';
-          this.hasError = true;
-          this.$.phone.setAttribute('class', 'hasError');
-          this.$.phone.setAttribute('placeholder', this.phoneError);
-        } else {this.$.phone.setAttribute('class', '')}
-        if (!this.user.email.includes('@')) {
-          this.emailError = 'Invalid Email Address Entered';
-          this.hasError = true;
-          this.$.email.setAttribute('class', 'hasError');
-          this.$.email.setAttribute('placeholder', this.emailError);
-        } else {this.$.email.setAttribute('class', '')}
-        if (this.firstNameError || this.lastNameError || this.phoneError || this.emailError) {
-          console.error(this.firstNameError, this.lastNameError, this.phoneError, this.emailError);
-          return false;
-        }
       }
     }
       
