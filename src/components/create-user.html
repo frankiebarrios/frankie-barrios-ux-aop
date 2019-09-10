@@ -130,7 +130,7 @@
       }
 
       deleteAllUsers() {
-        this.storage.deleteAllUsers();        
+        this.storage.deleteAllUsers();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
     }
