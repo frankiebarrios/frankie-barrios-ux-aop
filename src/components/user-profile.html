@@ -111,7 +111,8 @@
               </tr>
               <button class="button" on-click="editButtonClick">Edit</button>
             </template>
-
+            
+            <button class="button" on-click="deleteUser">Delete</button>
           </table>
           <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
         </div>
@@ -121,7 +122,6 @@
     <template is="dom-if" if="[[editButtonClicked]]">
       <edit-user storage="[[storage]]" user="[[user]]"></edit-user>
     </template>
-
   </template>
 
   <script type="module">
@@ -151,8 +151,8 @@
         }
       } 
 
-      ready() {
-        super.ready();
+      connectedCallback() {
+        super.connectedCallback();
         this.addEventListener('updateUserList', this.editButtonClick);
       }
 
@@ -168,16 +168,17 @@
       }
 
       updateUser() {
-        this.storage.updateUser(this.user.id, this.user)
+        this.storage.updateUser(this.user.id, this.user);
       }
 
       updateUserList() {
-        this.deleteUser();
+        //this.deleteUser();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       deleteUser() {
         this.storage.deleteUser(this.user.id);
+        this.updateUserList();      
       }
     }
     customElements.define(UserProfile.is, UserProfile);
