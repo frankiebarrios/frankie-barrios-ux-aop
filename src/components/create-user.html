@@ -125,7 +125,7 @@
       }
 
       createUser() {
-        this.validateInput();
+        this.storage.createUser(this.user);
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
