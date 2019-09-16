@@ -71,15 +71,19 @@
       }
 
       connectedCallback() {
-        super.connectedCallback();
-        const database = firebase.database();
-        const ref = database.ref('users');
-        this.users = ref.on('value', storage.getData.bind(this));        
+        super.connectedCallback(); 
+        this.loadUsers();       
         this.addEventListener('updateUserList', this.updateUserList);
       }
 
       updateUserList() {
         this.users = storage.getAllUsers();   
+      }
+
+      async loadUsers() {
+        const database = firebase.database();
+        const ref = await database.ref('users');
+        this.users = await ref.on('value', storage.getData.bind(this));  
       }
     }
     
