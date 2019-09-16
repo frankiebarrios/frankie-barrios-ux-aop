@@ -40,8 +40,6 @@
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-    const storage = new FirebaseAPI();
-
     // Firebase configuration
     var firebaseConfig = {
       apiKey: "",
@@ -56,6 +54,8 @@
     // Initialize Firebase    
     firebase.initializeApp(firebaseConfig);
     
+    const storage = new FirebaseAPI();
+
     class InternApp extends PolymerElement {
       static get is() { return 'intern-app'; }
       
@@ -72,11 +72,14 @@
 
       connectedCallback() {
         super.connectedCallback();
+        const database = firebase.database();
+        const ref = database.ref('users');
+        this.users = ref.on('value', storage.getData.bind(this));        
         this.addEventListener('updateUserList', this.updateUserList);
       }
 
       updateUserList() {
-        this.users = this.storage.getAllUsers();      
+        this.users = storage.getAllUsers();   
       }
     }
     

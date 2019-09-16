@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app';
 import 'firebase/database'
 
 export class FirebaseAPI {
@@ -49,17 +49,13 @@ export class FirebaseAPI {
       .remove();
   }
 
-  // Set as Async to try to resolve issue with data not 
-  // coming in upon load
-  async getAllUsers () {
+  getAllUsers () {
     const database = firebase.database();
     const ref = database.ref('users');
-    ref.on('value', await this.getData.bind(this));
+    ref.on('value', this.getData.bind(this));
     return this.users;
   }
 
-  // Set as Async to try to resolve issue with data not 
-  // coming in upon load
   getData (data) {
     try {
       const firebaseData = data.val();
