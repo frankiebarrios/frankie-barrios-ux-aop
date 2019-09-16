@@ -49,19 +49,23 @@ export class FirebaseAPI {
       .remove();
   }
 
-  getAllUsers () {
+  // Set as Async to try to resolve issue with data not 
+  // coming in upon load
+  async getAllUsers () {
     const database = firebase.database();
     const ref = database.ref('users');
-    ref.on('value', this.getData.bind(this));
+    ref.on('value', await this.getData.bind(this));
     return this.users;
   }
 
+  // Set as Async to try to resolve issue with data not 
+  // coming in upon load
   getData (data) {
     try {
       const firebaseData = data.val();
       const keys = Object.keys(firebaseData);
       const userObj = [];
-      keys.forEach(key => { userObj.push(firebaseData[key]) });
+      keys.forEach(key => { userObj.push(firebaseData[key]); });
       this.users = userObj;
     } catch (error) {
       console.error('Error Pulling In Users: Database Empty ', error);

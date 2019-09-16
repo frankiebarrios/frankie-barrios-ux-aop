@@ -140,6 +140,16 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@banno/banno-icons@^1.0.7":
+  version "1.0.7"
+  resolved "https://npm.banno-internal.com/@banno%2fbanno-icons/-/banno-icons-1.0.7.tgz#ce5d6059d13cd872484b5517aced728deee9d854"
+  integrity sha512-SMFuO0Y1tWVg0div3WnW+fn4CqW3S2mvsn/k4U9X7olFXYH9ODedI3v8SCpqyvDd4Z4VYo17A746c8W9zTVtKw==
+
+"@banno/jha-design-components@^0.4.0":
+  version "0.4.0"
+  resolved "https://npm.banno-internal.com/@banno%2fjha-design-components/-/jha-design-components-0.4.0.tgz#7de40d8b70358ce9797e2ed2e9ba8cea22f7b955"
+  integrity sha512-Os5zEKPlq9CT6PL3gQJZjxRAvST/GKXUsyhJ/K7P0hBVi9TheMO8VlumPYq5x+yksubPNMRFYrRw9WlaO4iDoQ==
+
 "@banno/polymer@2.3.1":
   version "2.3.1"
   resolved "https://npm.banno-internal.com/@banno%2fpolymer/-/polymer-2.3.1.tgz#a0d7a4b3198f2e70013436d9fd0f1145a5c410a5"
@@ -2455,6 +2465,13 @@ get-value@^2.0.3, get-value@^2.0.6:
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
 
+git@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/git/-/git-0.1.5.tgz#9ef62df93f851c27542143bf52d1c68b1017ca15"
+  integrity sha1-nvYt+T+FHCdUIUO/UtHGixAXyhU=
+  dependencies:
+    mime "1.2.9"
+
 glob-parent@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-3.1.0.tgz#9e6af6299d8d3bd2bd40430832bd113df906c5ae"
@@ -3459,6 +3476,11 @@ mime-types@~2.1.17, mime-types@~2.1.24:
   integrity sha512-WaFHS3MCl5fapm3oLxU4eYDw77IQM2ACcxQ9RIxfaC3ooc6PFuBMGZZsYpvoXS5D5QTWPieo1jjLdAm3TBP3cQ==
   dependencies:
     mime-db "1.40.0"
+
+mime@1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-1.2.9.tgz#009cd40867bd35de521b3b966f04e2f8d4d13d09"
+  integrity sha1-AJzUCGe9Nd5SGzuWbwTi+NTRPQk=
 
 mime@1.6.0:
   version "1.6.0"
