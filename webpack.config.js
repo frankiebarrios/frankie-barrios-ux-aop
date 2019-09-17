@@ -1,38 +1,40 @@
+
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = env => {
-	env = env || {};
-	const config = {
+  env = env || {};
+  const config = {
     mode: env.mode || 'production',
-		entry: './src/index.js',
-		output: {
-			path: path.resolve(__dirname, 'dist'),
-			filename: 'bundle.js'
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.js'
     },
-		module: {
-			rules: [
-				{
+    resolveLoader: {
+      alias: {
+        "fix-polymer-imports": require.resolve("./tools/fix-polymer-imports.js")
+      }
+    },
+    module: {
+      rules: [
+        {
           test: /\.html$/,
-					use: [
-						{ loader: 'babel-loader' },
-						{
-              options: {
-                processStyleLinks: true
-              },
-              loader: 'polymer-webpack-loader'
-            }
-					]
+          use: ['babel-loader', 'fix-polymer-imports']
         },
-				{
+        { 
+          test: /\.js/, 
+          use: "fix-polymer-imports" 
+        },
+        {
           test: /polymer\.html$/,
           include: [
             path.resolve(__dirname, './node_modules/@banno/polymer')
           ]
         },
-				{
+        {
           test: /\.js$/,
           use: 'babel-loader',
         },
@@ -44,16 +46,16 @@ module.exports = env => {
           test: /\.(png|jpg|gif)$/,
           use: 'file-loader'
         }
-			]
-		},
-		devServer: {
-			contentBase: path.join(__dirname, 'dist'),
-			compress: true,
-			port: 1820
+      ]
+    },
+    devServer: {
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      port: 1820
 
     },
     devtool: 'source-map',
-		plugins: [
+    plugins: [
       new webpack.NormalModuleReplacementPlugin(
         /\/node_modules\/@banno\/polymer\/polymer\.html$/,
         '@banno/polymer/polymer-element.js'
@@ -75,7 +77,7 @@ module.exports = env => {
           to: './assets/css/global.css'
         }
       ]),
-		],
-	};
+    ],
+  };
   return config;
 };
