@@ -5,30 +5,29 @@ const path = require('path');
 const indentExpr = /([ \t]*)\S/;
 
 function updateHtmlImports(contents) {
-  // let importIndex = contents.search(importSearchExpr);
-  // let insertionPoint, remainingContents;
-  // let indent = '';
-  // if (importIndex < 0) {
-  //   // return;
-  //   importIndex = 0;
-  //   insertionPoint = 0;
-  //   remainingContents = '\n' + contents;
-  // } else {
-  //   const importMatches = importSearchExpr.exec(contents);
-  //   const startIndicator = importMatches[1];
-  //   indent = importMatches[2];
-  //   insertionPoint = importMatches.index + startIndicator.length + indent.length;
-  //   remainingContents = contents.substr(importMatches.index + importMatches[0].length);
-  // }
+  let importIndex = contents.search(importSearchExpr);
+  let insertionPoint, remainingContents;
+  let indent = '';
+  if (importIndex < 0) {
+    // return;
+    importIndex = 0;
+    insertionPoint = 0;
+    remainingContents = '\n' + contents;
+  } else {
+    const importMatches = importSearchExpr.exec(contents);
+    const startIndicator = importMatches[1];
+    indent = importMatches[2];
+    insertionPoint = importMatches.index + startIndicator.length + indent.length;
+    remainingContents = contents.substr(importMatches.index + importMatches[0].length);
+  }
 
-  // let addDomIfImport = /<dom-if/.test(contents) || /is=['"]?dom-if/.test(contents);
-  // let addDomRepeatImport = /<dom-repeat/.test(contents) || /is=['"]?dom-repeat/.test(contents);
-  // contents = contents.substr(0, insertionPoint) +
-  //   '<link rel="import" href="~@banno/polymer/polymer-element.html">' +
-  //   (addDomIfImport ? `\n${indent}<link rel="import" href="~@banno/polymer/lib/elements/dom-if.html">` : '') +
-  //   (addDomRepeatImport ? `\n${indent}<link rel="import" href="~@banno/polymer/lib/elements/dom-repeat.html">` : '') +
-  //   remainingContents;
-  contents = contents.replace('polymer.js',  'frankie.js');
+  let addDomIfImport = /<dom-if/.test(contents) || /is=['"]?dom-if/.test(contents);
+  let addDomRepeatImport = /<dom-repeat/.test(contents) || /is=['"]?dom-repeat/.test(contents);
+  contents = contents.substr(0, insertionPoint) +
+    '<link rel="import" href="~@banno/polymer/polymer-element.html">' +
+    (addDomIfImport ? `\n${indent}<link rel="import" href="~@banno/polymer/lib/elements/dom-if.html">` : '') +
+    (addDomRepeatImport ? `\n${indent}<link rel="import" href="~@banno/polymer/lib/elements/dom-repeat.html">` : '') +
+    remainingContents;
   return contents;
 }
 

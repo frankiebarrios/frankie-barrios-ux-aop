@@ -22,7 +22,15 @@ module.exports = env => {
       rules: [
         {
           test: /\.html$/,
-          use: ['babel-loader', 'fix-polymer-imports']
+                    use: [
+                        { loader: 'babel-loader' },
+                        {
+              options: {
+                processStyleLinks: true
+              },
+              loader: 'polymer-webpack-loader'
+            }
+                    ]
         },
         { 
           test: /\.js/, 
@@ -36,7 +44,7 @@ module.exports = env => {
         },
         {
           test: /\.js$/,
-          use: 'babel-loader',
+          use: ['babel-loader', 'fix-polymer-imports']
         },
         {
           test: /\.css$/,
