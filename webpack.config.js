@@ -29,24 +29,8 @@ module.exports = env => {
                 processStyleLinks: true
               },
               loader: 'polymer-webpack-loader'
-            }
-          ]
-        },
-        {
-          test: /\.html$/,
-          include: [
-            path.resolve(__dirname, "./node_modules/@banno/jha-design-components")
-          ],
-          use: [
-            { loader: 'babel-loader' },
-            {
-              options: {
-                processStyleLinks: true
-              },
-              loader: 'polymer-webpack-loader'
             },
-            { loader: 'file-loader' },
-            { loader: 'fix-polymer-imports' }
+            { loader : 'fix-polymer-imports' }
           ]
         },
         {
@@ -83,8 +67,8 @@ module.exports = env => {
     plugins: [
       new webpack.NormalModuleReplacementPlugin(
         /\/node_modules\/@banno\/polymer\/polymer\.html$/,
-        '@banno/polymer/polymer-element.js'
-      ),
+        path.resolve(__dirname, './node_modules/@banno/polymer/polymer.js'),
+              ),
       new HtmlWebPackPlugin({
         template: path.resolve(__dirname, './src/index.ejs'),
         alwaysWriteToDisk: true,
