@@ -22,19 +22,36 @@ module.exports = env => {
       rules: [
         {
           test: /\.html$/,
-                    use: [
-                        { loader: 'babel-loader' },
-                        {
+          use: [
+            { loader: 'babel-loader' },
+            {
               options: {
                 processStyleLinks: true
               },
               loader: 'polymer-webpack-loader'
             }
-                    ]
+          ]
         },
-        { 
-          test: /\.js/, 
-          use: "fix-polymer-imports" 
+        {
+          test: /\.html$/,
+          include: [
+            path.resolve(__dirname, "./node_modules/@banno/jha-design-components")
+          ],
+          use: [
+            { loader: 'babel-loader' },
+            {
+              options: {
+                processStyleLinks: true
+              },
+              loader: 'polymer-webpack-loader'
+            },
+            { loader: 'file-loader' },
+            { loader: 'fix-polymer-imports' }
+          ]
+        },
+        {
+          test: /\.js$/,
+          use: "fix-polymer-imports"
         },
         {
           test: /polymer\.html$/,
@@ -44,14 +61,14 @@ module.exports = env => {
         },
         {
           test: /\.js$/,
-          use: ['babel-loader', 'fix-polymer-imports']
+          use: 'babel-loader'
         },
         {
           test: /\.css$/,
           use: 'css-loader'
         },
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.(png|jpg|svg)$/,
           use: 'file-loader'
         }
       ]

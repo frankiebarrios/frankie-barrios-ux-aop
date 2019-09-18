@@ -1,5 +1,5 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
-<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-alarm-clock.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-close.html">
 
 <dom-module id="create-user">
   <template>
@@ -73,13 +73,19 @@
       .hasError {
         border: 2px solid red;     
       }
+
+      /* .icon {
+        background: url('../../node_modules/@banno/jha-design-components/icons/jha-icon-alarm-clock-outline.html');
+      }    */
+
+
     </style>
 
     <div class="card">
       <div class="container">
         <h1 class="div-center">Onboarding App</h1>
+        <jha-icon-close>test</jha-icon-close>
         <h2 class="div-center">Create New User</h2>
-        <jha-icon-alarm-clock></jha-icon-alarm-clock>
         <form>
           <label>First Name</label>
           <input type="text" id="firstName" hasError="validateInput" 
@@ -198,6 +204,10 @@
           console.error(this.firstNameError, this.lastNameError, this.phoneError, this.emailError);
           return false;
         }
+      }
+
+      testFunction() {
+        alert('Test Hit');
       }
     }
       

@@ -1,3 +1,13 @@
+// //  Source is the string of all the code, this is where you can mess with stuff, like changing every letter to wombat
+
+// // Documentation at https://webpack.js.org/api/loaders/
+// function myLoader(source) {
+//   source = source.replace(/\D/g, "wombat");
+
+//   return source;
+// }
+
+// module.exports = myLoader;
 const searchExpr = /Polymer.Element/g;
 const importSearchExpr = /(^|\n)([ \t]*)(<link rel="import" href="\/node_modules\/@banno\/polymer\/polymer\.html"(?: *\/)?>)/;
 const fs = require('fs');
@@ -28,6 +38,7 @@ function updateHtmlImports(contents) {
     (addDomIfImport ? `\n${indent}<link rel="import" href="~@banno/polymer/lib/elements/dom-if.html">` : '') +
     (addDomRepeatImport ? `\n${indent}<link rel="import" href="~@banno/polymer/lib/elements/dom-repeat.html">` : '') +
     remainingContents;
+    console.log('Hit');
   return contents;
 }
 
