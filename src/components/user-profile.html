@@ -1,6 +1,11 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-if.js">
 <link rel="import" href="./edit-user.html">
+<!-- <link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-minus-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-plus-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-edit-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html"> -->
+
 
 <dom-module id="user-profile">
   <template>
@@ -88,11 +93,27 @@
         border-radius: 4px;
         box-sizing: border-box;
       }
+
+      .icon {
+        fill: #515154
+      }
+
+      .text {
+        color: #515154;
+      }
     </style>
 
     <template is="dom-if" if="[[!editButtonClicked]]">
       <div class="div-center" id="userProfileCard">
         <div class="card">
+        <template is="dom-if" if="[[!profileExpanded]]">
+          <!-- <jha-icon-circle-plus-outline class="icon" on-click="expandCollapseCard" style="margin-left: 90px;"></jha-icon-circle-plus-outline> -->
+        </template>
+        <template is="dom-if" if="[[profileExpanded]]">
+          <div>
+            <!-- <jha-icon-circle-minus-outline class="icon" on-click="expandCollapseCard"></jha-icon-circle-minus-outline> -->
+          </div>
+        </template>
           <h3 class="div-center">User Profile</h3>
           <table class="container center" id="test">
             <tr>
@@ -109,12 +130,14 @@
                 <td>Email:</td>
                 <td>[[user.email]]</td>
               </tr>
-              <button class="button" on-click="editButtonClick">Edit</button>
+              <!-- <jha-icon-edit-outline class="icon" on-click="editButtonClick"></jha-icon-edit-outline>
+              <jha-icon-delete-outline class="icon" on-click="deleteUser"></jha-icon-delete-outline> -->
+              <!-- <button class="button" on-click="editButtonClick">Edit</button> -->
             </template>
             
-            <button class="button" on-click="deleteUser">Delete</button>
+            <!-- <button class="button" on-click="deleteUser">Delete</button> -->
           </table>
-          <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
+          <!-- <button class="button" on-click="expandCollapseCard">[[buttonText]]</button> -->
         </div>
       </div>
     </template>

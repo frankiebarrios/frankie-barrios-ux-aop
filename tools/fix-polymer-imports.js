@@ -1,11 +1,14 @@
 /* eslint-disable no-extra-boolean-cast */
 // This is a Regular Expression we will use to match specific patterns in order to fix their imports.
-const PolymerRegex = /()(class (.*) extends )(Polymer\.Element)/
+const PolymerRegex = /()(class extends )(Polymer\.Element)/
 
 // This is the logic for the loader. We export it as a module so that it can be used as a loader in Webpack.
 module.exports = (content) => {
+  console.log('Content before if:  ----------------------------------------------------------------,', content);
   if (Boolean(content.search(PolymerRegex))) {
-    return content.replace(PolymerRegex, `import { Element as PolymerElement } from '@banno/polymer/polymer-element.html';\n$1$2PolymerElement`);
+    let test =  content.replace(PolymerRegex, `import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';\n$1$2PolymerElement`);
+    console.log('Content after replace: ----------------------------------------', test);
+    return test;
   }
   return content;
 }

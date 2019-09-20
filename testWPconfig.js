@@ -12,11 +12,6 @@ module.exports = env => {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js'
     },
-    resolveLoader: {
-      alias: {
-        "fix-polymer-imports": require.resolve("./tools/fix-polymer-imports.js")
-      }
-    },
     module: {
       rules: [
         {
@@ -28,43 +23,19 @@ module.exports = env => {
                 processStyleLinks: true
               },
               loader: 'polymer-webpack-loader'
-            },
-            {
-              loader: 'fix-polymer-imports'
             }
           ]
         },
         {
-          test: /\.html$/,
-          include: [
-              path.resolve(__dirname, "node_modules/@banno/jha-design-components")
-          ],
-          use: [
-              { loader: 'babel-loader' },
-              {
-                options: {
-                  processStyleLinks: true
-                },
-                loader: 'polymer-webpack-loader'
-              },
-              { loader: 'file-loader' },
-              { loader: 'fix-polymer-imports' }
-          ]
-        },
-        // {
-        //   test: /\.js$/,
-        //   use: "fix-polymer-imports"
-        // },
-        {
           test: /\.js$/,
-          use: 'babel-loader'
+          use: 'babel-loader',
         },
         {
           test: /\.css$/,
           use: 'css-loader'
         },
         {
-          test: /\.(png|jpg|svg)$/,
+          test: /\.(png|jpg|gif)$/,
           use: 'file-loader'
         }
       ]
@@ -73,14 +44,12 @@ module.exports = env => {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
       port: 1820
-
-
     },
     devtool: 'source-map',
     plugins: [
       new webpack.NormalModuleReplacementPlugin(
         /\/node_modules\/@banno\/polymer\/polymer\.html$/,
-        '@banno/polymer/polymer-element.js',
+        '@banno/polymer/polymer-element.html'
       ),
       new HtmlWebPackPlugin({
         template: path.resolve(__dirname, './src/index.ejs'),
@@ -89,13 +58,18 @@ module.exports = env => {
         production: Boolean(env.release),
         filename: 'index.html'
       }),
-      new CopyWebpackPlugin([{
+      new CopyWebpackPlugin([
+        {
           from: path.resolve(__dirname, './node_modules/@webcomponents/webcomponentsjs/*.js'),
           to: './webcomponentsjs/[name].[ext]'
         },
         {
           from: path.resolve(__dirname, './src/assets/css/global.css'),
           to: './assets/css/global.css'
+        },
+        {
+          from: path.resolve(__dirname, './src/html/*.html'),
+          to: './html/[name].html'
         }
       ]),
     ],
