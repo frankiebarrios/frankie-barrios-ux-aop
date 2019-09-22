@@ -29,9 +29,7 @@ module.exports = env => {
               },
               loader: 'polymer-webpack-loader'
             },
-            {
-              loader: 'fix-polymer-imports'
-            }
+            { loader: 'fix-polymer-imports' }
           ]
         },
         {
@@ -51,10 +49,6 @@ module.exports = env => {
               { loader: 'fix-polymer-imports' }
           ]
         },
-        // {
-        //   test: /\.js$/,
-        //   use: "fix-polymer-imports"
-        // },
         {
           test: /\.js$/,
           use: 'babel-loader'
