@@ -6,13 +6,13 @@ const PolymerRegex2 = /class extends Polymer\.Element/;
 module.exports = (content) => {
   console.log('Content before if:  ----------------------------------------------------------------,', content);
   if (Boolean(content.search(PolymerRegex))) {
-    let newString1 = content.replace(PolymerRegex, `import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';\n    $&class extends PolymerElement`);
-    if (Boolean(newString1.search(PolymerRegex2))) {
-      let finalString = newString1.replace(PolymerRegex2, ``);
+    let firstString = content.replace(PolymerRegex, `import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';\n    $&class extends PolymerElement`);
+    if (Boolean(firstString.search(PolymerRegex2))) {
+      let finalString = firstString.replace(PolymerRegex2, ``);
       console.log('FinalString: ----------------------------------------', finalString);
-      return finalString
+      return finalString;
     }
-  return newString1;
+  return firstString;
   }
   return content;
 }
