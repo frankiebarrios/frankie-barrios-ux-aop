@@ -60,7 +60,9 @@
       }
 
       .icon {
-        fill:#bfbff5;
+        fill:#6495ED;
+        height: 44px;
+        width: 44px;
       }
 
       .iconContainer {
@@ -69,6 +71,13 @@
         flex-direction: row;
         justify-content: space-around;
         padding-top: 6%;
+      }
+
+      .textContainer {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-around;
       }
     </style>
     <h1 class="div-center ">Onboarding App</h1>
@@ -95,6 +104,10 @@
         <div class="iconContainer">
           <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
           <jha-icon-save-outline on-click="createUser" class="icon"></jha-icon-save-outline>
+        </div>
+        <div class="textContainer">
+          <h5>Delete All</h5>
+          <h5>Create</h5>
         </div>
       </div>
     </div>

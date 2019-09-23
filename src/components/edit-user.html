@@ -1,5 +1,7 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-chevron-left.html">
+
 
 <dom-module id="edit-user">
   <template>
@@ -77,7 +79,7 @@
       }
 
       .icon {
-        fill:#bfbff5;
+        fill:#6495ED;
       }
     </style>
 
@@ -97,8 +99,8 @@
         <input type="text" placeholder="Your email.." value="{{user.email::input}}">
       </form>
       <div class="iconContainer">
+        <jha-icon-chevron-left class="icon" on-click="updateUserList"></jha-icon-chevron-left>
         <jha-icon-save-outline class="icon" on-click="updateUserList"></jha-icon-save-outline>
-        <!-- <button class="button" on-click="updateUserList">Save</button> -->
       </div>
     </div>
   </template>
@@ -116,12 +118,8 @@
       }
 
       updateUserList() {
-        this.saveButtonClick();
+        this.updateUser();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
-      }
-
-      saveButtonClick() {        
-        this.updateUser(); 
       }
 
       updateUser() {
