@@ -32,23 +32,23 @@ module.exports = env => {
             { loader: 'fix-polymer-imports' }
           ]
         },
-        {
-          test: /\.html$/,
-          include: [
-              path.resolve(__dirname, "node_modules/@banno/jha-design-components")
-          ],
-          use: [
-              { loader: 'babel-loader' },
-              {
-                options: {
-                  processStyleLinks: true
-                },
-                loader: 'polymer-webpack-loader'
-              },
-              { loader: 'file-loader' },
-              { loader: 'fix-polymer-imports' }
-          ]
-        },
+        // {
+        //   test: /\.html$/,
+        //   include: [
+        //       path.resolve(__dirname, "node_modules/@banno/jha-design-components/icons")
+        //   ],
+        //   use: [
+        //       { loader: 'babel-loader' },
+        //       {
+        //         options: {
+        //           processStyleLinks: true
+        //         },
+        //         loader: 'polymer-webpack-loader'
+        //       },
+        //       { loader: 'file-loader' },
+        //       { loader: 'fix-polymer-imports' }
+        //   ]
+        // },
         {
           test: /\.js$/,
           use: 'babel-loader'
