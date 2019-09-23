@@ -1,7 +1,7 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="../../node_modules/@banno/polymer/polymer-element.js">
 <link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
-<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-user-outline.html"> 
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html"> 
 
 <dom-module id="create-user">
   <template>
@@ -38,23 +38,6 @@
         padding-bottom: 25px;
       }
 
-      .button {
-        background-color: #87CEFA;
-        color: white;
-        padding: 5px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: auto;
-        font-size: 16px;
-        margin-top: 25px;
-        border-radius: 5px;
-      }
-
-      button:hover {
-        background-color: rgb(196, 226, 245);
-      }
-
       .container {
         padding: 10px 16px;
         width: 80%;
@@ -77,42 +60,41 @@
       }
 
       .icon {
-        fill:#515154;
+        fill:#bfbff5;
       }
 
-      .text {
-        color: #515154;
+      .iconContainer {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 6%;
       }
     </style>
-
     <h1 class="div-center ">Onboarding App</h1>
     <div class="card">
       <div class="container">
         <h2 class="div-center text">Create New User</h2>
         <form>
-          <label class="text">First Name</label>
+          <label>First Name</label>
           <input type="text" id="firstName" hasError="validateInput" 
             placeholder="Your name.." value="{{user.firstName::input}}">
 
-          <label class="text">Last Name</label>
+          <label>Last Name</label>
           <input type="text" id="lastName" hasError="validateInput" 
             placeholder="Your last name.." value="{{user.lastName::input}}">
 
-          <label class="text">Phone</label>
+          <label>Phone</label>
           <input type="text" id="phone" hasError="validateInput"   
             placeholder="Your phone number.." value="{{user.phone::input}}">
           
-          <label class="text">Email</label>
+          <label>Email</label>
           <input type="text" id="email" hasError="validateInput" 
             placeholder="Your email.." value="{{user.email::input}}">
         </form>
-        <div>
-          <jha-icon-user-outline on-click="createUser" class="icon"></jha-icon-user-outline>
+        <div class="iconContainer">
           <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
-<!--           
-          <button class="button" on-click="createUser">Create User</button>
-          <button class="button" on-click="getUsers">Show User List</button>
-          <button class="button" on-click="deleteAllUsers">Delete All Users</button>     -->
+          <jha-icon-save-outline on-click="createUser" class="icon"></jha-icon-save-outline>
         </div>
       </div>
     </div>

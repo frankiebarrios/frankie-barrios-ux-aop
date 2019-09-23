@@ -1,4 +1,5 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
 
 <dom-module id="edit-user">
   <template>
@@ -36,25 +37,6 @@
         padding-bottom: 75px;
       }
 
-      .button {
-        background-color: #87CEFA;
-        border: none;
-        color: white;
-        padding: 5px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: auto;
-        font-size: 16px;
-        margin-top: 25px;
-        border-radius: 8px;
-      }
-
-      button:hover {
-        background-color: rgb(196, 226, 245);
-      }
-
-      /* Edit Form */
       .edit-div {
         border-radius: 5px;
         margin: 25px auto 25px auto;
@@ -87,6 +69,16 @@
         width: 75%;
         margin: auto;
       }
+
+      .iconContainer {
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-around;
+      }
+
+      .icon {
+        fill:#bfbff5;
+      }
     </style>
 
     <div class="edit-div edit-container edit-Card">
@@ -104,8 +96,9 @@
         <label for="email">Email</label>
         <input type="text" placeholder="Your email.." value="{{user.email::input}}">
       </form>
-      <div>
-        <button class="button" on-click="updateUserList">Save</button>
+      <div class="iconContainer">
+        <jha-icon-save-outline class="icon" on-click="updateUserList"></jha-icon-save-outline>
+        <!-- <button class="button" on-click="updateUserList">Save</button> -->
       </div>
     </div>
   </template>
