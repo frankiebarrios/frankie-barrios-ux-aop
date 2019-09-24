@@ -83,14 +83,14 @@
 
           <label>Phone</label>
           <input type="text" id="phone" placeholder="Your phone number.." value="{{user.phone::input}}">
-          
+
           <label>Email</label>
           <input type="text" id="email" placeholder="Your email.." value="{{user.email::input}}">
         </form>
         <div>
           <button class="button" on-click="createUser">Create User</button>
           <button class="button" on-click="getUsers">Show User List</button>
-          <button class="button" on-click="deleteAllUsers">Delete All Users</button>    
+          <button class="button" on-click="deleteAllUsers">Delete All Users</button>
         </div>
       </div>
     </div>
@@ -134,7 +134,7 @@
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
     }
-      
+
     customElements.define(CreateUser.is, CreateUser);
     export default CreateUser;
   </script>
