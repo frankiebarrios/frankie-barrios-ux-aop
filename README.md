@@ -11,4 +11,3 @@ $ yarn start
 ```
 # Dependencies
 - yarn
-- http-server

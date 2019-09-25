@@ -12,8 +12,6 @@
         padding: 20px 0;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
       }
 
       h1 {
@@ -38,9 +36,25 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import { LocalStorage } from '../api/localStorage.js';
+    import { FirebaseAPI } from '../api/firebaseAPI.js';
+    import * as firebase from "firebase/app";
+    import "firebase/database";
 
-    const storage = new LocalStorage();
+    const storage = new FirebaseAPI();
+
+    // Firebase configuration
+    var firebaseConfig = {
+      apiKey: "",
+      authDomain: "onboarding-project-d1154.firebaseapp.com",
+      databaseURL: "https://onboarding-project-d1154.firebaseio.com",
+      projectId: "onboarding-project-d1154",
+      storageBucket: "onboarding-project-d1154.appspot.com",
+      messagingSenderId: "461134238683",
+      appId: "1:461134238683:web:629a864bdaf08301"
+    };
+
+    // Initialize Firebase    
+    firebase.initializeApp(firebaseConfig);
     
     class InternApp extends PolymerElement {
       static get is() { return 'intern-app'; }
@@ -51,25 +65,21 @@
             value: () => storage
           },
           users: {
-            value: () => []
+            value: () => storage.getAllUsers()
           }
         }
       }
 
       connectedCallback() {
         super.connectedCallback();
-        this.users = this.storage.getAllUsers();
-      }
-
-      ready() {
-        super.ready();
         this.addEventListener('updateUserList', this.updateUserList);
       }
-      
-      updateUserList(e) {
+
+      updateUserList() {
         this.users = this.storage.getAllUsers();
       }
     }
+    
     customElements.define(InternApp.is, InternApp);
     export default InternApp;
   </script>
