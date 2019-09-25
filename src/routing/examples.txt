@@ -1,0 +1,59 @@
+// Imports from routes.js in Banno project
+// import RoutePaths from './paths.js';
+// import RouteId from './id';
+// import RouteData from '@banno/web-component-router/lib/route-data';
+// import RouteTreeNode from '@banno/web-component-router/lib/route-tree-node';
+
+// Code here is also from the Banno projects, will use as reference.
+// const viewInheritedProperties = [
+//   'environmentConfig',
+//   'institutionTimeZone',
+//   'institutionId',
+//   'institutionShortId',
+//   'queryParameters',
+//   'institutionAbilities',
+//   'isMobile'
+// ];
+
+// /* eslint-disable max-len */
+// const routeData = {
+//   title: 'Reports',
+//   navItems: [
+//     { label: 'Dashboard', path: RoutePaths.REPORTS_APP, icon: 'jha-icon-dashboard' },
+//     { label: 'Exports', path: RoutePaths.REPORTS_EXPORTS_LIST, icon: 'jha-icon-download' }
+//   ],
+//   args: [RouteId.REPORTS_APP, 'REPORTS-APP', RoutePaths.REPORTS_APP, ['institutionShortId'], true],
+//   children: [
+//     {
+//       title: 'App Usage',
+//       inheritedProperties: [...viewInheritedProperties],
+//       args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+//     },
+//     {
+//       title: 'Transfers',
+//       inheritedProperties: [...viewInheritedProperties],
+//       args: [RouteId.REPORTS_TRANSFERS, 'REPORTS-TRANSFERS', RoutePaths.REPORTS_TRANSFERS, ['institutionShortId'], true]
+//     },
+//     {
+//       title: 'Bill Pay',
+//       inheritedProperties: [...viewInheritedProperties],
+//       args: [RouteId.REPORTS_BILL_PAY, 'REPORTS-BILL-PAY', RoutePaths.REPORTS_BILL_PAY, ['institutionShortId'], true]
+//     }
+//   ]
+// };
+/* eslint-enable max-len */
+
+// function buildRouteTree(nodeData) {
+//   const node = new RouteTreeNode(new RouteData(...nodeData.args));
+//   node.title = nodeData.title;
+//   node.inheritedProperties = nodeData.inheritedProperties;
+//   node.navItems = nodeData.navItems;
+//   if (nodeData.children) {
+//     nodeData.children.forEach(nodeData => {
+//       node.addChild(buildRouteTree(nodeData));
+//     });
+//   }
+//   return node;
+// }
+
+// export default buildRouteTree(routeData);
