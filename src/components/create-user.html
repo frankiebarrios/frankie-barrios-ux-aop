@@ -17,7 +17,6 @@
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #87CEFA;
         border-radius: 4px;
         box-sizing: border-box;
       }
@@ -38,7 +37,6 @@
 
       .button {
         background-color: #87CEFA;
-        border: none;
         color: white;
         padding: 5px 12px;
         text-align: center;
@@ -74,22 +72,25 @@
 
     <div class="card">
       <div class="container">
-        <h1 class="div-center">Create User</h1>
+        <h1 class="div-center">Onboarding App</h1>
+        <h2 class="div-center">Create New User</h2>
         <form>
-          <label for="fname">First Name</label>
-          <input type="text" placeholder="Your name.." value="{{user.firstName::input}}">
+          <label>First Name</label>
+          <input type="text" id="firstName" placeholder="Your name.." value="{{user.firstName::input}}">
 
-          <label for="lname">Last Name</label>
-          <input type="text" placeholder="Your last name.." value="{{user.lastName::input}}">
+          <label>Last Name</label>
+          <input type="text" id="lastName" placeholder="Your last name.." value="{{user.lastName::input}}">
 
-          <label for="phone">Phone</label>
-          <input type="text" placeholder="Your phone number.." value="{{user.phone::input}}">
+          <label>Phone</label>
+          <input type="text" id="phone" placeholder="Your phone number.." value="{{user.phone::input}}">
 
-          <label for="email">Email</label>
-          <input type="text" placeholder="Your email.." value="{{user.email::input}}">
+          <label>Email</label>
+          <input type="text" id="email" placeholder="Your email.." value="{{user.email::input}}">
         </form>
         <div>
-          <button class="button" on-click="updateUserList">Create User</button>
+          <button class="button" on-click="createUser">Create User</button>
+          <button class="button" on-click="getUsers">Show User List</button>
+          <button class="button" on-click="deleteAllUsers">Delete All Users</button>
         </div>
       </div>
     </div>
@@ -118,17 +119,22 @@
           }
         }
       }
-        
-      createUser() {
-        this.storage.createUser(this.user);
+
+      getUsers() {
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
-      updateUserList() {
-        this.createUser();
+      createUser() {
+        this.storage.createUser(this.user);
+        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+
+      deleteAllUsers() {
+        this.storage.deleteAllUsers();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
     }
-      
+
     customElements.define(CreateUser.is, CreateUser);
     export default CreateUser;
   </script>

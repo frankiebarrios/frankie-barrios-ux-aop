@@ -52,6 +52,7 @@
       td {
         text-align: left;
         padding: 16px;
+        width: 25%;
       }
 
       tr:nth-child(odd) {
@@ -95,10 +96,6 @@
           <h3 class="div-center">User Profile</h3>
           <table class="container center" id="test">
             <tr>
-              <td>User Id:</td>
-              <td>[[user.id]]</td>
-            </tr>
-            <tr>
               <td>Name:</td>
               <td>[[user.firstName]] [[user.lastName]]</td>
             </tr>
@@ -113,7 +110,6 @@
                 <td>[[user.email]]</td>
               </tr>
               <button class="button" on-click="editButtonClick">Edit</button>
-              <button class="button" on-click="updateUserList">Delete User</button>
             </template>
 
           </table>
