@@ -1,7 +1,7 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="../../node_modules/@banno/polymer/polymer-element.js">
 <link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
-<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html"> 
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
 
 <dom-module id="create-user">
   <template>
@@ -74,19 +74,19 @@
         <h2 class="div-center text">Create New User</h2>
         <form>
           <label>First Name</label>
-          <input type="text" id="firstName" hasError="validateInput" 
+          <input type="text" id="firstName" hasError="validateInput"
             placeholder="Your name.." value="{{user.firstName::input}}">
 
           <label>Last Name</label>
-          <input type="text" id="lastName" hasError="validateInput" 
+          <input type="text" id="lastName" hasError="validateInput"
             placeholder="Your last name.." value="{{user.lastName::input}}">
 
           <label>Phone</label>
-          <input type="text" id="phone" hasError="validateInput"   
+          <input type="text" id="phone" hasError="validateInput"
             placeholder="Your phone number.." value="{{user.phone::input}}">
-          
+
           <label>Email</label>
-          <input type="text" id="email" hasError="validateInput" 
+          <input type="text" id="email" hasError="validateInput"
             placeholder="Your email.." value="{{user.email::input}}">
         </form>
         <div class="iconContainer">
@@ -125,19 +125,19 @@
           hasError: {
             type: Boolean,
             value: false
-          }, 
+          },
           firstNameError: {
             type: String,
             value: ''
-          }, 
+          },
           lastNameError: {
             type: String,
             value: ''
-          }, 
+          },
           phoneError : {
             type: String,
             value: ''
-          }, 
+          },
           emailError: {
             type: String,
             value: ''
@@ -159,7 +159,7 @@
       }
 
       deleteAllUsers() {
-        this.storage.deleteAllUsers();       
+        this.storage.deleteAllUsers();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
@@ -199,7 +199,7 @@
         alert('Test Hit');
       }
     }
-      
+
     customElements.define(CreateUser.is, CreateUser);
     export default CreateUser;
   </script>
