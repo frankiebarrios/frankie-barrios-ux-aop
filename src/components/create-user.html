@@ -67,6 +67,11 @@
         flex-direction: row;
         justify-content: space-around;
       }
+
+      .hasError {
+        border: solid 2px red;
+      }
+
     </style>
     <h1 class="div-center ">Onboarding App</h1>
     <div class="card">
@@ -164,39 +169,58 @@
       }
 
       validateInput() {
+        this.validateFirstName();
+        this.validateLastName();
+        this.validatePhone();
+        this.validateEmail();
+      }
+
+      validateFirstName() {
         const phoneRegex = /^\d{10}$/;
         if (!this.user.firstName) {
           this.firstNameError = 'Must Enter A First Name';
           this.hasError = true;
           this.$.firstName.setAttribute('class', 'hasError');
           this.$.firstName.setAttribute('placeholder', this.firstNameError);
-        } else {this.$.firstName.setAttribute('class', '')}
+        } else {
+          this.$.firstName.setAttribute('class', '');
+        }
+      }
+
+      validateLastName() {
+        const phoneRegex = /^\d{10}$/;
         if (!this.user.lastName) {
           this.lastNameError = 'Must Enter A Last Name';
           this.hasError = true;
           this.$.lastName.setAttribute('class', 'hasError');
           this.$.lastName.setAttribute('placeholder', this.lastNameError);
-        } else {this.$.lastName.setAttribute('class', '')}
+        } else {
+          this.$.lastName.setAttribute('class', '');
+        }
+      }
+
+      validatePhone() {
+        const phoneRegex = /^\d{10}$/;
         if (!this.user.phone || !this.user.phone.match(phoneRegex)) {
           this.phoneError = 'Invalid Phone Number Entered';
           this.hasError = true;
           this.$.phone.setAttribute('class', 'hasError');
           this.$.phone.setAttribute('placeholder', this.phoneError);
-        } else {this.$.phone.setAttribute('class', '')}
+        } else {
+          this.$.phone.setAttribute('class', '');
+        }
+      }
+
+      validateEmail() {
+        const phoneRegex = /^\d{10}$/;
         if (!this.user.email.includes('@')) {
           this.emailError = 'Invalid Email Address Entered';
           this.hasError = true;
           this.$.email.setAttribute('class', 'hasError');
           this.$.email.setAttribute('placeholder', this.emailError);
-        } else {this.$.email.setAttribute('class', '')}
-        if (this.firstNameError || this.lastNameError || this.phoneError || this.emailError) {
-          console.error(this.firstNameError, this.lastNameError, this.phoneError, this.emailError);
-          return false;
+        } else {
+          this.$.email.setAttribute('class', '');
         }
-      }
-
-      testFunction() {
-        alert('Test Hit');
       }
     }
 
