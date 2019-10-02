@@ -3,18 +3,13 @@
  * All components which register a route must have a unique entry.
  */
 
- // Banno project code reference
  /** @enum {string} tag name mapping */
-// const RouteId = {
-//   REPORTS_APP: 'A',
-//   REPORTS_APP_USAGE: 'B',
-//   REPORTS_BILL_PAY: 'C',
-//   REPORTS_TRANSFERS: 'D',
-//   REPORTS_RDC: 'E',
-//   REPORTS_CONVERSATIONS: 'F',
-//   REPORTS_AGENTS: 'G',
-//   REPORTS_EXPORTS_CREATE: 'H',
-//   REPORTS_EXPORTS_LIST: 'I'
-// };
+const RouteId = {
+  INTERN_APP: 'IA',
+  CREATE_USER: 'CU',
+  USER_LIST: 'UL',
+  USER_PROFILE: 'UP',
+  EDIT_USER: 'EU',
+};
 
-// export default RouteId;
+export default RouteId;

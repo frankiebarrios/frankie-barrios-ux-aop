@@ -4,6 +4,8 @@
 <link rel="import" href="./edit-user.html">
 <link rel="import" href="./create-user.html">
 
+
+
 <dom-module id="intern-app">
   <template>
     <style>
@@ -29,6 +31,9 @@
       }
     </style>
     <header>
+      <!-- Routes will render to slot below once configured -->
+      <slot></slot>
+
       <create-user storage="[[storage]]"></create-user>
       <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
@@ -39,6 +44,11 @@
     import { FirebaseAPI } from '../api/firebaseAPI.js';
     import * as firebase from "firebase/app";
     import "firebase/database";
+
+    // Routing Imports
+    import Routes from '../routing/routes.js';
+    import RoutePaths from '../routing/paths.js';
+    import RouteIds from '../routing/id.js';
 
     const storage = new FirebaseAPI();
 
