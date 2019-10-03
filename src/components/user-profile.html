@@ -34,7 +34,7 @@
         margin-bottom: 25px;
       }
 
-      .icon {
+      icon {
         fill:#6495ED;
       }
 
@@ -59,12 +59,12 @@
         <div class="card">
         <template is="dom-if" if="[[!profileExpanded]]">
           <div class="iconContainer">
-            <jha-icon-circle-plus-outline on-click="expandCollapseCard" style="fill:#6495ED;"></jha-icon-circle-plus-outline>
+            <jha-icon-circle-plus-outline on-click="expandCollapseCard"></jha-icon-circle-plus-outline>
           </div>
         </template>
         <template is="dom-if" if="[[profileExpanded]]">
           <div class="iconContainer">
-            <jha-icon-circle-minus-outline on-click="expandCollapseCard" style="fill:#6495ED;"></jha-icon-circle-minus-outline>
+            <jha-icon-circle-minus-outline on-click="expandCollapseCard"></jha-icon-circle-minus-outline>
           </div>
         </template>
           <h3 class="div-center" style="margin: initial;padding-bottom: inherit;">User Profile</h3>
@@ -84,8 +84,8 @@
                 <td>[[user.email]]</td>
               </tr>
               <div class="iconContainer2">
-                <jha-icon-edit-outline on-click="editButtonClick" style="fill:#6495ED;"></jha-icon-edit-outline>
-                <jha-icon-delete-outline on-click="deleteUser" style="fill:#6495ED;"></jha-icon-delete-outline>
+                <jha-icon-edit-outline on-click="editButtonClick"></jha-icon-edit-outline>
+                <jha-icon-delete-outline on-click="deleteUser"></jha-icon-delete-outline>
               </div>
             </template>
           </table>
