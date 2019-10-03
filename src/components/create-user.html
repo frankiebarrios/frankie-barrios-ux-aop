@@ -80,19 +80,19 @@
         <form>
           <label>First Name</label>
           <input type="text" id="firstName" hasError="validateInput"
-            placeholder="Your name.." value="{{user.firstName::input}}">
+            placeholder$="[[firstNamePlaceholder]]" value="{{user.firstName::input}}" class$="[[firstNameClass]]">
 
           <label>Last Name</label>
           <input type="text" id="lastName" hasError="validateInput"
-            placeholder="Your last name.." value="{{user.lastName::input}}">
+            placeholder$="[[lastNamePlaceholder]]" value="{{user.lastName::input}}" class$="[[lastNameClass]]">
 
           <label>Phone</label>
           <input type="text" id="phone" hasError="validateInput"
-            placeholder="Your phone number.." value="{{user.phone::input}}">
+            placeholder$="[[phonePlaceholder]]" value="{{user.phone::input}}" class$="[[phoneClass]]">
 
           <label>Email</label>
           <input type="text" id="email" hasError="validateInput"
-            placeholder="Your email.." value="{{user.email::input}}">
+            placeholder$="[[emailPlaceholder]]" value="{{user.email::input}}" class$="[[emailClass]]">
         </form>
         <div class="iconContainer">
           <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
@@ -133,19 +133,51 @@
           },
           firstNameError: {
             type: String,
-            value: ''
+            value: 'Must Enter A First Name!'
           },
           lastNameError: {
             type: String,
-            value: ''
+            value: 'Must Enter A Last Name!'
           },
           phoneError : {
             type: String,
-            value: ''
+            value: 'Invalid Phone Number Entered!'
           },
           emailError: {
             type: String,
+            value: 'Invalid Email Address Entered!'
+          },
+          firstNameClass: {
+            type: String,
             value: ''
+          },
+          firstNamePlaceholder: {
+            type: String,
+            value: 'Enter first name...'
+          },
+          lastNameClass: {
+            type: String,
+            value: ''
+          },
+          lastNamePlaceholder: {
+            type: String,
+            value: 'Enter last name...'
+          }, 
+          phoneClass: {
+            type: String,
+            value: ''
+          },
+          phonePlaceholder: {
+            type: String,
+            value: 'Enter phone number...'
+          },
+          emailClass: {
+            type: String,
+            value: ''
+          }, 
+          emailPlaceholder: {
+            type: String,
+            value: 'Enter email address...'
           }
         }
       }
@@ -176,50 +208,43 @@
       }
 
       validateFirstName() {
-        const phoneRegex = /^\d{10}$/;
         if (!this.user.firstName) {
-          this.firstNameError = 'Must Enter A First Name';
           this.hasError = true;
-          this.$.firstName.setAttribute('class', 'hasError');
-          this.$.firstName.setAttribute('placeholder', this.firstNameError);
+          this.firstNameClass = 'hasError';
+          this.firstNamePlaceholder = this.firstNameError;
         } else {
-          this.$.firstName.setAttribute('class', '');
+          this.firstNameClass = '';
         }
       }
 
       validateLastName() {
-        const phoneRegex = /^\d{10}$/;
         if (!this.user.lastName) {
-          this.lastNameError = 'Must Enter A Last Name';
           this.hasError = true;
-          this.$.lastName.setAttribute('class', 'hasError');
-          this.$.lastName.setAttribute('placeholder', this.lastNameError);
+          this.lastNameClass = 'hasError';
+          this.lastNamePlaceholder = this.lastNameError;
         } else {
-          this.$.lastName.setAttribute('class', '');
+          this.lastNameClass = '';        
         }
       }
 
       validatePhone() {
         const phoneRegex = /^\d{10}$/;
         if (!this.user.phone || !this.user.phone.match(phoneRegex)) {
-          this.phoneError = 'Invalid Phone Number Entered';
           this.hasError = true;
-          this.$.phone.setAttribute('class', 'hasError');
-          this.$.phone.setAttribute('placeholder', this.phoneError);
+          this.phoneClass = 'hasError';
+          this.phonePlaceholder = this.phoneError;
         } else {
-          this.$.phone.setAttribute('class', '');
+          this.phoneClass = '';
         }
       }
 
       validateEmail() {
-        const phoneRegex = /^\d{10}$/;
         if (!this.user.email.includes('@')) {
-          this.emailError = 'Invalid Email Address Entered';
           this.hasError = true;
-          this.$.email.setAttribute('class', 'hasError');
-          this.$.email.setAttribute('placeholder', this.emailError);
+          this.emailClass = 'hasError';
+          this.emailPlaceholder = this.emailError;
         } else {
-          this.$.email.setAttribute('class', '');
+          this.emailClass = '';
         }
       }
     }
