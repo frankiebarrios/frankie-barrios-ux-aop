@@ -34,10 +34,6 @@
         margin-bottom: 25px;
       }
 
-      icon {
-        fill:#6495ED;
-      }
-
       .iconContainer {
         width: 100%;
         display: inline-flex;
@@ -52,6 +48,14 @@
         justify-content: space-around;
         padding-top: 6%;
       }
+
+      jha-icon-circle-plus-outline,
+      jha-icon-circle-minus-outline,
+      jha-icon-edit-outline,
+      jha-icon-delete-outline{
+        fill:#6495ED;
+      }
+
     </style>
 
     <template is="dom-if" if="[[!editButtonClicked]]">
