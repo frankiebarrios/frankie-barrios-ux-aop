@@ -19,32 +19,28 @@ import RouteId from './id.js';
 import RouteData from '../../node_modules/@banno/web-component-router/lib/route-data.js';
 import RouteTreeNode from '../../node_modules/@banno/web-component-router/lib/route-tree-node.js';
 
-const viewInheritedProperties {
-  // Figure out how to add FirebaseAPI in here 
-}
+const viewInheritedProperties = [
+  'storage'
+]
 
-// Configure correct paths and ids
 const routeData = {
   title: 'Intern App',
-  navItems: [
-    { label: 'Dashboard', path: RoutePaths.REPORTS_APP_USAGE, icon: 'jha-icon-dashboard' },
-  ],
-  args: [RouteId.REPORTS_APP, 'REPORTS-APP', RoutePaths.REPORTS_APP, ['institutionShortId'], true],
+  args: [RouteId.INTERN_APP, 'INTERN-APP', RoutePaths.INTERN_APP, true],
   children: [
     {
       title: 'User List',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+      args: [RouteId.USER_LIST, 'USER-LIST', RoutePaths.USER_LIST, true]
     },
     {
       title: 'User Profile',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+      args: [RouteId.USER_PROFILE, 'USER-PROFILE', RoutePaths.USER_PROFILE, true]
     },
     {
       title: 'Edit User',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+      args: [RouteId.EDIT_USER, 'EDIT-USER', RoutePaths.EDIT_USER, true]
     }
   ]
 }
