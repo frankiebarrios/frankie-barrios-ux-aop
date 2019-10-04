@@ -13,39 +13,53 @@
  * FIRST THING WILL BE TO SETUP A TEST PAGE TO ROUTE BACK AND FORTH FROM 
  * MY MAIN APP.              
 */ 
-const RouteData = require('@banno/web-component-router/lib/route-data');
-const RouteTreeNode = require('@banno/web-component-router/lib/route-tree-node');
 
-// CREATES INTERN_APP, WILL BE TOP OF TREE
-const internApp = new RouteTreeNode(
-  new RouteData('InternApp', 'INTERN_APP', '', [], false));
+import RoutePaths from './paths.js';
+import RouteId from './id.js';
+import RouteData from '../../node_modules/@banno/web-component-router/lib/route-data.js';
+import RouteTreeNode from '../../node_modules/@banno/web-component-router/lib/route-tree-node.js';
 
-// Creates CREATE_USER node
-const createUserNode = new RouteTreeNode(
-  new RouteData('CreateUser', 'CREATE_USER', '/create-user'));
+const viewInheritedProperties {
+  // Figure out how to add FirebaseAPI in here 
+}
 
-// Creates USER_LIST node
-const userListNode = new RouteTreeNode(
-  new RouteData('UserList', 'USER_LIST', '/user-list'));
+// Configure correct paths and ids
+const routeData = {
+  title: 'Intern App',
+  navItems: [
+    { label: 'Dashboard', path: RoutePaths.REPORTS_APP_USAGE, icon: 'jha-icon-dashboard' },
+  ],
+  args: [RouteId.REPORTS_APP, 'REPORTS-APP', RoutePaths.REPORTS_APP, ['institutionShortId'], true],
+  children: [
+    {
+      title: 'User List',
+      inheritedProperties: [...viewInheritedProperties],
+      args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+    },
+    {
+      title: 'User Profile',
+      inheritedProperties: [...viewInheritedProperties],
+      args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+    },
+    {
+      title: 'Edit User',
+      inheritedProperties: [...viewInheritedProperties],
+      args: [RouteId.REPORTS_APP_USAGE, 'REPORTS-APP-USAGE', RoutePaths.REPORTS_APP_USAGE, ['institutionShortId'], true]
+    }
+  ]
+}
 
-// Create USER_PROFILE noce
-const userProfileNode = new RouteTreeNode(
-  new RouteData('UserProfile', 'USER_PROFILE', '/user-profile'));
+function buildRouteTree(nodeData) {
+  const node = new RouteTreeNode(new RouteData(...nodeData.args));
+  node.title = nodeData.title;
+  node.inheritedProperties = nodeData.inheritedProperties;
+  node.navItems = nodeData.navItems;
+  if (nodeData.children) {
+    nodeData.children.forEach(nodeData => {
+      node.addChild(buildRouteTree(nodeData));
+    });
+  }
+  return node;
+}
 
-// Creates EDIT_USER node
-const editUserNode = new RouteTreeNode(
-  new RouteData('EditUser', 'EDIT_USER', '/edit-user'));
-
-/* ADDING CHILD NODES TO TREE */
-internApp.addChild(createUserNode);
-internApp.addChild(userListNode);
-internApp.addChild(userProfileNode);
-internApp.addChild(editUserNode);
-
-module.exports = internApp;
-
-
-
-
-
-
+export default buildRouteTree(routeData);
