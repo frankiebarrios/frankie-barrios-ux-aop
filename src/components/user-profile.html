@@ -1,6 +1,11 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-if.js">
 <link rel="import" href="./edit-user.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-minus-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-plus-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-edit-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
+
 
 <dom-module id="user-profile">
   <template>
@@ -9,50 +14,8 @@
         text-align: center;
       }
 
-      .center {
-        text-align: center;
-        padding-top: 25px;
-      }
-
-      form {
-        border: 1 px black solid;
-        border-radius: 5px;
-        padding: 20px;
-        width: 50%;
-        margin: auto;
-      }
-
-      /* Clean up some of this, some values may be unused? */
-      .button {
-        background-color: #87CEFA;
-        border: none;
-        color: white;
-        padding: 5px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: auto;
-        font-size: 16px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-      }
-
-      button:hover {
-        background-color: rgb(196, 226, 245);
-      }
-
-      table.center {
-        margin-top: 20px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      th,
       td {
-        text-align: left;
-        padding: 16px;
-        width: 25%;
+        padding: 12px;
       }
 
       tr:nth-child(odd) {
@@ -60,15 +23,8 @@
       }
 
       .container {
-        padding: 0 16px;
-        display: flex;
-      }
-
-      .container::after,
-      .row::after {
-        content: "";
-        clear: both;
-        display: table;
+        padding: 0 16px 8px 16px;
+        display: inline-flex;
       }
 
       .card {
@@ -78,22 +34,44 @@
         margin-bottom: 25px;
       }
 
-      input[type=text],
-      select {
+      .profileIcons {
         width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #87CEFA;
-        border-radius: 4px;
-        box-sizing: border-box;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: flex-end;
       }
+
+      .formActionIcons {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 6%;
+      }
+
+      jha-icon-circle-plus-outline,
+      jha-icon-circle-minus-outline,
+      jha-icon-edit-outline,
+      jha-icon-delete-outline{
+        fill:#6495ED;
+      }
+
     </style>
 
     <template is="dom-if" if="[[!editButtonClicked]]">
       <div class="div-center" id="userProfileCard">
         <div class="card">
-          <h3 class="div-center">User Profile</h3>
+        <template is="dom-if" if="[[!profileExpanded]]">
+          <div class="profileIcons">
+            <jha-icon-circle-plus-outline on-click="expandCollapseCard"></jha-icon-circle-plus-outline>
+          </div>
+        </template>
+        <template is="dom-if" if="[[profileExpanded]]">
+          <div class="profileIcons">
+            <jha-icon-circle-minus-outline on-click="expandCollapseCard"></jha-icon-circle-minus-outline>
+          </div>
+        </template>
+          <h3 class="div-center" style="margin: initial;padding-bottom: inherit;">User Profile</h3>
           <table class="container center" id="test">
             <tr>
               <td>Name:</td>
@@ -109,11 +87,12 @@
                 <td>Email:</td>
                 <td>[[user.email]]</td>
               </tr>
-              <button class="button" on-click="editButtonClick">Edit</button>
+              <div class="formActionIcons">
+                <jha-icon-edit-outline on-click="editButtonClick"></jha-icon-edit-outline>
+                <jha-icon-delete-outline on-click="deleteUser"></jha-icon-delete-outline>
+              </div>
             </template>
-
           </table>
-          <button class="button" on-click="expandCollapseCard">[[buttonText]]</button>
         </div>
       </div>
     </template>
@@ -121,7 +100,6 @@
     <template is="dom-if" if="[[editButtonClicked]]">
       <edit-user storage="[[storage]]" user="[[user]]"></edit-user>
     </template>
-
   </template>
 
   <script type="module">
@@ -151,8 +129,8 @@
         }
       } 
 
-      ready() {
-        super.ready();
+      connectedCallback() {
+        super.connectedCallback();
         this.addEventListener('updateUserList', this.editButtonClick);
       }
 
@@ -168,16 +146,16 @@
       }
 
       updateUser() {
-        this.storage.updateUser(this.user.id, this.user)
+        this.storage.updateUser(this.user.id, this.user);
       }
 
       updateUserList() {
-        this.deleteUser();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       deleteUser() {
         this.storage.deleteUser(this.user.id);
+        this.updateUserList();      
       }
     }
     customElements.define(UserProfile.is, UserProfile);

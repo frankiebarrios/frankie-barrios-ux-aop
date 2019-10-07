@@ -1,14 +1,13 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-chevron-left.html">
+
 
 <dom-module id="edit-user">
   <template>
     <style>
       :host {
         display: block
-      }
-
-      .div-center {
-        text-align: center;
       }
 
       input[type=text],
@@ -22,39 +21,6 @@
         box-sizing: border-box;
       }
 
-      div {
-        border-radius: 5px;
-        margin: 25px auto 25px auto;
-        width: 60%;
-      }
-
-      .border {
-        border: #666 1px solid;
-        width: 20%;
-        margin: auto;
-        margin-top: 25px;
-        padding-bottom: 75px;
-      }
-
-      .button {
-        background-color: #87CEFA;
-        border: none;
-        color: white;
-        padding: 5px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: auto;
-        font-size: 16px;
-        margin-top: 25px;
-        border-radius: 8px;
-      }
-
-      button:hover {
-        background-color: rgb(196, 226, 245);
-      }
-
-      /* Edit Form */
       .edit-div {
         border-radius: 5px;
         margin: 25px auto 25px auto;
@@ -71,21 +37,19 @@
         padding-top: initial;
       }
 
-      .edit-container::after,
-      .row::after {
-        content: "";
-        clear: both;
-        display: table;
-      }
-
       .center {
         text-align: center;
         padding-top: 25px;
       }
 
-      .width75 {
-        width: 75%;
-        margin: auto;
+      .formIcons {
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-around;
+      }
+
+      .icon {
+        fill:#6495ED;
       }
     </style>
 
@@ -104,8 +68,9 @@
         <label for="email">Email</label>
         <input type="text" placeholder="Your email.." value="{{user.email::input}}">
       </form>
-      <div>
-        <button class="button" on-click="updateUserList">Save</button>
+      <div class="formIcons">
+        <jha-icon-chevron-left class="icon" on-click="updateUserList"></jha-icon-chevron-left>
+        <jha-icon-save-outline class="icon" on-click="updateUserList"></jha-icon-save-outline>
       </div>
     </div>
   </template>
@@ -123,12 +88,8 @@
       }
 
       updateUserList() {
-        this.saveButtonClick();
+        this.updateUser();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
-      }
-
-      saveButtonClick() {        
-        this.updateUser(); 
       }
 
       updateUser() {

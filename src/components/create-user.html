@@ -1,4 +1,7 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../node_modules/@banno/polymer/polymer-element.js">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
+<link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
 
 <dom-module id="create-user">
   <template>
@@ -23,33 +26,8 @@
 
       div {
         border-radius: 5px;
-        margin: 25px auto 25px auto;
+        margin: auto;
         width: 60%;
-      }
-
-      .border {
-        border: #666 1px solid;
-        width: 20%;
-        margin: auto;
-        margin-top: 25px;
-        padding-bottom: 25px;
-      }
-
-      .button {
-        background-color: #87CEFA;
-        color: white;
-        padding: 5px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: auto;
-        font-size: 16px;
-        margin-top: 25px;
-        border-radius: 8px;
-      }
-
-      button:hover {
-        background-color: rgb(196, 226, 245);
       }
 
       .container {
@@ -68,29 +46,61 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         padding-top: initial;
       }
-    </style>
 
+      .icon {
+        fill:#6495ED;
+        height: 44px;
+        width: 44px;
+      }
+
+      .formIcons {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 6%;
+      }
+
+      .textContainer {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      .hasError {
+        border: solid 2px red;
+      }
+
+    </style>
+    <h1 class="div-center ">Onboarding App</h1>
     <div class="card">
       <div class="container">
-        <h1 class="div-center">Onboarding App</h1>
-        <h2 class="div-center">Create New User</h2>
+        <h2 class="div-center text">Create New User</h2>
         <form>
           <label>First Name</label>
-          <input type="text" id="firstName" placeholder="Your name.." value="{{user.firstName::input}}">
+          <input type="text" id="firstName" hasError="validateInput"
+            placeholder$="[[firstNamePlaceholder]]" value="{{user.firstName::input}}" class$="[[firstNameClass]]">
 
           <label>Last Name</label>
-          <input type="text" id="lastName" placeholder="Your last name.." value="{{user.lastName::input}}">
+          <input type="text" id="lastName" hasError="validateInput"
+            placeholder$="[[lastNamePlaceholder]]" value="{{user.lastName::input}}" class$="[[lastNameClass]]">
 
           <label>Phone</label>
-          <input type="text" id="phone" placeholder="Your phone number.." value="{{user.phone::input}}">
+          <input type="text" id="phone" hasError="validateInput"
+            placeholder$="[[phonePlaceholder]]" value="{{user.phone::input}}" class$="[[phoneClass]]">
 
           <label>Email</label>
-          <input type="text" id="email" placeholder="Your email.." value="{{user.email::input}}">
+          <input type="text" id="email" hasError="validateInput"
+            placeholder$="[[emailPlaceholder]]" value="{{user.email::input}}" class$="[[emailClass]]">
         </form>
-        <div>
-          <button class="button" on-click="createUser">Create User</button>
-          <button class="button" on-click="getUsers">Show User List</button>
-          <button class="button" on-click="deleteAllUsers">Delete All Users</button>
+        <div class="formIcons">
+          <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
+          <jha-icon-save-outline on-click="createUser" class="icon"></jha-icon-save-outline>
+        </div>
+        <div class="textContainer">
+          <h5>Delete All</h5>
+          <h5>Create</h5>
         </div>
       </div>
     </div>
@@ -116,6 +126,58 @@
                 id: ''
               }
             }
+          },
+          hasError: {
+            type: Boolean,
+            value: false
+          },
+          firstNameError: {
+            type: String,
+            value: 'Must Enter A First Name!'
+          },
+          lastNameError: {
+            type: String,
+            value: 'Must Enter A Last Name!'
+          },
+          phoneError : {
+            type: String,
+            value: 'Invalid Phone Number Entered!'
+          },
+          emailError: {
+            type: String,
+            value: 'Invalid Email Address Entered!'
+          },
+          firstNameClass: {
+            type: String,
+            value: ''
+          },
+          firstNamePlaceholder: {
+            type: String,
+            value: 'Enter first name...'
+          },
+          lastNameClass: {
+            type: String,
+            value: ''
+          },
+          lastNamePlaceholder: {
+            type: String,
+            value: 'Enter last name...'
+          }, 
+          phoneClass: {
+            type: String,
+            value: ''
+          },
+          phonePlaceholder: {
+            type: String,
+            value: 'Enter phone number...'
+          },
+          emailClass: {
+            type: String,
+            value: ''
+          }, 
+          emailPlaceholder: {
+            type: String,
+            value: 'Enter email address...'
           }
         }
       }
@@ -125,13 +187,66 @@
       }
 
       createUser() {
-        this.storage.createUser(this.user);
+        this.validateInput();
+        if(!this.hasError) {
+          this.storage.createUser(this.user);
+          this.user = {};
+        }
+        this.hasError = false;
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       deleteAllUsers() {
         this.storage.deleteAllUsers();
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+      }
+
+      validateInput() {
+        this.validateFirstName();
+        this.validateLastName();
+        this.validatePhone();
+        this.validateEmail();
+      }
+
+      validateFirstName() {
+        if (!this.user.firstName) {
+          this.hasError = true;
+          this.firstNameClass = 'hasError';
+          this.firstNamePlaceholder = this.firstNameError;
+        } else {
+          this.firstNameClass = '';
+        }
+      }
+
+      validateLastName() {
+        if (!this.user.lastName) {
+          this.hasError = true;
+          this.lastNameClass = 'hasError';
+          this.lastNamePlaceholder = this.lastNameError;
+        } else {
+          this.lastNameClass = '';        
+        }
+      }
+
+      validatePhone() {
+        const phoneRegex = /^\d{10}$/;
+        if (!this.user.phone || !this.user.phone.match(phoneRegex)) {
+          this.hasError = true;
+          this.phoneClass = 'hasError';
+          this.phonePlaceholder = this.phoneError;
+        } else {
+          this.phoneClass = '';
+        }
+      }
+
+      validateEmail() {
+        if (!this.user.email.includes('@')) {
+          this.hasError = true;
+          this.emailClass = 'hasError';
+          this.emailPlaceholder = this.emailError;
+        } else {
+          this.emailClass = '';
+        }
       }
     }
 
