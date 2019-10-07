@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app';
 import 'firebase/database'
 
 export class FirebaseAPI {
@@ -61,10 +61,10 @@ export class FirebaseAPI {
       const firebaseData = data.val();
       const keys = Object.keys(firebaseData);
       const userObj = [];
-      keys.forEach(key => { userObj.push(firebaseData[key]) });
+      keys.forEach(key => { userObj.push(firebaseData[key]); });
       this.users = userObj;
     } catch (error) {
-      console.error('Error Pulling In Users: Database Empty ', error);
+      this.users = [];
     }
   }
 

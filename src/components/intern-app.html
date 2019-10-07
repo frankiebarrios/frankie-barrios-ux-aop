@@ -11,7 +11,7 @@
         width: 100%;
         padding: 20px 0;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
       }
 
       h1 {
@@ -40,8 +40,6 @@
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-    const storage = new FirebaseAPI();
-
     // Firebase configuration
     var firebaseConfig = {
       apiKey: "",
@@ -53,12 +51,14 @@
       appId: "1:461134238683:web:629a864bdaf08301"
     };
 
-    // Initialize Firebase    
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    
+
+    const storage = new FirebaseAPI();
+
     class InternApp extends PolymerElement {
       static get is() { return 'intern-app'; }
-      
+
       static get properties() {
         return {
           storage: {
@@ -72,14 +72,21 @@
 
       connectedCallback() {
         super.connectedCallback();
+        this.loadUsers();
         this.addEventListener('updateUserList', this.updateUserList);
       }
 
       updateUserList() {
-        this.users = this.storage.getAllUsers();
+        this.users = storage.getAllUsers();
+      }
+
+      async loadUsers() {
+        const database = firebase.database();
+        const ref = await database.ref('users');
+        this.users = await ref.on('value', storage.getData.bind(this));
       }
     }
-    
+
     customElements.define(InternApp.is, InternApp);
     export default InternApp;
   </script>
