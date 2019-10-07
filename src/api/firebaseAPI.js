@@ -64,7 +64,6 @@ export class FirebaseAPI {
       keys.forEach(key => { userObj.push(firebaseData[key]); });
       this.users = userObj;
     } catch (error) {
-      console.error('Error Pulling In Users: Database Empty ', error);
       this.users = [];
     }
   }

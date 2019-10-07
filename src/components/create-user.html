@@ -53,7 +53,7 @@
         width: 44px;
       }
 
-      .iconContainer {
+      .formIcons {
         width: 100%;
         display: inline-flex;
         flex-direction: row;
@@ -77,7 +77,7 @@
     <div class="card">
       <div class="container">
         <h2 class="div-center text">Create New User</h2>
-        <form>
+        <form id="createUserForm">
           <label>First Name</label>
           <input type="text" id="firstName" hasError="validateInput"
             placeholder$="[[firstNamePlaceholder]]" value="{{user.firstName::input}}" class$="[[firstNameClass]]">
@@ -94,7 +94,7 @@
           <input type="text" id="email" hasError="validateInput"
             placeholder$="[[emailPlaceholder]]" value="{{user.email::input}}" class$="[[emailClass]]">
         </form>
-        <div class="iconContainer">
+        <div class="formIcons">
           <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
           <jha-icon-save-outline on-click="createUser" class="icon"></jha-icon-save-outline>
         </div>
@@ -190,6 +190,7 @@
         this.validateInput();
         if(!this.hasError) {
           this.storage.createUser(this.user);
+          this.$.createUserForm.reset();
         }
         this.hasError = false;
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));

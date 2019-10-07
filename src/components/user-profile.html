@@ -34,14 +34,14 @@
         margin-bottom: 25px;
       }
 
-      .iconContainer {
+      .profileIcons {
         width: 100%;
         display: inline-flex;
         flex-direction: row;
         justify-content: flex-end;
       }
 
-      .iconContainer2 {
+      .formActionIcons {
         width: 100%;
         display: inline-flex;
         flex-direction: row;
@@ -62,12 +62,12 @@
       <div class="div-center" id="userProfileCard">
         <div class="card">
         <template is="dom-if" if="[[!profileExpanded]]">
-          <div class="iconContainer">
+          <div class="profileIcons">
             <jha-icon-circle-plus-outline on-click="expandCollapseCard"></jha-icon-circle-plus-outline>
           </div>
         </template>
         <template is="dom-if" if="[[profileExpanded]]">
-          <div class="iconContainer">
+          <div class="profileIcons">
             <jha-icon-circle-minus-outline on-click="expandCollapseCard"></jha-icon-circle-minus-outline>
           </div>
         </template>
@@ -87,7 +87,7 @@
                 <td>Email:</td>
                 <td>[[user.email]]</td>
               </tr>
-              <div class="iconContainer2">
+              <div class="formActionIcons">
                 <jha-icon-edit-outline on-click="editButtonClick"></jha-icon-edit-outline>
                 <jha-icon-delete-outline on-click="deleteUser"></jha-icon-delete-outline>
               </div>
