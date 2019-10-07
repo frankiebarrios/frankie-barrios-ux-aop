@@ -190,7 +190,7 @@
         this.validateInput();
         if(!this.hasError) {
           this.storage.createUser(this.user);
-          this.$.createUserForm.reset();
+          this.user = '';
         }
         this.hasError = false;
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
