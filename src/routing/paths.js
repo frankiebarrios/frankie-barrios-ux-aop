@@ -10,7 +10,7 @@ const RoutePaths = {
   CREATE_USER: '/create-user',
   USER_LIST: '/user-list',
   USER_PROFILE: '/user-profile',
-  EDIT_USER: '/edit-user',
+  EDIT_USER: '/edit-user'
 };
 
 module.exports = RoutePaths;

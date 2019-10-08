@@ -4,8 +4,6 @@
 <link rel="import" href="./edit-user.html">
 <link rel="import" href="./create-user.html">
 
-
-
 <dom-module id="intern-app">
   <template>
     <style>
@@ -33,8 +31,8 @@
     <header>
       <!-- Routes will render to slot below once configured -->
       <slot></slot>
-
-      <create-user storage="[[storage]]"></create-user>
+      <input type='submit' on-click='testRouting' value='Create User'>
+      <!-- <create-user storage="[[storage]]"></create-user> -->
       <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
   </template>
@@ -45,11 +43,7 @@
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-    // Routing Imports
-    import Routes from '../routing/routes.js';
-    import RoutePaths from '../routing/paths.js';
-    import RouteIds from '../routing/id.js';
-
+    
     // Firebase configuration
     var firebaseConfig = {
       apiKey: "",
@@ -66,7 +60,16 @@
 
     const storage = new FirebaseAPI();
 
-    class InternApp extends PolymerElement {
+    // Routing Imports
+    import routeTree from '../routing/routes.js';
+    import Route_Paths from '../routing/paths.js';
+    import Route_Ids from '../routing/id.js';
+
+    const router = require('../../node_modules/@banno/web-component-router');
+    const Route_Mixin = require('../../node_modules/@banno/web-component-router/routing-mixin');
+    const pageJs = require('page');
+
+    class InternApp extends Route_Mixin(PolymerElement) {
       static get is() { return 'intern-app'; }
 
       static get properties() {
@@ -76,12 +79,27 @@
           },
           users: {
             value: () => storage.getAllUsers()
+          },
+          routeData: {
+            type: Object,
+            value: routeTree
           }
         }
       }
 
       connectedCallback() {
         super.connectedCallback();
+        
+        // Get or define the routing tree
+        router.routeTree = routeTree;
+
+        // Define this instance as the root element
+        router.routeTree.getValue().element = this;
+
+        // Begins routing. Should only be called once. The routing tree
+        // must first be defined.
+        router.start();
+
         this.loadUsers();
         this.addEventListener('updateUserList', this.updateUserList);
       }
@@ -94,6 +112,16 @@
         const database = firebase.database();
         const ref = await database.ref('users');
         this.users = await ref.on('value', storage.getData.bind(this));
+      }
+
+      async testRouting() {
+        console.log(this.routeData);
+        
+        // Navigate to the specified route path.
+        // This is rendering the specified component to the <slot>
+          // However, getting Uncaught (in promise) Error: 
+          // Element 'USER-PROFILE' does not implement routeEnter
+        router.go(Route_Paths.USER_PROFILE);
       }
     }
 

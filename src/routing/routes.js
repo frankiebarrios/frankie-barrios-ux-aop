@@ -28,6 +28,11 @@ const routeData = {
   args: [RouteId.INTERN_APP, 'INTERN-APP', RoutePaths.INTERN_APP, true],
   children: [
     {
+      title: 'Create User',
+      inheritedProperties: [...viewInheritedProperties],
+      args: [RouteId.CREATE_USER, 'CREATE-USER', RoutePaths.CREATE_USER, true]
+    },
+    {
       title: 'User List',
       inheritedProperties: [...viewInheritedProperties],
       args: [RouteId.USER_LIST, 'USER-LIST', RoutePaths.USER_LIST, true]
@@ -55,6 +60,7 @@ function buildRouteTree(nodeData) {
       node.addChild(buildRouteTree(nodeData));
     });
   }
+  console.log('NODE: ', node);
   return node;
 }
 
