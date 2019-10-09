@@ -114,14 +114,12 @@
         this.users = await ref.on('value', storage.getData.bind(this));
       }
 
-      async testRouting() {
-        console.log(this.routeData);
-        
+      async testRouting() {        
         // Navigate to the specified route path.
         // This is rendering the specified component to the <slot>
           // However, getting Uncaught (in promise) Error: 
           // Element 'USER-PROFILE' does not implement routeEnter
-        router.go(Route_Paths.USER_PROFILE);
+        router.go(Route_Paths.CREATE_USER);
       }
     }
 

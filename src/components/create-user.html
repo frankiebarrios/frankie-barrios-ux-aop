@@ -48,7 +48,7 @@
       }
 
       .icon {
-        fill:#6495ED;
+        fill: #6495ED;
         height: 44px;
         width: 44px;
       }
@@ -71,7 +71,6 @@
       .hasError {
         border: solid 2px red;
       }
-
     </style>
     <h1 class="div-center ">Onboarding App</h1>
     <div class="card">
@@ -79,20 +78,20 @@
         <h2 class="div-center text">Create New User</h2>
         <form>
           <label>First Name</label>
-          <input type="text" id="firstName" hasError="validateInput"
-            placeholder$="[[firstNamePlaceholder]]" value="{{user.firstName::input}}" class$="[[firstNameClass]]">
+          <input type="text" id="firstName" hasError="validateInput" placeholder$="[[firstNamePlaceholder]]"
+            value="{{user.firstName::input}}" class$="[[firstNameClass]]">
 
           <label>Last Name</label>
-          <input type="text" id="lastName" hasError="validateInput"
-            placeholder$="[[lastNamePlaceholder]]" value="{{user.lastName::input}}" class$="[[lastNameClass]]">
+          <input type="text" id="lastName" hasError="validateInput" placeholder$="[[lastNamePlaceholder]]"
+            value="{{user.lastName::input}}" class$="[[lastNameClass]]">
 
           <label>Phone</label>
-          <input type="text" id="phone" hasError="validateInput"
-            placeholder$="[[phonePlaceholder]]" value="{{user.phone::input}}" class$="[[phoneClass]]">
+          <input type="text" id="phone" hasError="validateInput" placeholder$="[[phonePlaceholder]]"
+            value="{{user.phone::input}}" class$="[[phoneClass]]">
 
           <label>Email</label>
-          <input type="text" id="email" hasError="validateInput"
-            placeholder$="[[emailPlaceholder]]" value="{{user.email::input}}" class$="[[emailClass]]">
+          <input type="text" id="email" hasError="validateInput" placeholder$="[[emailPlaceholder]]"
+            value="{{user.email::input}}" class$="[[emailClass]]">
         </form>
         <div class="formIcons">
           <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
@@ -108,7 +107,7 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    
+
     // Routing Imports
     // import routeTree from '../routing/routes.js';
     // import Route_Paths from '../routing/paths.js';
@@ -118,7 +117,11 @@
     // const Route_Mixin = require('../../node_modules/@banno/web-component-router/routing-mixin');
     // const pageJs = require('page');
 
-    class CreateUser extends PolymerElement {
+    const RouteMixin = require('@banno/web-component-router/routing-mixin');
+    //class MyElement extends RouteMixin(HTMLElement) { }
+
+    // class CreateUser extends PolymerElement {
+      class CreateUser extends RouteMixin(HTMLElement) {
       static get is() { return 'create-user'; }
 
       static get properties() {
@@ -148,7 +151,7 @@
             type: String,
             value: 'Must Enter A Last Name!'
           },
-          phoneError : {
+          phoneError: {
             type: String,
             value: 'Invalid Phone Number Entered!'
           },
@@ -171,7 +174,7 @@
           lastNamePlaceholder: {
             type: String,
             value: 'Enter last name...'
-          }, 
+          },
           phoneClass: {
             type: String,
             value: ''
@@ -183,21 +186,57 @@
           emailClass: {
             type: String,
             value: ''
-          }, 
+          },
           emailPlaceholder: {
             type: String,
             value: 'Enter email address...'
           }
         }
       }
-  
+
+      routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
+        // make sure to set this to indicate the route was recognized.
+        context.handled = true;
+        // do something with the node
+        const currentElement = currentNode.getValue().element;
+        console.log('Current Element: ', currentElement);
+        alert('routeEnter Hit!!!')
+        // Always call next
+        next();
+      }
+
+      /**
+       * Implementation for the callback on exiting a route node.
+       * This method is ONLY called if this element is not being
+       * used by the next route destination.
+       *
+       * @param {!RouteTreeNode} currentNode
+       * @param {!RouteTreeNode|undefined} nextNode - parent node
+       * @param {string} routeId - unique name of the route
+       * @param {!Context} context - page.js Context object
+       * @param {function(boolean=)} next - used to continue to the next
+       *     routing callback
+       */
+      routeExit(currentNode, nextNode, routeId, context, next) {
+        const currentElement = currentNode.getValue().element;
+        console.log('Current Element: ', currentElement);
+        // remove the element from the dom
+        if (currentElement.parentNode) {
+          currentElement.parentNode.removeChild(/** @type {!Element} */(currentElement));
+        }
+        currentNode.getValue().element = undefined;
+
+        // Always call next
+        next();
+      }
+
       getUsers() {
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       createUser() {
         this.validateInput();
-        if(!this.hasError) {
+        if (!this.hasError) {
           this.storage.createUser(this.user);
           this.user = {};
         }
@@ -233,7 +272,7 @@
           this.lastNameClass = 'hasError';
           this.lastNamePlaceholder = this.lastNameError;
         } else {
-          this.lastNameClass = '';        
+          this.lastNameClass = '';
         }
       }
 
