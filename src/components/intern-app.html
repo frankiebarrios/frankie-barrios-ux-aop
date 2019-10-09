@@ -33,7 +33,7 @@
       <slot></slot>
       <input type='submit' on-click='testRouting' value='Create User'>
       <!-- <create-user storage="[[storage]]"></create-user> -->
-      <user-list users="[[users]]" storage="[[storage]]"></user-list>
+      <!-- <user-list users="[[users]]" storage="[[storage]]"></user-list> -->
     </header>
   </template>
 
@@ -114,7 +114,7 @@
         this.users = await ref.on('value', storage.getData.bind(this));
       }
 
-      async testRouting() {        
+      testRouting() {        
         // Navigate to the specified route path.
         // This is rendering the specified component to the <slot>
           // However, getting Uncaught (in promise) Error: 

@@ -109,24 +109,24 @@
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
 
     // Routing Imports
-    // import routeTree from '../routing/routes.js';
-    // import Route_Paths from '../routing/paths.js';
-    // import Route_Ids from '../routing/id.js';
-
-    // const router = require('../../node_modules/@banno/web-component-router');
-    // const Route_Mixin = require('../../node_modules/@banno/web-component-router/routing-mixin');
-    // const pageJs = require('page');
+    import routeTree from '../routing/routes.js';
+    import Route_Paths from '../routing/paths.js';
+    import Route_Ids from '../routing/id.js';
+    import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
+    const router = require('../../node_modules/@banno/web-component-router');
+    const pageJs = require('page');
 
     const RouteMixin = require('@banno/web-component-router/routing-mixin');
-    //class MyElement extends RouteMixin(HTMLElement) { }
 
-    // class CreateUser extends PolymerElement {
-      class CreateUser extends RouteMixin(HTMLElement) {
+    class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
       static get is() { return 'create-user'; }
 
       static get properties() {
         return {
-          storage: Object,
+          storage: {
+            type: Object,
+            observer: 'check'
+          },
           user: {
             type: Object,
             value() {
@@ -194,13 +194,18 @@
         }
       }
 
+      check(newValue) {
+        console.log(newValue);
+      }
+
       routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
+        super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
         // make sure to set this to indicate the route was recognized.
         context.handled = true;
         // do something with the node
         const currentElement = currentNode.getValue().element;
-        console.log('Current Element: ', currentElement);
-        alert('routeEnter Hit!!!')
+        // console.log('Current Element: ', currentElement);
+        // alert('routeEnter Hit!!!')
         // Always call next
         next();
       }
@@ -218,6 +223,7 @@
        *     routing callback
        */
       routeExit(currentNode, nextNode, routeId, context, next) {
+        super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
         const currentElement = currentNode.getValue().element;
         console.log('Current Element: ', currentElement);
         // remove the element from the dom
