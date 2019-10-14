@@ -60,7 +60,6 @@ function buildRouteTree(nodeData) {
       node.addChild(buildRouteTree(nodeData));
     });
   }
-  // console.log('NODE: ', node);
   return node;
 }
 
