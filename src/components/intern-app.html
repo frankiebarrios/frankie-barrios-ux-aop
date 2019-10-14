@@ -31,7 +31,8 @@
     <header>
       <!-- Routes will render to slot below once configured -->
       <slot></slot>
-      <input type='submit' on-click='testRouting' value='Create User'>
+      <!-- <input type='submit' value='Create User' on-click="testRouting"> -->
+      <a href="[[testRouting()]]">GO</a>
       <!-- <create-user storage="[[storage]]"></create-user> -->
       <!-- <user-list users="[[users]]" storage="[[storage]]"></user-list> -->
     </header>
@@ -104,6 +105,44 @@
         this.addEventListener('updateUserList', this.updateUserList);
       }
 
+      routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
+        super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
+        // make sure to set this to indicate the route was recognized.
+        context.handled = true;
+        // do something with the node
+        const currentElement = currentNode.getValue().element;
+        console.log('Current Element: ', currentElement);
+        // alert('routeEnter Hit!!!')
+        // Always call next
+        next();
+      }
+
+      /**
+       * Implementation for the callback on exiting a route node.
+       * This method is ONLY called if this element is not being
+       * used by the next route destination.
+       *
+       * @param {!RouteTreeNode} currentNode
+       * @param {!RouteTreeNode|undefined} nextNode - parent node
+       * @param {string} routeId - unique name of the route
+       * @param {!Context} context - page.js Context object
+       * @param {function(boolean=)} next - used to continue to the next
+       *     routing callback
+       */
+      routeExit(currentNode, nextNode, routeId, context, next) {
+        super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
+        const currentElement = currentNode.getValue().element;
+        console.log('Current Element: ', currentElement);
+        // remove the element from the dom
+        if (currentElement.parentNode) {
+          currentElement.parentNode.removeChild(/** @type {!Element} */(currentElement));
+        }
+        currentNode.getValue().element = undefined;
+
+        // Always call next
+        next();
+      }
+
       updateUserList() {
         this.users = storage.getAllUsers();
       }
@@ -115,7 +154,7 @@
       }
 
       testRouting() {        
-        router.go(Route_Paths.CREATE_USER);
+        return '/intern-app/create-user';
       }
     }
 
