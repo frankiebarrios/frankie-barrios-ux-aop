@@ -25,27 +25,28 @@ const viewInheritedProperties = [
 
 const routeData = {
   title: 'Intern App',
-  args: [RouteId.INTERN_APP, 'INTERN-APP', RoutePaths.INTERN_APP, true],
+  // new RouteData('App', 'APP-ELEMENT', '', [], false));
+  args: [RouteId.INTERN_APP, 'intern-app', RoutePaths.INTERN_APP, ['intern-app'], true],
   children: [
     {
       title: 'Create User',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.CREATE_USER, 'CREATE-USER', RoutePaths.CREATE_USER, true]
+      args: [RouteId.CREATE_USER, 'create-user', RoutePaths.CREATE_USER, ['create-user'], true]
     },
     {
       title: 'User List',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.USER_LIST, 'USER-LIST', RoutePaths.USER_LIST, true]
+      args: [RouteId.USER_LIST, 'USER-LIST', RoutePaths.USER_LIST, ['user-list'], true]
     },
     {
       title: 'User Profile',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.USER_PROFILE, 'USER-PROFILE', RoutePaths.USER_PROFILE, true]
+      args: [RouteId.USER_PROFILE, 'USER-PROFILE', RoutePaths.USER_PROFILE, ['user-profile'], true]
     },
     {
       title: 'Edit User',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.EDIT_USER, 'EDIT-USER', RoutePaths.EDIT_USER, true]
+      args: [RouteId.EDIT_USER, 'EDIT-USER', RoutePaths.EDIT_USER, ['edit-user'], true]
     }
   ]
 }
@@ -60,6 +61,7 @@ function buildRouteTree(nodeData) {
       node.addChild(buildRouteTree(nodeData));
     });
   }
+  console.log(node);
   return node;
 }
 

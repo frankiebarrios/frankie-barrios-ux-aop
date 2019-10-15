@@ -29,12 +29,8 @@
       }
     </style>
     <header>
-      <!-- Routes will render to slot below once configured -->
-      <slot></slot>
-      <!-- <input type='submit' value='Create User' on-click="testRouting"> -->
+      <slot> </slot>
       <a href="[[testRouting()]]">GO</a>
-      <!-- <create-user storage="[[storage]]"></create-user> -->
-      <!-- <user-list users="[[users]]" storage="[[storage]]"></user-list> -->
     </header>
   </template>
 
@@ -154,7 +150,7 @@
       }
 
       testRouting() {        
-        return '/intern-app/create-user';
+        return '/create-user';
       }
     }
 

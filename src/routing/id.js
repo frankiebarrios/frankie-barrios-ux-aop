@@ -5,11 +5,11 @@
 
  /** @enum {string} tag name mapping */
 const RouteId = {
-  INTERN_APP: 'IA',
-  CREATE_USER: 'CU',
-  USER_LIST: 'UL',
-  USER_PROFILE: 'UP',
-  EDIT_USER: 'EU',
+  INTERN_APP: 'app',
+  CREATE_USER: 'create',
+  USER_LIST: 'list',
+  USER_PROFILE: 'profile',
+  EDIT_USER: 'edit',
 };
 
 export default RouteId;
