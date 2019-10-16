@@ -4,15 +4,13 @@
  * directly routable. Their callbacks are invoked
  * when a child route is activated.
  */
-const BASE_PATH = '';
-// const DEV_SERVER = 'localhost:1820'
 
 const RoutePaths = {
-  INTERN_APP: ``,
-  CREATE_USER: `/create-user`,
-  USER_LIST: `${BASE_PATH}/user-list`,
-  USER_PROFILE: `${BASE_PATH}/user-profile`,
-  EDIT_USER: `${BASE_PATH}/edit-user`
+  INTERN_APP: '',
+  CREATE_USER: '/create-user',
+  USER_LIST: '/user-list',
+  USER_PROFILE: '/user-profile',
+  EDIT_USER: '/edit-user'
 };
 
 module.exports = RoutePaths;

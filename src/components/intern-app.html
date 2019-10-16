@@ -10,8 +10,6 @@
       header {
         width: 100%;
         padding: 20px 0;
-        display: flex;
-        flex-direction: row;
       }
 
       h1 {
@@ -27,10 +25,50 @@
         font-family: monospace;
         font-size: 15px;
       }
+
+      /* Nav Bar Styles */
+      body {margin:0;}
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #6495ED;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      li {
+        font-size: 20px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: rgb(159, 209, 255);
+      }
     </style>
     <header>
-      <slot> </slot>
-      <a href="[[testRouting()]]">GO</a>
+      <ul>
+          <li><a href="[[createUsersRoute()]]">Create User</a></li>
+          <li><a href="[[userListRoute()]]">Show Users</a></li>
+      </ul>
+      <slot></slot>
     </header>
   </template>
 
@@ -61,7 +99,6 @@
     import routeTree from '../routing/routes.js';
     import Route_Paths from '../routing/paths.js';
     import Route_Ids from '../routing/id.js';
-
     const router = require('../../node_modules/@banno/web-component-router');
     const Route_Mixin = require('../../node_modules/@banno/web-component-router/routing-mixin');
     const pageJs = require('page');
@@ -86,56 +123,27 @@
 
       connectedCallback() {
         super.connectedCallback();
-        
-        // Get or define the routing tree
         router.routeTree = routeTree;
-
-        // Define this instance as the root element
         router.routeTree.getValue().element = this;
-
-        // Begins routing. Should only be called once. The routing tree
-        // must first be defined.
         router.start();
-
         this.loadUsers();
         this.addEventListener('updateUserList', this.updateUserList);
       }
 
       routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
         super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
-        // make sure to set this to indicate the route was recognized.
         context.handled = true;
-        // do something with the node
         const currentElement = currentNode.getValue().element;
-        console.log('Current Element: ', currentElement);
-        // alert('routeEnter Hit!!!')
-        // Always call next
         next();
       }
 
-      /**
-       * Implementation for the callback on exiting a route node.
-       * This method is ONLY called if this element is not being
-       * used by the next route destination.
-       *
-       * @param {!RouteTreeNode} currentNode
-       * @param {!RouteTreeNode|undefined} nextNode - parent node
-       * @param {string} routeId - unique name of the route
-       * @param {!Context} context - page.js Context object
-       * @param {function(boolean=)} next - used to continue to the next
-       *     routing callback
-       */
       routeExit(currentNode, nextNode, routeId, context, next) {
         super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
         const currentElement = currentNode.getValue().element;
-        console.log('Current Element: ', currentElement);
-        // remove the element from the dom
         if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild(/** @type {!Element} */(currentElement));
+          currentElement.parentNode.removeChild((currentElement));
         }
         currentNode.getValue().element = undefined;
-
-        // Always call next
         next();
       }
 
@@ -149,8 +157,12 @@
         this.users = await ref.on('value', storage.getData.bind(this));
       }
 
-      testRouting() {        
+      createUsersRoute() {        
         return '/create-user';
+      }
+
+      userListRoute() {
+        return '/user-list';
       }
     }
 

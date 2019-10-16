@@ -8,10 +8,7 @@
  *                                            \
  *                                        USER-PROFILE
  *                                              \
- *                                           EDIT-USER
- * 
- * FIRST THING WILL BE TO SETUP A TEST PAGE TO ROUTE BACK AND FORTH FROM 
- * MY MAIN APP.              
+ *                                           EDIT-USER    
 */ 
 
 import RoutePaths from './paths.js';
@@ -25,7 +22,6 @@ const viewInheritedProperties = [
 
 const routeData = {
   title: 'Intern App',
-  // new RouteData('App', 'APP-ELEMENT', '', [], false));
   args: [RouteId.INTERN_APP, 'intern-app', RoutePaths.INTERN_APP, ['intern-app'], true],
   children: [
     {
@@ -36,12 +32,12 @@ const routeData = {
     {
       title: 'User List',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.USER_LIST, 'USER-LIST', RoutePaths.USER_LIST, ['user-list'], true]
+      args: [RouteId.USER_LIST, 'user-list', RoutePaths.USER_LIST, ['user-list'], true]
     },
     {
       title: 'User Profile',
       inheritedProperties: [...viewInheritedProperties],
-      args: [RouteId.USER_PROFILE, 'USER-PROFILE', RoutePaths.USER_PROFILE, ['user-profile'], true]
+      args: [RouteId.USER_PROFILE, 'user-profile', RoutePaths.USER_PROFILE, ['user-profile'], true]
     },
     {
       title: 'Edit User',
@@ -61,7 +57,7 @@ function buildRouteTree(nodeData) {
       node.addChild(buildRouteTree(nodeData));
     });
   }
-  console.log(node);
+  console.log('Tree: ', node);
   return node;
 }
 

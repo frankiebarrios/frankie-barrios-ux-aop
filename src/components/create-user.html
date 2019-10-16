@@ -27,7 +27,7 @@
       div {
         border-radius: 5px;
         margin: auto;
-        width: 60%;
+        width: 40%;
       }
 
       .container {
@@ -45,6 +45,7 @@
       .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         padding-top: initial;
+        margin-top: 65px;
       }
 
       .icon {
@@ -72,7 +73,7 @@
         border: solid 2px red;
       }
     </style>
-    <h1 class="div-center ">Onboarding App</h1>
+    <!-- <h1 class="div-center ">Onboarding App</h1> -->
     <div class="card">
       <div class="container">
         <h2 class="div-center text">Create New User</h2>
@@ -115,7 +116,6 @@
     import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
     const router = require('../../node_modules/@banno/web-component-router');
     const pageJs = require('page');
-
     const RouteMixin = require('@banno/web-component-router/routing-mixin');
 
     class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
@@ -198,41 +198,22 @@
         console.log(newValue);
       }
 
-      routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
-        super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
-        // make sure to set this to indicate the route was recognized.
+      routeEnter(currentNode, nextNode, routeId, context, next) {
+        super.routeEnter(currentNode, nextNode, routeId, context, next)
         context.handled = true;
-        // do something with the node
         const currentElement = currentNode.getValue().element;
-        // console.log('Current Element: ', currentElement);
-        alert('routeEnter Hit!!!')
-        // Always call next
+        console.log('Create User Parent Node on Enter: ', currentElement.parentNode);
         next();
       }
 
-      /**
-       * Implementation for the callback on exiting a route node.
-       * This method is ONLY called if this element is not being
-       * used by the next route destination.
-       *
-       * @param {!RouteTreeNode} currentNode
-       * @param {!RouteTreeNode|undefined} nextNode - parent node
-       * @param {string} routeId - unique name of the route
-       * @param {!Context} context - page.js Context object
-       * @param {function(boolean=)} next - used to continue to the next
-       *     routing callback
-       */
       routeExit(currentNode, nextNode, routeId, context, next) {
-        super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
+        super.routeExit(currentNode, nextNode, routeId, context, next)
         const currentElement = currentNode.getValue().element;
-        console.log('Current Element: ', currentElement);
-        // remove the element from the dom
+        console.log('Create User Parent Node on Exit: ', currentElement.parentNode);
         if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild(/** @type {!Element} */(currentElement));
+          currentElement.parentNode.removeChild((currentElement));
         }
         currentNode.getValue().element = undefined;
-
-        // Always call next
         next();
       }
 

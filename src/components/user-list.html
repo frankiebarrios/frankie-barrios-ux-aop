@@ -7,8 +7,9 @@
     <style>
     </style>
     <div>
+      <h1>Test</h1>
       <template is="dom-repeat" items="[[users]]" as="user">
-          <user-profile user="[[user]]" storage="[[storage]]"></user-profile>
+        <user-profile user="[[user]]" storage="[[storage]]"></user-profile>
       </template>
     </div>
   </template>
@@ -16,17 +17,51 @@
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
 
-    class UserList extends PolymerElement {
+    // Routing Imports
+    import routeTree from '../routing/routes.js';
+    import Route_Paths from '../routing/paths.js';
+    import Route_Ids from '../routing/id.js';
+    import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
+    const router = require('../../node_modules/@banno/web-component-router');
+    const pageJs = require('page');
+    const RouteMixin = require('@banno/web-component-router/routing-mixin');
+
+    class UserList extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
       static get is() { return 'user-list'; }
 
       static get properties() {
         return {
           users: Object,
-          storage: Object
+          storage: {
+            type: Object,
+            observer: 'check'
+          }
         };
       }
+      
+      check(newValue) {
+        console.log(newValue);
+      }
+
+      routeEnter(currentNode, nextNode, routeId, context, next) {
+        super.routeEnter(currentNode, nextNode, routeId, context, next)
+        context.handled = true;
+        const currentElement = currentNode.getValue().element;
+        next();
+      }
+
+      routeExit(currentNode, nextNode, routeId, context, next) {
+        super.routeExit(currentNode, nextNode, routeId, context, next)
+        const currentElement = currentNode.getValue().element;
+        console.log('Current Element user-list:', currentElement);
+        if (currentElement.parentNode) {
+          currentElement.parentNode.removeChild((currentElement));
+        }
+        currentNode.getValue().element = undefined;
+        next();
+      }
     }
-    customElements.define(UserList.is, UserList);
-    export default UserList;
+      customElements.define(UserList.is, UserList);
+      export default UserList;
   </script>
 </dom-module>
