@@ -32,6 +32,7 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         border-radius: 20px;
         margin-bottom: 25px;
+        margin-top: 50px;
       }
 
       .profileIcons {
@@ -52,25 +53,24 @@
       jha-icon-circle-plus-outline,
       jha-icon-circle-minus-outline,
       jha-icon-edit-outline,
-      jha-icon-delete-outline{
-        fill:#6495ED;
+      jha-icon-delete-outline {
+        fill: #6495ED;
       }
-
     </style>
 
     <template is="dom-if" if="[[!editButtonClicked]]">
       <div class="div-center" id="userProfileCard">
         <div class="card">
-        <template is="dom-if" if="[[!profileExpanded]]">
-          <div class="profileIcons">
-            <jha-icon-circle-plus-outline on-click="expandCollapseCard"></jha-icon-circle-plus-outline>
-          </div>
-        </template>
-        <template is="dom-if" if="[[profileExpanded]]">
-          <div class="profileIcons">
-            <jha-icon-circle-minus-outline on-click="expandCollapseCard"></jha-icon-circle-minus-outline>
-          </div>
-        </template>
+          <template is="dom-if" if="[[!profileExpanded]]">
+            <div class="profileIcons">
+              <jha-icon-circle-plus-outline on-click="expandCollapseCard"></jha-icon-circle-plus-outline>
+            </div>
+          </template>
+          <template is="dom-if" if="[[profileExpanded]]">
+            <div class="profileIcons">
+              <jha-icon-circle-minus-outline on-click="expandCollapseCard"></jha-icon-circle-minus-outline>
+            </div>
+          </template>
           <h3 class="div-center" style="margin: initial;padding-bottom: inherit;">User Profile</h3>
           <table class="container center" id="test">
             <tr>
@@ -123,9 +123,9 @@
             type: Object,
             observer: 'check'
           },
-          user: { 
+          user: {
             type: Object
-          }, 
+          },
           profileExpanded: {
             type: Boolean,
             value: false
@@ -139,14 +139,14 @@
             value: false
           }
         }
-      } 
+      }
 
       check(newValue) {
         console.log(newValue);
       }
 
       routeEnter(currentNode, nextNode, routeId, context, next) {
-        // super.routeEnter(currentNode, nextNode, routeId, context, next)
+        super.routeEnter(currentNode, nextNode, routeId, context, next)
         context.handled = true;
         const currentElement = currentNode.getValue().element;
         console.log('User Profiles Entered');
@@ -154,7 +154,7 @@
       }
 
       routeExit(currentNode, nextNode, routeId, context, next) {
-        // super.routeExit(currentNode, nextNode, routeId, context, next)
+        super.routeExit(currentNode, nextNode, routeId, context, next)
         const currentElement = currentNode.getValue().element;
         console.log('Current Element user-list:', currentElement);
         if (currentElement.parentNode) {
@@ -171,9 +171,9 @@
 
       expandCollapseCard() {
         this.profileExpanded ? this.profileExpanded = false :
-         this.profileExpanded = true;
+          this.profileExpanded = true;
         this.buttonText === 'Expand' ? this.buttonText = 'Collapse' :
-         this.buttonText = 'Expand';
+          this.buttonText = 'Expand';
       }
 
       editButtonClick() {
@@ -190,7 +190,7 @@
 
       deleteUser() {
         this.storage.deleteUser(this.user.id);
-        this.updateUserList();      
+        this.updateUserList();
       }
     }
     customElements.define(UserProfile.is, UserProfile);

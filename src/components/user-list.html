@@ -7,7 +7,6 @@
     <style>
     </style>
     <div>
-      <h1>Test</h1>
       <template is="dom-repeat" items="[[users]]" as="user">
         <user-profile user="[[user]]" storage="[[storage]]"></user-profile>
       </template>
@@ -38,7 +37,7 @@
           }
         };
       }
-      
+
       check(newValue) {
         console.log(newValue);
       }
@@ -61,7 +60,7 @@
         next();
       }
     }
-      customElements.define(UserList.is, UserList);
-      export default UserList;
+    customElements.define(UserList.is, UserList);
+    export default UserList;
   </script>
 </dom-module>

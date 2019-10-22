@@ -10,6 +10,9 @@
       header {
         width: 100%;
         padding: 20px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
       }
 
       h1 {
@@ -27,7 +30,9 @@
       }
 
       /* Nav Bar Styles */
-      body {margin:0;}
+      body {
+        margin: 0;
+      }
 
       ul {
         list-style-type: none;
@@ -40,7 +45,7 @@
         width: 100%;
         display: inline-flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
       }
 
       li {
@@ -65,10 +70,10 @@
     </style>
     <header>
       <ul>
-          <li><a href="[[createUsersRoute()]]">Create User</a></li>
-          <li><a href="[[userListRoute()]]">Show Users</a></li>
+        <li><a href="[[createUsersRoute()]]">Create New User</a></li>
       </ul>
       <slot></slot>
+      <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
   </template>
 
@@ -78,7 +83,7 @@
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-    
+
     // Firebase configuration
     var firebaseConfig = {
       apiKey: "",
@@ -157,12 +162,8 @@
         this.users = await ref.on('value', storage.getData.bind(this));
       }
 
-      createUsersRoute() {        
+      createUsersRoute() {
         return '/create-user';
-      }
-
-      userListRoute() {
-        return '/user-list';
       }
     }
 
