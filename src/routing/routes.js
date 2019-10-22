@@ -8,8 +8,8 @@
  *                                            \
  *                                        USER-PROFILE
  *                                              \
- *                                           EDIT-USER    
-*/ 
+ *                                           EDIT-USER
+*/
 
 import RoutePaths from './paths.js';
 import RouteId from './id.js';
