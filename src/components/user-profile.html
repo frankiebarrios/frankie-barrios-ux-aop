@@ -104,14 +104,7 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
-    // Routing Imports
-    import routeTree from '../routing/routes.js';
-    import Route_Paths from '../routing/paths.js';
-    import Route_Ids from '../routing/id.js';
     import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
-    const router = require('../../node_modules/@banno/web-component-router');
-    const pageJs = require('page');
     const RouteMixin = require('@banno/web-component-router/routing-mixin');
 
     class UserProfile extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
@@ -120,8 +113,7 @@
       static get properties() {
         return {
           storage: {
-            type: Object,
-            observer: 'check'
+            type: Object
           },
           user: {
             type: Object
@@ -139,29 +131,6 @@
             value: false
           }
         }
-      }
-
-      check(newValue) {
-        console.log(newValue);
-      }
-
-      routeEnter(currentNode, nextNode, routeId, context, next) {
-        super.routeEnter(currentNode, nextNode, routeId, context, next)
-        context.handled = true;
-        const currentElement = currentNode.getValue().element;
-        console.log('User Profiles Entered');
-        next();
-      }
-
-      routeExit(currentNode, nextNode, routeId, context, next) {
-        super.routeExit(currentNode, nextNode, routeId, context, next)
-        const currentElement = currentNode.getValue().element;
-        console.log('Current Element user-list:', currentElement);
-        if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild((currentElement));
-        }
-        currentNode.getValue().element = undefined;
-        next();
       }
 
       connectedCallback() {

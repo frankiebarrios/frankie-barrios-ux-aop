@@ -20,7 +20,6 @@
 
     class UserList extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
       static get is() { return 'user-list'; }
-
       static get properties() {
         return {
           users: Object,
@@ -28,7 +27,6 @@
         };
       }
     }
-
     customElements.define(UserList.is, UserList);
     export default UserList;
   </script>
