@@ -2,7 +2,7 @@
 <link rel="import" href="../../node_modules/@banno/polymer/polymer-element.js">
 <link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
 <link rel="import" href="../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
-
+<link rel="import" href="lit-components/lit-user-list.js">
 <dom-module id="create-user">
   <template>
     <style>
@@ -75,6 +75,7 @@
     </style>
     <div class="card">
       <div class="container">
+        <lit-user-list></lit-user-list>
           <h2 class="div-center text">Create New User</h2>
         <form>
           <label>First Name</label>
