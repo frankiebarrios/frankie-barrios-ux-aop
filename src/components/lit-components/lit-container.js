@@ -3,11 +3,16 @@ import '../intern-app.html';
 
 class LitContainer extends LitElement {
   static get styles() {
-    return css``;
+    return css`
+      div { border: 20px solid #6495ed; }
+      .center { margin: auto; }
+    `;
   }
   render() {
     return html`
+    <div>
       <intern-app></intern-app>
+    </div>
     `;
   }
 }
