@@ -1,12 +1,4 @@
 import { LitElement, html, css } from 'lit-element';
-
-// Rendering this third party LE Component within this LE Component
-import  '@banno/jha-web-components/src/buttons/jha-button/jha-button';
-
-// Rendering within this LE Component
-import '../user-profile.html';
-
-// Using to utilize API
 import { FirebaseAPI } from '../../api/firebaseAPI';
 
 const storage = new FirebaseAPI();
@@ -14,7 +6,10 @@ const storage = new FirebaseAPI();
 class LitUserList extends LitElement {
   static get properties() {
     return {
-      users: { type: Object },
+      users: {
+        type: Object,
+        value: {}
+      },
       storage: {
         value: () => storage
       },
@@ -40,44 +35,64 @@ class LitUserList extends LitElement {
         padding: 0 16px 8px 16px;
         display: inline-flex;
       }
+
+      .card {
+        padding: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin-bottom: 25px;
+        margin-top: 50px;
+      }
+
+      .profileIcons {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      jha-icon-circle-plus-outline {
+        fill: #6495ED;
+      }
     `;
   }
-
-  // Look at using lifecycle methods to pull users into state
-  // without having to trigger something to do so.
 
   render() {
     return html`
-      <jha-button @click="${this.getUsers}">LitElement Button</jha-button>
+      <div>
+        ${this.users.map(user => html`
+          <div class="card">
+            <div class="profileIcons">
+              <jha-icon-circle-plus-outline>
+            </div>
+            <table class="container">
+              <tr>
+                <td>Name:</td>
+                <td>${user.firstName} ${user.lastName}</td>
+              </tr>
+            </table>
+          </div>
+        `)}
+      </div>
     `;
   }
 
-  // render() {
-  //   return html`
-  //     <div>
-  //       ${users.map(user => html`
-  //         <div>
-  //           <table class="container">
-  //             <tr>
-  //               <td>Name:</td>
-  //               <td>${user.firstName} ${user.lastName}</td>
-  //             </tr>
-  //             <tr>
-  //               <td>Id:</td>
-  //               <td>${user.id}</td>
-  //             </tr>
-  //           </table>
-  //         </div>
-  //       `)}
-  //     </div>
-  //   `;
+  async connectedCallback() {
+    super.connectedCallback()
+    this.users = await this.getUsers();
+  }
+
+  // Original attempt to pull in user data:
+  // connectedCallback() {
+  //   super.connectedCallback();
+  //   this.users = this.getUsers();
   // }
 
   async getUsers() {
     let users = await storage.getAllUsers();
-    console.log('Users', users);
     return users;
   }
+
 }
 customElements.define('lit-user-list', LitUserList);
 export default LitUserList;
