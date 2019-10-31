@@ -27,19 +27,56 @@ class LitUserList extends LitElement {
   }
 
   static get styles() {
-    return css``;
+    return css`
+      td {
+        padding: 12px;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        padding: 0 16px 8px 16px;
+        display: inline-flex;
+      }
+    `;
   }
+
+  // Look at using lifecycle methods to pull users into state
+  // without having to trigger something to do so.
 
   render() {
     return html`
       <jha-button @click="${this.getUsers}">LitElement Button</jha-button>
-      <user-profile></user-profile>
     `;
   }
 
+  // render() {
+  //   return html`
+  //     <div>
+  //       ${users.map(user => html`
+  //         <div>
+  //           <table class="container">
+  //             <tr>
+  //               <td>Name:</td>
+  //               <td>${user.firstName} ${user.lastName}</td>
+  //             </tr>
+  //             <tr>
+  //               <td>Id:</td>
+  //               <td>${user.id}</td>
+  //             </tr>
+  //           </table>
+  //         </div>
+  //       `)}
+  //     </div>
+  //   `;
+  // }
+
   async getUsers() {
-    this.users = await storage.getAllUsers();
-    console.log('Users', this.users);
+    let users = await storage.getAllUsers();
+    console.log('Users', users);
+    return users;
   }
 }
 customElements.define('lit-user-list', LitUserList);

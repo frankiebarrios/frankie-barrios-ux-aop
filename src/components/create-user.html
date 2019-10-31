@@ -72,10 +72,14 @@
       .hasError {
         border: solid 2px red;
       }
+
+      .buttonDiv {
+        display: flex;
+        justify-content: center;
+      }
     </style>
     <div class="card">
       <div class="container">
-        <lit-user-list></lit-user-list>
           <h2 class="div-center text">Create New User</h2>
         <form>
           <label>First Name</label>
@@ -102,6 +106,11 @@
           <h5>Delete All</h5>
           <h5>Create</h5>
         </div>
+
+        <div class="buttonDiv">
+          <lit-user-list></lit-user-list>
+        </div>
+
       </div>
     </div>
   </template>
