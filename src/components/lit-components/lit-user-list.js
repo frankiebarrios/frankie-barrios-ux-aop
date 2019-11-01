@@ -13,6 +13,10 @@ class LitUserList extends LitElement {
       storage: {
         value: () => storage
       },
+      profileExpanded: {
+        type: Boolean,
+        value: true
+      }
     };
   }
 
@@ -39,7 +43,6 @@ class LitUserList extends LitElement {
       .card {
         padding: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
         margin-bottom: 25px;
         margin-top: 50px;
       }
@@ -54,17 +57,38 @@ class LitUserList extends LitElement {
       jha-icon-circle-plus-outline {
         fill: #6495ED;
       }
+
+      .div-center {
+        text-align: center;
+      }
     `;
   }
 
+  // dom-if example
+  // render() {
+  //   return html`
+  //     <div>
+  //       ${(this.profileExpanded ? html`
+  //         <h1>True</h1>
+  //         <jha-icon-circle-plus-outline @click="${this.expandCollapseCard}">
+  //         ` : html`
+  //         <h1>False</h1>
+  //         <jha-icon-circle-plus-outline @click="${this.expandCollapseCard}">
+  //       `)}
+  //     </div>
+  //   `;
+  // }
+
+  // dom-repeat example
   render() {
     return html`
       <div>
         ${this.users.map(user => html`
           <div class="card">
             <div class="profileIcons">
-              <jha-icon-circle-plus-outline>
+              <jha-icon-circle-plus-outline @click="${this.expandCollapseCard}">
             </div>
+            <h3 class="div-center">User Profile</h3>
             <table class="container">
               <tr>
                 <td>Name:</td>
@@ -86,7 +110,14 @@ class LitUserList extends LitElement {
   // connectedCallback() {
   //   super.connectedCallback();
   //   this.users = this.getUsers();
+  //   console.log('Users: ', this.users);
   // }
+
+  expandCollapseCard() {
+    this.profileExpanded ? this.profileExpanded = false :
+      this.profileExpanded = true;
+      console.log(this.profileExpanded);
+  }
 
   async getUsers() {
     let users = await storage.getAllUsers();
