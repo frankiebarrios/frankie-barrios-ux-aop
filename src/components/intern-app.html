@@ -83,8 +83,6 @@
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-
-    // Firebase configuration
     var firebaseConfig = {
       apiKey: "",
       authDomain: "onboarding-project-d1154.firebaseapp.com",
@@ -95,12 +93,10 @@
       appId: "1:461134238683:web:629a864bdaf08301"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
     const storage = new FirebaseAPI();
 
-    // Routing Imports
     import routeTree from '../routing/routes.js';
     import Route_Paths from '../routing/paths.js';
     import Route_Ids from '../routing/id.js';

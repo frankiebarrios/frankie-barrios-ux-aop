@@ -15,8 +15,6 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
-    // Routing Imports
     import routeTree from '../routing/routes.js';
     import Route_Paths from '../routing/paths.js';
     import Route_Ids from '../routing/id.js';
@@ -31,15 +29,8 @@
       static get properties() {
         return {
           users: Object,
-          storage: {
-            type: Object,
-            observer: 'check'
-          }
+          storage: { type: Object }
         };
-      }
-
-      check(newValue) {
-        console.log(newValue);
       }
 
       routeEnter(currentNode, nextNode, routeId, context, next) {
@@ -52,9 +43,8 @@
       routeExit(currentNode, nextNode, routeId, context, next) {
         super.routeExit(currentNode, nextNode, routeId, context, next)
         const currentElement = currentNode.getValue().element;
-        console.log('Current Element user-list:', currentElement);
         if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild((currentElement));
+          currentElement.parentNode.removeChild(currentElement);
         }
         currentNode.getValue().element = undefined;
         next();

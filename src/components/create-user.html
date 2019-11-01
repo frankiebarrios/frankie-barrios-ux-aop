@@ -73,7 +73,6 @@
         border: solid 2px red;
       }
     </style>
-    <!-- <h1 class="div-center ">Onboarding App</h1> -->
     <div class="card">
       <div class="container">
         <h2 class="div-center text">Create New User</h2>
@@ -108,8 +107,6 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
-    // Routing Imports
     import routeTree from '../routing/routes.js';
     import Route_Paths from '../routing/paths.js';
     import Route_Ids from '../routing/id.js';
@@ -123,10 +120,7 @@
 
       static get properties() {
         return {
-          storage: {
-            type: Object,
-            observer: 'check'
-          },
+          storage: { type: Object },
           user: {
             type: Object,
             value() {
@@ -194,24 +188,18 @@
         }
       }
 
-      check(newValue) {
-        console.log(newValue);
-      }
-
       routeEnter(currentNode, nextNode, routeId, context, next) {
         super.routeEnter(currentNode, nextNode, routeId, context, next)
         context.handled = true;
         const currentElement = currentNode.getValue().element;
-        console.log('Create User Parent Node on Enter: ', currentElement.parentNode);
         next();
       }
 
       routeExit(currentNode, nextNode, routeId, context, next) {
         super.routeExit(currentNode, nextNode, routeId, context, next)
         const currentElement = currentNode.getValue().element;
-        console.log('Create User Parent Node on Exit: ', currentElement.parentNode);
         if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild((currentElement));
+          currentElement.parentNode.removeChild(currentElement);
         }
         currentNode.getValue().element = undefined;
         next();
