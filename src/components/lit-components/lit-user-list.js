@@ -82,6 +82,7 @@ class LitUserList extends LitElement {
   // dom-repeat example
   render() {
     return html`
+    <h1>Lit User List</h1>
       <div>
         ${this.users.map(user => html`
           <div class="card">
@@ -101,6 +102,8 @@ class LitUserList extends LitElement {
     `;
   }
 
+  // The way I am pulling in data here is throwing off my loading.
+  // Need to fix this. Use events like in other components to accomplish this.
   async connectedCallback() {
     super.connectedCallback()
     this.users = await this.getUsers();
@@ -116,7 +119,6 @@ class LitUserList extends LitElement {
   expandCollapseCard() {
     this.profileExpanded ? this.profileExpanded = false :
       this.profileExpanded = true;
-      console.log(this.profileExpanded);
   }
 
   async getUsers() {

@@ -3,6 +3,8 @@
 <link rel="import" href="./user-list.html">
 <link rel="import" href="./edit-user.html">
 <link rel="import" href="./create-user.html">
+<link rel="import" href="./lit-components/lit-user-container.js">
+<link rel="import" href="./lit-components/lit-user-list.js">
 
 <dom-module id="intern-app">
   <template>
@@ -75,6 +77,11 @@
       <slot></slot>
       <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
+<!--
+    <div>
+      <lit-user-container></lit-user-container>
+      <lit-user-ist></lit-user-ist>
+    </div> -->
   </template>
 
   <script type="module">
