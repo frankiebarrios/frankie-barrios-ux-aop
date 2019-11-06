@@ -6,9 +6,12 @@ class LitUserContainer extends LitElement {
     return css``;
   }
   render() {
+    const testValue = 'Hello World';
     return html`
       <h2>Lit User Container</h2>
-      <lit-user-list></lit-user-list>
+      <lit-user-list
+        .testAttribute=${testValue}
+      ></lit-user-list>
     `;
   }
 }

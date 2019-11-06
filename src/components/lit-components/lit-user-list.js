@@ -16,13 +16,17 @@ class LitUserList extends LitElement {
       profileExpanded: {
         type: Boolean,
         value: true
+      },
+      testAttribute: {
+        type: String
       }
     };
   }
 
   constructor() {
     super();
-    this.users = [];
+    this.users = {};
+    this.testAttribute = null;
   }
 
   static get styles() {
@@ -92,6 +96,7 @@ class LitUserList extends LitElement {
             <h3 class="div-center">User Profile</h3>
             <table class="container">
               <tr>
+                <td>${this.testAttribute}</td>
                 <td>Name:</td>
                 <td>${user.firstName} ${user.lastName}</td>
               </tr>
