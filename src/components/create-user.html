@@ -27,7 +27,7 @@
       div {
         border-radius: 5px;
         margin: auto;
-        width: 60%;
+        width: 40%;
       }
 
       .container {
@@ -45,10 +45,11 @@
       .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         padding-top: initial;
+        margin-top: 65px;
       }
 
       .icon {
-        fill:#6495ED;
+        fill: #6495ED;
         height: 44px;
         width: 44px;
       }
@@ -71,28 +72,26 @@
       .hasError {
         border: solid 2px red;
       }
-
     </style>
-    <h1 class="div-center ">Onboarding App</h1>
     <div class="card">
       <div class="container">
         <h2 class="div-center text">Create New User</h2>
         <form>
           <label>First Name</label>
-          <input type="text" id="firstName" hasError="validateInput"
-            placeholder$="[[firstNamePlaceholder]]" value="{{user.firstName::input}}" class$="[[firstNameClass]]">
+          <input type="text" id="firstName" hasError="validateInput" placeholder$="[[firstNamePlaceholder]]"
+            value="{{user.firstName::input}}" class$="[[firstNameClass]]">
 
           <label>Last Name</label>
-          <input type="text" id="lastName" hasError="validateInput"
-            placeholder$="[[lastNamePlaceholder]]" value="{{user.lastName::input}}" class$="[[lastNameClass]]">
+          <input type="text" id="lastName" hasError="validateInput" placeholder$="[[lastNamePlaceholder]]"
+            value="{{user.lastName::input}}" class$="[[lastNameClass]]">
 
           <label>Phone</label>
-          <input type="text" id="phone" hasError="validateInput"
-            placeholder$="[[phonePlaceholder]]" value="{{user.phone::input}}" class$="[[phoneClass]]">
+          <input type="text" id="phone" hasError="validateInput" placeholder$="[[phonePlaceholder]]"
+            value="{{user.phone::input}}" class$="[[phoneClass]]">
 
           <label>Email</label>
-          <input type="text" id="email" hasError="validateInput"
-            placeholder$="[[emailPlaceholder]]" value="{{user.email::input}}" class$="[[emailClass]]">
+          <input type="text" id="email" hasError="validateInput" placeholder$="[[emailPlaceholder]]"
+            value="{{user.email::input}}" class$="[[emailClass]]">
         </form>
         <div class="formIcons">
           <jha-icon-delete-outline on-click="deleteAllUsers" class="icon"></jha-icon-delete-outline>
@@ -108,13 +107,20 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    import routeTree from '../routing/routes.js';
+    import Route_Paths from '../routing/paths.js';
+    import Route_Ids from '../routing/id.js';
+    import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
+    const router = require('../../node_modules/@banno/web-component-router');
+    const pageJs = require('page');
+    const RouteMixin = require('@banno/web-component-router/routing-mixin');
 
-    class CreateUser extends PolymerElement {
+    class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
       static get is() { return 'create-user'; }
 
       static get properties() {
         return {
-          storage: Object,
+          storage: { type: Object },
           user: {
             type: Object,
             value() {
@@ -139,7 +145,7 @@
             type: String,
             value: 'Must Enter A Last Name!'
           },
-          phoneError : {
+          phoneError: {
             type: String,
             value: 'Invalid Phone Number Entered!'
           },
@@ -162,7 +168,7 @@
           lastNamePlaceholder: {
             type: String,
             value: 'Enter last name...'
-          }, 
+          },
           phoneClass: {
             type: String,
             value: ''
@@ -174,12 +180,29 @@
           emailClass: {
             type: String,
             value: ''
-          }, 
+          },
           emailPlaceholder: {
             type: String,
             value: 'Enter email address...'
           }
         }
+      }
+
+      routeEnter(currentNode, nextNode, routeId, context, next) {
+        super.routeEnter(currentNode, nextNode, routeId, context, next)
+        context.handled = true;
+        const currentElement = currentNode.getValue().element;
+        next();
+      }
+
+      routeExit(currentNode, nextNode, routeId, context, next) {
+        super.routeExit(currentNode, nextNode, routeId, context, next)
+        const currentElement = currentNode.getValue().element;
+        if (currentElement.parentNode) {
+          currentElement.parentNode.removeChild(currentElement);
+        }
+        currentNode.getValue().element = undefined;
+        next();
       }
 
       getUsers() {
@@ -188,7 +211,7 @@
 
       createUser() {
         this.validateInput();
-        if(!this.hasError) {
+        if (!this.hasError) {
           this.storage.createUser(this.user);
           this.user = {};
         }
@@ -224,7 +247,7 @@
           this.lastNameClass = 'hasError';
           this.lastNamePlaceholder = this.lastNameError;
         } else {
-          this.lastNameClass = '';        
+          this.lastNameClass = '';
         }
       }
 

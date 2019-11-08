@@ -8,22 +8,46 @@
     </style>
     <div>
       <template is="dom-repeat" items="[[users]]" as="user">
-          <user-profile user="[[user]]" storage="[[storage]]"></user-profile>
+        <user-profile user="[[user]]" storage="[[storage]]"></user-profile>
       </template>
     </div>
   </template>
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
+    import routeTree from '../routing/routes.js';
+    import Route_Paths from '../routing/paths.js';
+    import Route_Ids from '../routing/id.js';
+    import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
+    const router = require('../../node_modules/@banno/web-component-router');
+    const pageJs = require('page');
+    const RouteMixin = require('@banno/web-component-router/routing-mixin');
 
-    class UserList extends PolymerElement {
+    class UserList extends bindPropertiesFromParentRouteMixin(RouteMixin(PolymerElement)) {
       static get is() { return 'user-list'; }
 
       static get properties() {
         return {
           users: Object,
-          storage: Object
+          storage: { type: Object }
         };
+      }
+
+      routeEnter(currentNode, nextNode, routeId, context, next) {
+        super.routeEnter(currentNode, nextNode, routeId, context, next)
+        context.handled = true;
+        const currentElement = currentNode.getValue().element;
+        next();
+      }
+
+      routeExit(currentNode, nextNode, routeId, context, next) {
+        super.routeExit(currentNode, nextNode, routeId, context, next)
+        const currentElement = currentNode.getValue().element;
+        if (currentElement.parentNode) {
+          currentElement.parentNode.removeChild(currentElement);
+        }
+        currentNode.getValue().element = undefined;
+        next();
       }
     }
     customElements.define(UserList.is, UserList);

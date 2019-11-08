@@ -12,6 +12,7 @@
         padding: 20px 0;
         display: flex;
         flex-direction: row;
+        justify-content: center;
       }
 
       h1 {
@@ -27,9 +28,51 @@
         font-family: monospace;
         font-size: 15px;
       }
+
+      /* Nav Bar Styles */
+      body {
+        margin: 0;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #6495ED;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      li {
+        font-size: 20px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: rgb(159, 209, 255);
+      }
     </style>
     <header>
-      <create-user storage="[[storage]]"></create-user>
+      <ul>
+        <li><a href="[[createUsersRoute()]]">Create New User</a></li>
+      </ul>
+      <slot></slot>
       <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
   </template>
@@ -40,7 +83,6 @@
     import * as firebase from "firebase/app";
     import "firebase/database";
 
-    // Firebase configuration
     var firebaseConfig = {
       apiKey: "",
       authDomain: "onboarding-project-d1154.firebaseapp.com",
@@ -51,12 +93,18 @@
       appId: "1:461134238683:web:629a864bdaf08301"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
     const storage = new FirebaseAPI();
 
-    class InternApp extends PolymerElement {
+    import routeTree from '../routing/routes.js';
+    import Route_Paths from '../routing/paths.js';
+    import Route_Ids from '../routing/id.js';
+    const router = require('../../node_modules/@banno/web-component-router');
+    const Route_Mixin = require('../../node_modules/@banno/web-component-router/routing-mixin');
+    const pageJs = require('page');
+
+    class InternApp extends Route_Mixin(PolymerElement) {
       static get is() { return 'intern-app'; }
 
       static get properties() {
@@ -66,14 +114,38 @@
           },
           users: {
             value: () => storage.getAllUsers()
+          },
+          routeData: {
+            type: Object,
+            value: routeTree
           }
         }
       }
 
       connectedCallback() {
         super.connectedCallback();
+        router.routeTree = routeTree;
+        router.routeTree.getValue().element = this;
+        router.start();
         this.loadUsers();
         this.addEventListener('updateUserList', this.updateUserList);
+      }
+
+      routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
+        super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
+        context.handled = true;
+        const currentElement = currentNode.getValue().element;
+        next();
+      }
+
+      routeExit(currentNode, nextNode, routeId, context, next) {
+        super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
+        const currentElement = currentNode.getValue().element;
+        if (currentElement.parentNode) {
+          currentElement.parentNode.removeChild((currentElement));
+        }
+        currentNode.getValue().element = undefined;
+        next();
       }
 
       updateUserList() {
@@ -84,6 +156,10 @@
         const database = firebase.database();
         const ref = await database.ref('users');
         this.users = await ref.on('value', storage.getData.bind(this));
+      }
+
+      createUsersRoute() {
+        return '/create-user';
       }
     }
 
