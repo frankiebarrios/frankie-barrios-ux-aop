@@ -8,8 +8,9 @@ class LitContainer extends LitElement {
       .center { margin: auto; }
     `;
   }
+
   render() {
-    return html`
+    return /**/html`
     <div>
       <intern-app></intern-app>
     </div>

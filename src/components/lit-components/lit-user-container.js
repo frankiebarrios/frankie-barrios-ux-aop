@@ -1,17 +1,31 @@
 import { LitElement, html, css } from 'lit-element';
+import { FirebaseAPI } from '../../api/firebaseAPI';
 import './lit-user-list';
 
+const storage = new FirebaseAPI();
+
 class LitUserContainer extends LitElement {
-  static get styles() {
-    return css``;
+  static get properties() {
+    return {
+      storage: {
+        type: Array,
+        value: storage
+      }
+    };
   }
+
+  constructor() {
+    super();
+    this.storage = [];
+  }
+
   render() {
-    const testValue = 'Hello World';
-    return html`
-      <h2>Lit User Container</h2>
+    this.users = storage.getAllUsers();
+    return /**/html`
       <lit-user-list
-        .testAttribute=${testValue}
-      ></lit-user-list>
+        .users=${this.users}
+        .storage=${this.storage}>
+      </lit-user-list>
     `;
   }
 }

@@ -122,10 +122,6 @@
             type: Boolean,
             value: false
           },
-          buttonText: {
-            type: String,
-            value: 'Expand'
-          },
           editButtonClicked: {
             type: Boolean,
             value: false
@@ -141,8 +137,6 @@
       expandCollapseCard() {
         this.profileExpanded ? this.profileExpanded = false :
           this.profileExpanded = true;
-        this.buttonText === 'Expand' ? this.buttonText = 'Collapse' :
-          this.buttonText = 'Expand';
       }
 
       editButtonClick() {
