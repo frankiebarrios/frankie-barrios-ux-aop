@@ -80,7 +80,6 @@
         justify-content: center;
       }
     </style>
-
     <div class="card">
       <div class="container">
           <h2 class="div-center text">Create New User</h2>
@@ -120,8 +119,6 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-
-    // Routing Imports
     import routeTree from '../routing/routes.js';
     import Route_Paths from '../routing/paths.js';
     import Route_Ids from '../routing/id.js';
@@ -135,10 +132,7 @@
 
       static get properties() {
         return {
-          storage: {
-            type: Object,
-            observer: 'check'
-          },
+          storage: { type: Object },
           user: {
             type: Object,
             value() {
