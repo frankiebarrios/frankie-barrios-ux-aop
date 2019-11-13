@@ -135,28 +135,6 @@
         router.routeTree.getValue().element = this;
         router.start();
         this.loadUsers();
-        this.addEventListener('updateUserList', this.updateUserList);
-      }
-
-      routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
-        super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
-        context.handled = true;
-        const currentElement = currentNode.getValue().element;
-        next();
-      }
-
-      routeExit(currentNode, nextNode, routeId, context, next) {
-        super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
-        const currentElement = currentNode.getValue().element;
-        if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild((currentElement));
-        }
-        currentNode.getValue().element = undefined;
-        next();
-      }
-
-      updateUserList() {
-        this.users = storage.getAllUsers();
       }
 
       async loadUsers() {

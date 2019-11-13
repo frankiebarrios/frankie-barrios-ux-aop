@@ -210,23 +210,6 @@
         console.log(newValue);
       }
 
-      routeEnter(currentNode, nextNode, routeId, context, next) {
-        super.routeEnter(currentNode, nextNode, routeId, context, next)
-        context.handled = true;
-        const currentElement = currentNode.getValue().element;
-        next();
-      }
-
-      routeExit(currentNode, nextNode, routeId, context, next) {
-        super.routeExit(currentNode, nextNode, routeId, context, next)
-        const currentElement = currentNode.getValue().element;
-        if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild((currentElement));
-        }
-        currentNode.getValue().element = undefined;
-        next();
-      }
-
       getUsers() {
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
