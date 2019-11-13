@@ -200,10 +200,6 @@
         }
       }
 
-      check(newValue) {
-        console.log(newValue);
-      }
-
       getUsers() {
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
