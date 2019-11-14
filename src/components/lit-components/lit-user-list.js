@@ -5,15 +5,15 @@ class LitUserList extends LitElement {
   static get properties() {
     return {
       storage: {
-        type: Array
+        type: Object
       }
     };
   }
 
-  constructor() {
-    super();
-    this.storage = {};
-  }
+  // constructor() {
+  //   super();
+  //   this.storage = {};
+  // }
 
   static get styles() {
     return css``;

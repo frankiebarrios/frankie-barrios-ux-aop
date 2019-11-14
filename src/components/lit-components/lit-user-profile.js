@@ -16,11 +16,11 @@ class LitUserProfile extends LitElement {
     };
   }
 
-  constructor() {
-    super();
-    this.user = {};
-    this.storage = {};
-  }
+  // constructor() {
+  //   super();
+  //   this.user = {};
+  //   this.storage = {};
+  // }
 
   static get styles() {
     return css`
@@ -138,9 +138,7 @@ class LitUserProfile extends LitElement {
   }
 
   deleteUser() {
-    console.log('Storage: ', this.storage);
-    // this.storage.deleteUser(this.user.id);
-    // this.updateUserList();
+    this.storage.deleteUser(this.user.id);
   }
 }
 customElements.define('lit-user-profile', LitUserProfile);

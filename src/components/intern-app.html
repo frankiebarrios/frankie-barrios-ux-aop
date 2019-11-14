@@ -137,6 +137,10 @@
         const database = firebase.database();
         const ref = await database.ref('users');
         this.users = await ref.on('value', storage.getData.bind(this));
+        // To keep stuff up to date in my litelement components,
+        // reference them here and pass data into them somehow.
+        // Look at referencing using something like:
+        // this.shadowroot
       }
 
       createUsersRoute() {

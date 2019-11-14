@@ -8,15 +8,10 @@ class LitUserContainer extends LitElement {
   static get properties() {
     return {
       storage: {
-        type: Array,
+        type: Object,
         value: storage
       }
     };
-  }
-
-  constructor() {
-    super();
-    this.storage = [];
   }
 
   render() {
@@ -24,7 +19,7 @@ class LitUserContainer extends LitElement {
     return /**/html`
       <lit-user-list
         .users=${this.users}
-        .storage=${this.storage}>
+        .storage=${storage}>
       </lit-user-list>
     `;
   }
