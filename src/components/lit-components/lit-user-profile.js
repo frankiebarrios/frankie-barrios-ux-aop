@@ -2,10 +2,13 @@ import { LitElement, html, css } from 'lit-element';
 const Route_Mixin = require('../../../node_modules/@banno/web-component-router/routing-mixin');
 const router = require('../../../node_modules/@banno/web-component-router');
 import routeTree from '../../routing/routes';
-
 import bindPropertiesFromParentRouteMixin from '../../routing/bindPropertiesFromParentRouteMixin';
 import Route_Paths from '../../routing/paths.js';
 import Route_Ids from '../../routing/id.js';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-minus-outline.html';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-plus-outline.html';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-edit-outline.html';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html';
 
 class LitUserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement)) {
 // class LitUserProfile extends Route_Mixin(LitElement) {
@@ -88,6 +91,9 @@ class LitUserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitE
               <div class="profileIcons">
                 <jha-icon-circle-minus-outline
                   @click="${this.expandCollapseCard}">
+                  <!-- To get edit form working:
+                  Bind prop expandCollapseCard to a lit-edit-user component that renders
+                  if prop true -->
                 </jha-icon-circle-minus-outline>
               </div>
               <h3 class="div-center">User Profile</h3>

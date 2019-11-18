@@ -7,6 +7,10 @@ const router = require('../../../node_modules/@banno/web-component-router');
 import routeTree from '../../routing/routes';
 const pageJs = require('page');
 import './lit-user-list';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-minus-outline.html';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-circle-plus-outline.html';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-edit-outline.html';
+import '../../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html';
 
 var firebaseConfig = {
   apiKey: "",
@@ -93,12 +97,12 @@ class LitInternApp extends Route_Mixin(LitElement) {
         value: () => storage
       },
       users: {
-        value: () => storage.getAllUsers()
-      },
-      routeData: {
-        type: Object,
-        value: routeTree
+        type: Object
       }
+      // routeData: {
+      //   type: Object,
+      //   value: routeTree
+      // }
     }
   }
 

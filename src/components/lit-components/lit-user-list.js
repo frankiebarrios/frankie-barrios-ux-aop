@@ -35,11 +35,6 @@ class LitUserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
       `)}
     `;
   }
-
-  connectedCallback() {
-    super.connectedCallback();
-    console.log('LUL Users: ', this.users);
-  }
 }
 customElements.define('lit-user-list', LitUserList);
 export default LitUserList;
