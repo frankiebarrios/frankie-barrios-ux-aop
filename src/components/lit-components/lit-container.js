@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit-element';
-import '../intern-app.html';
+// import '../intern-app.html';
+import './lit-intern-app';
 
 class LitContainer extends LitElement {
   static get styles() {
@@ -12,7 +13,8 @@ class LitContainer extends LitElement {
   render() {
     return /**/html`
     <div>
-      <intern-app></intern-app>
+      <!-- <intern-app></intern-app> -->
+      <lit-intern-app></lit-intern-app>
     </div>
     `;
   }

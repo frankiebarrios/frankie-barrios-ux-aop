@@ -201,10 +201,6 @@
         }
       }
 
-      getUsers() {
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
-      }
-
       createUser() {
         this.validateInput();
         if (!this.hasError) {
@@ -212,12 +208,10 @@
           this.user = {};
         }
         this.hasError = false;
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       deleteAllUsers() {
         this.storage.deleteAllUsers();
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       validateInput() {

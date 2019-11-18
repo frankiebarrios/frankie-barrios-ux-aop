@@ -6,6 +6,9 @@ class LitUserList extends LitElement {
     return {
       storage: {
         type: Object
+      },
+      users: {
+        type: Array
       }
     };
   }

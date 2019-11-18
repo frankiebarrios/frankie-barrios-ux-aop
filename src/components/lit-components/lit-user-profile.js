@@ -128,6 +128,11 @@ class LitUserProfile extends LitElement {
       `;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    // this.addEventListener('updateUserList', /* function to trigger with this listener */);
+  }
+
   expandCollapseCard() {
     this.profileExpanded ? this.profileExpanded = false :
       this.profileExpanded = true;
@@ -139,6 +144,7 @@ class LitUserProfile extends LitElement {
 
   deleteUser() {
     this.storage.deleteUser(this.user.id);
+    this.updateUserList();
   }
 }
 customElements.define('lit-user-profile', LitUserProfile);
