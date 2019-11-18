@@ -128,6 +128,7 @@
       connectedCallback() {
         super.connectedCallback();
         router.routeTree = routeTree;
+        console.log('Intern App Route Tree:', routeTree);
         router.routeTree.getValue().element = this;
         router.start();
         this.loadUsers();

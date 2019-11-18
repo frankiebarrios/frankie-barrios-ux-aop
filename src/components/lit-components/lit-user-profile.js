@@ -1,6 +1,14 @@
 import { LitElement, html, css } from 'lit-element';
+const Route_Mixin = require('../../../node_modules/@banno/web-component-router/routing-mixin');
+const router = require('../../../node_modules/@banno/web-component-router');
+import routeTree from '../../routing/routes';
 
-class LitUserProfile extends LitElement {
+import bindPropertiesFromParentRouteMixin from '../../routing/bindPropertiesFromParentRouteMixin';
+import Route_Paths from '../../routing/paths.js';
+import Route_Ids from '../../routing/id.js';
+
+class LitUserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement)) {
+// class LitUserProfile extends Route_Mixin(LitElement) {
   static get properties() {
     return {
       profileExpanded: {
@@ -15,12 +23,6 @@ class LitUserProfile extends LitElement {
       }
     };
   }
-
-  // constructor() {
-  //   super();
-  //   this.user = {};
-  //   this.storage = {};
-  // }
 
   static get styles() {
     return css`
@@ -130,7 +132,6 @@ class LitUserProfile extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // this.addEventListener('updateUserList', /* function to trigger with this listener */);
   }
 
   expandCollapseCard() {

@@ -6,10 +6,10 @@
  */
 
 const RoutePaths = {
-  INTERN_APP: '',
+  INTERN_APP: '/lit-intern-app',
   CREATE_USER: '/create-user',
-  USER_LIST: '/user-list',
-  USER_PROFILE: '/user-profile',
+  USER_LIST: '/lit-user-list',
+  USER_PROFILE: '/lit-user-profile',
   EDIT_USER: '/edit-user'
 };
 

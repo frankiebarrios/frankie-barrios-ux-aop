@@ -1,17 +1,11 @@
 import { LitElement, html, css } from 'lit-element';
-// import routeTree from '../../routing/routes.js';
-// import { routeTree } from '../../routing/routes.js';
 import { FirebaseAPI } from '../../api/firebaseAPI';
 import * as firebase from "firebase/app";
 import "firebase/database";
-// import Route_Paths from '../routing/paths.js';
-// import Route_Ids from '../routing/id.js';
-// import { router } from '../../../node_modules/@banno/web-component-router';
-// import { Route_Mixin } from '../../../node_modules/@banno/web-component-router/routing-mixin';
 const Route_Mixin = require('../../../node_modules/@banno/web-component-router/routing-mixin');
 const router = require('../../../node_modules/@banno/web-component-router');
-const routeTree = require('../../routing/routes');
-// const pageJs = require('page');
+import routeTree from '../../routing/routes';
+const pageJs = require('page');
 import './lit-user-list';
 
 var firebaseConfig = {
@@ -99,7 +93,6 @@ class LitInternApp extends Route_Mixin(LitElement) {
         value: () => storage
       },
       users: {
-        type: Array,
         value: () => storage.getAllUsers()
       },
       routeData: {
@@ -112,15 +105,13 @@ class LitInternApp extends Route_Mixin(LitElement) {
   render() {
     return /**/html`
       <header>
-        <!-- <h1>LitElement Intern App</h1> -->
         <ul>
           <li><a @click=${this.createUsersRoute}>Create New User</a></li>
         </ul>
         <slot></slot>
-        <!-- <user-list .users=${this.users} .storage=${this.storage}></user-list> -->
         <lit-user-list
-          .users=${this.users}
-          .storage=${this.storage}>
+          .storage=${this.storage}
+          .users=${this.users}>
         </lit-user-list>
       </header>
     `;
@@ -129,10 +120,10 @@ class LitInternApp extends Route_Mixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     router.routeTree = routeTree;
-    console.log('Route Tree: ', router.routeTree);
+    console.log('Lit Route Tree: ', router.routeTree);
     console.log('This: ', this);
-    // router.routeTree.getValue().element = this;
-    // router.start();
+    router.routeTree.getValue().element = this;
+    router.start();
     this.loadUsers();
   }
 
@@ -144,7 +135,7 @@ class LitInternApp extends Route_Mixin(LitElement) {
 
   createUsersRoute() {
     console.log('Clicked');
-    return '/create-user';
+    return '/lit-user-list';
   }
 }
 customElements.define('lit-intern-app', LitInternApp);
