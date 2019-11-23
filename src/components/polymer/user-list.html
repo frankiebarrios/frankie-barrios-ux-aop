@@ -1,5 +1,5 @@
-<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
-<link rel="import" href="../../node_modules/@banno/polymer/lib/elements/dom-repeat.js">
+<link rel="import" href="../../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../../node_modules/@banno/polymer/lib/elements/dom-repeat.js">
 <link rel="import" href="./user-profile.html">
 
 <dom-module id="user-list">
@@ -15,11 +15,11 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import routeTree from '../routing/routes.js';
-    import Route_Paths from '../routing/paths.js';
-    import Route_Ids from '../routing/id.js';
-    import bindPropertiesFromParentRouteMixin from '../../src/routing/bindPropertiesFromParentRouteMixin.js';
-    const router = require('../../node_modules/@banno/web-component-router');
+    import routeTree from '../../routing/routes.js';
+    import Route_Paths from '../../routing/paths.js';
+    import Route_Ids from '../../routing/id.js';
+    import bindPropertiesFromParentRouteMixin from '../../../src/routing/bindPropertiesFromParentRouteMixin.js';
+    const router = require('../../../node_modules/@banno/web-component-router');
     const pageJs = require('page');
     const RouteMixin = require('@banno/web-component-router/routing-mixin');
 

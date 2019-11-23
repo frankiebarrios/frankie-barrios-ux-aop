@@ -1,4 +1,4 @@
-<link rel="import" href="../../node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="../../../node_modules/@banno/polymer/polymer.js">
 <link rel="import" href="./user-profile.html">
 <link rel="import" href="./user-list.html">
 <link rel="import" href="./edit-user.html">
@@ -79,7 +79,7 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import { FirebaseAPI } from '../api/firebaseAPI.js';
+    import { FirebaseAPI } from '../../api/firebaseAPI.js';
     import * as firebase from "firebase/app";
     import "firebase/database";
 
@@ -97,11 +97,11 @@
 
     const storage = new FirebaseAPI();
 
-    import routeTree from '../routing/routes.js';
-    import Route_Paths from '../routing/paths.js';
-    import Route_Ids from '../routing/id.js';
-    const router = require('../../node_modules/@banno/web-component-router');
-    const Route_Mixin = require('../../node_modules/@banno/web-component-router/routing-mixin');
+    import routeTree from '../../routing/routes.js';
+    import Route_Paths from '../../routing/paths.js';
+    import Route_Ids from '../../routing/id.js';
+    const router = require('../../../node_modules/@banno/web-component-router');
+    const Route_Mixin = require('../../../node_modules/@banno/web-component-router/routing-mixin');
     const pageJs = require('page');
 
     class InternApp extends Route_Mixin(PolymerElement) {
