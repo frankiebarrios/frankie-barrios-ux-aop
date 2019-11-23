@@ -68,6 +68,7 @@
         background-color: rgb(159, 209, 255);
       }
     </style>
+
     <header>
       <ul>
         <li><a href="[[createUsersRoute()]]">Create New User</a></li>
@@ -75,6 +76,7 @@
       <slot></slot>
       <user-list users="[[users]]" storage="[[storage]]"></user-list>
     </header>
+
   </template>
 
   <script type="module">
@@ -128,6 +130,9 @@
         router.routeTree.getValue().element = this;
         router.start();
         this.loadUsers();
+        // Listening to all event dispatches from children to update
+        // user-list from db once a change is made to the data through something
+        // like a form submission or user edit
         this.addEventListener('updateUserList', this.updateUserList);
       }
 
