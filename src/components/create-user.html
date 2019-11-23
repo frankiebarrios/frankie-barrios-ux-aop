@@ -73,6 +73,7 @@
         border: solid 2px red;
       }
     </style>
+
     <div class="card">
       <div class="container">
         <h2 class="div-center text">Create New User</h2>
@@ -188,25 +189,21 @@
         }
       }
 
-      routeEnter(currentNode, nextNode, routeId, context, next) {
-        super.routeEnter(currentNode, nextNode, routeId, context, next)
+      routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
+        super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
         context.handled = true;
         const currentElement = currentNode.getValue().element;
         next();
       }
 
       routeExit(currentNode, nextNode, routeId, context, next) {
-        super.routeExit(currentNode, nextNode, routeId, context, next)
+        super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
         const currentElement = currentNode.getValue().element;
         if (currentElement.parentNode) {
-          currentElement.parentNode.removeChild(currentElement);
+          currentElement.parentNode.removeChild((currentElement));
         }
         currentNode.getValue().element = undefined;
         next();
-      }
-
-      getUsers() {
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       createUser() {
@@ -221,6 +218,8 @@
 
       deleteAllUsers() {
         this.storage.deleteAllUsers();
+        // By dispatching this event here were triggering any listener functions
+        // elsewhere in the app that will update the user list without reloading the page
         this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
