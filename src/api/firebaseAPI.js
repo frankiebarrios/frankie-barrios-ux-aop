@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/database'
+const faker = require('faker');
 
 export class FirebaseAPI {
   constructor () {
@@ -15,7 +16,8 @@ export class FirebaseAPI {
         lastName: user.lastName,
         phone: user.phone,
         email: user.email,
-        id: this.generateId()
+        id: this.generateId(),
+        img: faker.image.avatar()
       });
   }
 

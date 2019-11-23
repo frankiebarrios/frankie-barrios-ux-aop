@@ -72,11 +72,15 @@
       .hasError {
         border: solid 2px red;
       }
+
+      * {
+        font-family: "Helvetica", Times, serif;
+      }
     </style>
 
     <div class="card">
       <div class="container">
-        <h2 class="div-center text">Create New User</h2>
+        <h2 class="div-center" style="font-weight: 400;">Create New User</h2>
         <form>
           <label>First Name</label>
           <input type="text" id="firstName" hasError="validateInput" placeholder$="[[firstNamePlaceholder]]"

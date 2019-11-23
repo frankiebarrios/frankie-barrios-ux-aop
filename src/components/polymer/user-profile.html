@@ -30,7 +30,7 @@
       .card {
         padding: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
+        /* border-radius: 20px; */
         margin-bottom: 25px;
         margin-top: 50px;
       }
@@ -56,6 +56,17 @@
       jha-icon-delete-outline {
         fill: #6495ED;
       }
+
+      img {
+        border-radius: 50%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      * {
+        font-family: "Helvetica", Times, serif;
+        font-weight: 400;
+      }
     </style>
 
     <template is="dom-if" if="[[!editButtonClicked]]">
@@ -72,6 +83,11 @@
             </div>
           </template>
           <h3 class="div-center" style="margin: initial;padding-bottom: inherit;">User Profile</h3>
+
+          <div class="div-center">
+            <img src="[[user.img]]" alt="Faker Avatar" height="64" width="64">
+          </div>
+
           <table class="container center" id="test">
             <tr>
               <td>Name:</td>
@@ -179,6 +195,8 @@
         this.storage.deleteUser(this.user.id);
         this.updateUserList();
       }
+
+
     }
     customElements.define(UserProfile.is, UserProfile);
     export default UserProfile;
