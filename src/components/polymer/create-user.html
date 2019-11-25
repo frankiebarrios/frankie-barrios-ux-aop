@@ -103,7 +103,7 @@
           <jha-icon-save-outline on-click="createUser" class="icon"></jha-icon-save-outline>
         </div>
         <div class="textContainer">
-          <h5>Delete All</h5>
+          <h5>Bella Is Cool</h5>
           <h5>Create</h5>
         </div>
       </div>
@@ -221,10 +221,11 @@
       }
 
       deleteAllUsers() {
-        this.storage.deleteAllUsers();
+        alert('Bella Is Not Cool');
+        //this.storage.deleteAllUsers();
         // By dispatching this event here were triggering any listener functions
         // elsewhere in the app that will update the user list without reloading the page
-        this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
+        //this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
       }
 
       validateInput() {
