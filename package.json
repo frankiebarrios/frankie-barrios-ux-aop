@@ -27,6 +27,7 @@
     "firebase": "^6.6.1",
     "git": "^0.1.5",
     "gulp": "^4.0.2",
+    "lit-element": "^2.2.1",
     "svg-url-loader": "^3.0.2"
   },
   "devDependencies": {

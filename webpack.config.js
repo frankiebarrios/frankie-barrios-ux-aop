@@ -17,6 +17,12 @@ module.exports = env => {
         "fix-polymer-imports": require.resolve("./tools/fix-polymer-imports.js")
       }
     },
+    resolve: {
+      alias: {
+        '@app': path.resolve(__dirname, 'src/'),
+        node_modules: path.resolve(__dirname, 'node_modules/')
+      }
+    },
     module: {
       rules: [
         {
