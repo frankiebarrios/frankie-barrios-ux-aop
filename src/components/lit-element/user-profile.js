@@ -30,9 +30,10 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
       .card {
         padding: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        /* border-radius: 20px; */
-        margin-bottom: 25px;
-        margin-top: 10px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        max-width: 300px;
+        min-width: 200px;
       }
 
       .profileIcons {
@@ -95,6 +96,7 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
     return /**/html`
       ${(this.profileExpanded ?
         html`
+          <div class="container">
             <div class="card div-center">
               <div class="profileIcons">
                 <jha-icon-circle-minus-outline
@@ -103,7 +105,7 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
               </div>
               <h3 class="div-center">User Profile</h3>
               <div class="div-center">
-                <img src="${this.user.img}" alt="Faker Avatar" height="64" width="64">
+                <img src="${this.user.img}" alt="Faker Avatar" height="96" width="96">
               </div>
               <table class="container card">
                   <tr>
@@ -124,6 +126,7 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
                   <jha-icon-delete-outline @click="${this.deleteUser}"></jha-icon-delete-outline>
               </div>
             </div>
+          </div>
         ` :
         html`
             <div class="card div-center">

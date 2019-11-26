@@ -1,7 +1,7 @@
-<link rel="import" href="../../../node_modules/@banno/polymer/polymer.js">
-<link rel="import" href="../../../node_modules/@banno/polymer/polymer-element.js">
-<link rel="import" href="../../../node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
-<link rel="import" href="../../../node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
+<link rel="import" href="node_modules/@banno/polymer/polymer.js">
+<link rel="import" href="node_modules/@banno/polymer/polymer-element.js">
+<link rel="import" href="node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html">
+<link rel="import" href="node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html">
 
 <dom-module id="create-user">
   <template>
@@ -112,11 +112,11 @@
 
   <script type="module">
     import { Element as PolymerElement } from '@banno/polymer/polymer-element.js';
-    import routeTree from '../../routing/routes.js';
-    import Route_Paths from '../../routing/paths.js';
-    import Route_Ids from '../../routing/id.js';
-    import bindPropertiesFromParentRouteMixin from '../../../src/routing/bindPropertiesFromParentRouteMixin.js';
-    const router = require('../../../node_modules/@banno/web-component-router');
+    import routeTree from '@app/routing/routes.js';
+    import Route_Paths from '@app/routing/paths.js';
+    import Route_Ids from '@app/routing/id.js';
+    import bindPropertiesFromParentRouteMixin from '@app/src/routing/bindPropertiesFromParentRouteMixin.js';
+    const router = require('node_modules/@banno/web-component-router');
     const pageJs = require('page');
     const RouteMixin = require('@banno/web-component-router/routing-mixin');
 

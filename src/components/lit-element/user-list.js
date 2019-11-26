@@ -5,7 +5,16 @@ const Route_Mixin = require('node_modules/@banno/web-component-router/routing-mi
 
 class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement)) {
   static get styles() {
-    return css``;
+    return css`
+      .container {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        max-width: 300px;
+        min-width: 200px;
+      }
+    `;
   }
 
   static get properties() {
@@ -17,12 +26,14 @@ class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement
 
   render() {
     return /**/html`
-      ${this.users.map(user => html`
-        <user-profile
-          .user=${user}
-          .storage=${this.storage}
-        ></user-profile>
-      `)}
+      <div class="container">
+        ${this.users.map(user => html`
+          <user-profile
+            .user=${user}
+            .storage=${this.storage}
+          ></user-profile>
+        `)}
+      </div>
     `;
   }
 }
