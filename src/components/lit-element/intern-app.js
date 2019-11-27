@@ -35,6 +35,14 @@ class InternApp extends Route_Mixin(LitElement) {
         justify-content: center;
       }
 
+      .userListContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 80%;
+        overflow: scroll;
+      }
+
       h1 {
         font-weight: normal;
       }
@@ -97,7 +105,7 @@ class InternApp extends Route_Mixin(LitElement) {
   static get properties() {
     return {
       storage: {
-        value: () => storage
+        value: storage
       },
       users: {
         value: () => storage.getAllUsers()
@@ -117,21 +125,22 @@ class InternApp extends Route_Mixin(LitElement) {
             <a href="/create-user">Create User</a>
           </li>
         </ul>
-        <slot></slot>
+      </header>
+      <div class="routingContainer">
         <user-list
           .users="${this.users}"
           .storage="${this.storage}">
         </user-list>
-      </header>
-      <h1>LitElement App</h1>
+      </div>
+      <slot></slot>
     `;
   }
 
   connectedCallback() {
     super.connectedCallback();
+    console.log('Storage at Intern-App', this.storage);
     router.routeTree = routeTree;
     router.routeTree.getValue().element = this;
-    console.log('Route Tree:', routeTree);
     router.start();
     this.loadUsers();
     this.addEventListener('updateUserList', this.updateUserList);

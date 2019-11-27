@@ -9,10 +9,9 @@ class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement
       .container {
         margin-top: 50px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-evenly;
-        max-width: 300px;
-        min-width: 200px;
+
       }
     `;
   }

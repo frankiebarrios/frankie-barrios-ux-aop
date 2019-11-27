@@ -103,7 +103,7 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
                   @click="${this.expandCollapseCard}">
                 </jha-icon-circle-minus-outline>
               </div>
-              <h3 class="div-center">User Profile</h3>
+              <h2 class="div-center">User Profile</h2>
               <div class="div-center">
                 <img src="${this.user.img}" alt="Faker Avatar" height="96" width="96">
               </div>
@@ -169,6 +169,7 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
 
   connectedCallback() {
     super.connectedCallback();
+    console.log('Storage at User Profile: ', this.storage);
     this.addEventListener('updateUserList', this.editButtonClick);
   }
 

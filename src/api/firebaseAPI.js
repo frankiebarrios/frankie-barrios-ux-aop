@@ -30,6 +30,7 @@ export class FirebaseAPI {
   }
 
   updateUser (id, update) {
+    console.log('API Hit');
     try {
       const updatedUser = Object.assign(this.getUser(id), update);
       this.users.splice(this.getUserIndex(id), 1, updatedUser);
