@@ -84,7 +84,9 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyE
   static get properties() {
     return {
       storage: { type: Object },
-      user: { type: Object },
+      user: {
+        firstName: { type: String }
+      },
       hasError: { type: Boolean },
       firstNameError: { type: String },
       lastNameError: { type: String },
@@ -97,12 +99,14 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyE
       firstNamePlaceholder: { type: String },
       lastNamePlaceholder: { type: String },
       phonePlaceholder: { type: String },
-      emailPlaceholder: { type: String }
+      emailPlaceholder: { type: String },
+      testText: { type: String }
     };
   }
 
   constructor() {
     super();
+    this.testText = 'Test Bind',
     this.user = {
       firstName: '',
       lastName: '',
@@ -133,19 +137,19 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyE
           <form>
             <label>First Name</label>
             <input type="text" id="firstName" .hasError=${this.hasError} .placeholder="${this.firstNamePlaceholder}"
-              .value="${this.user.firstName}" .class=${this.firstNameClass}>
+              value=${this.user.firstName} @change=${(e) => this.user.firstName = e.target.value} .class=${this.firstNameClass}>
 
             <label>Last Name</label>
             <input type="text" id="lastName" .hasError=${this.hasError} .placeholder="${this.lastNamePlaceholder}"
-              .value="${this.user.lastName}" .class=${this.lastNameClass}>
+              value=${this.user.lastName} @change=${(e) => this.user.lastName = e.target.value} .class=${this.lastNameClass}>
 
             <label>Phone</label>
             <input type="text" id="phone" .hasError=${this.hasError} .placeholder="${this.phonePlaceholder}"
-            .value="${this.user.phone}" .class=${this.phoneClass}>
+              value=${this.user.phone} @change=${(e) => this.user.phone = e.target.value} .class=${this.phoneClass}>
 
             <label>Email</label>
             <input type="text" id="email" .hasError=${this.hasError} .placeholder="${this.emailPlaceholder}"
-            .value="${this.user.email}" .class=${this.emailClass}>
+              value=${this.user.email} @change=${(e) => this.user.email = e.target.value} .class=${this.emailClass}>
           </form>
           <div class="formIcons">
             <jha-icon-delete-outline class="icon" @click=${this.deleteAllUsers}></jha-icon-delete-outline>
@@ -161,15 +165,15 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyE
 
   createUser() {
     console.log('Create User Hit');
-    console.log('Storage: ', this.storage);
+    console.log('Storage: ', this.user);
     // this.storage.createUser(this.user);
 
-    // this.validateInput();
-    // if (!this.hasError) {
-    //   this.storage.createUser(this.user);
-    //   this.user = {};
-    // }
-    // this.hasError = false;
+    this.validateInput();
+    if (!this.hasError) {
+      this.storage.createUser(this.user);
+      this.user = {};
+    }
+    this.hasError = false;
     this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
   }
 
