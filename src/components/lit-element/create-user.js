@@ -164,10 +164,6 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyE
   }
 
   createUser() {
-    console.log('Create User Hit');
-    console.log('Storage: ', this.user);
-    // this.storage.createUser(this.user);
-
     this.validateInput();
     if (!this.hasError) {
       this.storage.createUser(this.user);
@@ -180,8 +176,6 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyE
   deleteAllUsers() {
     alert('Need Safety Check To Avoid Deleting All Data If Triggered');
     //this.storage.deleteAllUsers();
-    // By dispatching this event here were triggering any listener functions
-    // elsewhere in the app that will update the user list without reloading the page
     //this.dispatchEvent(new CustomEvent('updateUserList', { bubbles: true, composed: true }));
   }
 
