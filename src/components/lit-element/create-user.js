@@ -3,8 +3,9 @@ import bindPropertiesFromParentRouteMixin from '@app/routing/bindPropertiesFromP
 const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html';
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html';
+import { PropertyEffects } from 'node_modules/@banno/polymer/lib/mixins/property-effects.js';
 
-class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(LitElement)) {
+class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(PropertyEffects(LitElement))) {
   static get styles() {
     return css`
     :host {
@@ -157,27 +158,6 @@ class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(LitElemen
       </div>
     `;
   }
-
-  // routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
-  //   super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
-  //   // make sure to set this to indicate the route was recognized.
-  //   context.handled = true;
-  //   // do something with the node
-  //   const currentElement = currentNode.getValue().element;
-  //   console.log('Current Element: ', currentElement);
-  //   // Always call next
-  //   next();
-  // }
-
-  // routeExit(currentNode, nextNode, routeId, context, next) {
-  //   super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
-  //   const currentElement = currentNode.getValue().element;
-  //   if (currentElement.parentNode) {
-  //     currentElement.parentNode.removeChild((currentElement));
-  //   }
-  //   currentNode.getValue().element = undefined;
-  //   next();
-  // }
 
   createUser() {
     console.log('Create User Hit');

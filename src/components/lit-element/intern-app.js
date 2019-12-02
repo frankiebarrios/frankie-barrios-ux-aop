@@ -7,9 +7,9 @@ import { FirebaseAPI } from '@app/api/firebaseAPI.js';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import routeTree from '@app/routing/routes.js';
-import { constructors } from 'dom5';
 const router = require('node_modules/@banno/web-component-router');
 const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
+import { PropertyEffects } from 'node_modules/@banno/polymer/lib/mixins/property-effects.js';
 
 var firebaseConfig = {
   apiKey: "",
@@ -25,7 +25,7 @@ firebase.initializeApp(firebaseConfig);
 
 const storage = new FirebaseAPI();
 
-class InternApp extends RouteMixin(LitElement) {
+class InternApp extends RouteMixin(PropertyEffects(LitElement)) {
   static get styles() {
     return css`
       header {
