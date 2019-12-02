@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit-element';
+import bindPropertiesFromParentRouteMixin from '@app/routing/bindPropertiesFromParentRouteMixin.js';
+const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
 
-class EditUser extends LitElement {
+class EditUser extends bindPropertiesFromParentRouteMixin(LitElement) {
   static get styles() {
     return css``;
   }

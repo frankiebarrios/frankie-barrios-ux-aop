@@ -3,7 +3,7 @@ import bindPropertiesFromParentRouteMixin from '@app/routing/bindPropertiesFromP
 const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html';
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html';
-class CreateUser extends RouteMixin(LitElement) {
+class CreateUser extends bindPropertiesFromParentRouteMixin(LitElement) {
   static get styles() {
     return css`
     :host {
@@ -79,76 +79,6 @@ class CreateUser extends RouteMixin(LitElement) {
     `;
   }
 
-  // static get properties() {
-  //   return {
-  //     storage: { type: Object },
-  //         user: {
-  //           type: Object,
-  //           value() {
-  //             return {
-  //               firstName: '',
-  //               lastName: '',
-  //               phone: '',
-  //               email: '',
-  //               id: ''
-  //             }
-  //           }
-  //         },
-  //         hasError: {
-  //           type: Boolean,
-  //           value: false
-  //         },
-  //         firstNameError: {
-  //           type: String,
-  //           value: 'Must Enter A First Name!'
-  //         },
-  //         lastNameError: {
-  //           type: String,
-  //           value: 'Must Enter A Last Name!'
-  //         },
-  //         phoneError: {
-  //           type: String,
-  //           value: 'Invalid Phone Number Entered!'
-  //         },
-  //         emailError: {
-  //           type: String,
-  //           value: 'Invalid Email Address Entered!'
-  //         },
-  //         firstNameClass: {
-  //           type: String,
-  //           value: ''
-  //         },
-  //         firstNamePlaceholder: {
-  //           type: String,
-  //           value: 'Enter first name...'
-  //         },
-  //         lastNameClass: {
-  //           type: String,
-  //           value: ''
-  //         },
-  //         lastNamePlaceholder: {
-  //           type: String,
-  //           value: 'Enter last name...'
-  //         },
-  //         phoneClass: {
-  //           type: String,
-  //           value: ''
-  //         },
-  //         phonePlaceholder: {
-  //           type: String,
-  //           value: 'Enter phone number...'
-  //         },
-  //         emailClass: {
-  //           type: String,
-  //           value: ''
-  //         },
-  //         emailPlaceholder: {
-  //           type: String,
-  //           value: 'Enter email address...'
-  //         }
-  //   };
-  // }
-
   static get properties() {
     return {
       storage: { type: Object },
@@ -171,7 +101,6 @@ class CreateUser extends RouteMixin(LitElement) {
 
   constructor() {
     super();
-    this.storage = '',
     this.user = {
       firstName: '',
       lastName: '',
@@ -228,26 +157,26 @@ class CreateUser extends RouteMixin(LitElement) {
     `;
   }
 
-  routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
-    super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
-    // make sure to set this to indicate the route was recognized.
-    context.handled = true;
-    // do something with the node
-    const currentElement = currentNode.getValue().element;
-    console.log('Current Element: ', currentElement);
-    // Always call next
-    next();
-  }
+  // routeEnter(currentNode, nextNodeIfExists, routeId, context, next) {
+  //   super.routeEnter(currentNode, nextNodeIfExists, routeId, context, next)
+  //   // make sure to set this to indicate the route was recognized.
+  //   context.handled = true;
+  //   // do something with the node
+  //   const currentElement = currentNode.getValue().element;
+  //   console.log('Current Element: ', currentElement);
+  //   // Always call next
+  //   next();
+  // }
 
-  routeExit(currentNode, nextNode, routeId, context, next) {
-    super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
-    const currentElement = currentNode.getValue().element;
-    if (currentElement.parentNode) {
-      currentElement.parentNode.removeChild((currentElement));
-    }
-    currentNode.getValue().element = undefined;
-    next();
-  }
+  // routeExit(currentNode, nextNode, routeId, context, next) {
+  //   super.routeExit(currentNode, nextNodeIfExists, routeId, context, next)
+  //   const currentElement = currentNode.getValue().element;
+  //   if (currentElement.parentNode) {
+  //     currentElement.parentNode.removeChild((currentElement));
+  //   }
+  //   currentNode.getValue().element = undefined;
+  //   next();
+  // }
 
   createUser() {
     console.log('Create User Hit');

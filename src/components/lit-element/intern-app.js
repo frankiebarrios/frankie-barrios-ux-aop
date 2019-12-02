@@ -7,8 +7,9 @@ import { FirebaseAPI } from '@app/api/firebaseAPI.js';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import routeTree from '@app/routing/routes.js';
+import { constructors } from 'dom5';
 const router = require('node_modules/@banno/web-component-router');
-const Route_Mixin = require('node_modules/@banno/web-component-router/routing-mixin');
+const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
 
 var firebaseConfig = {
   apiKey: "",
@@ -24,7 +25,7 @@ firebase.initializeApp(firebaseConfig);
 
 const storage = new FirebaseAPI();
 
-class InternApp extends Route_Mixin(LitElement) {
+class InternApp extends RouteMixin(LitElement) {
   static get styles() {
     return css`
       header {
@@ -114,17 +115,15 @@ class InternApp extends Route_Mixin(LitElement) {
 
   static get properties() {
     return {
-      storage: {
-        value: storage
-      },
-      users: {
-        value: () => storage.getAllUsers()
-      },
-      routeData: {
-        type: Object,
-        value: routeTree
-      }
+      storage: { type: Object },
+      users: { type: Object }
     }
+  }
+
+  constructor() {
+    super();
+    this.storage = storage;
+    this.users = storage.getAllUsers();
   }
 
   render() {
