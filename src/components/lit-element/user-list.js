@@ -7,11 +7,11 @@ class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement
   static get styles() {
     return css`
       .container {
-        margin-top: 50px;
+        padding-top: 25px;
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
-
+        justify-content: space-between;
+        overflow: scroll;
       }
     `;
   }
@@ -27,7 +27,7 @@ class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement
     return /**/html`
       <div class="container">
         ${this.users.map(user => html`
-          <user-profile
+          <user-profile style="padding-left: 15px; padding-right: 15px;"
             .user=${user}
             .storage=${this.storage}
           ></user-profile>

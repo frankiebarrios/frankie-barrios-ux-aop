@@ -32,7 +32,7 @@ class InternApp extends Route_Mixin(LitElement) {
         padding: 20px 0;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
       }
 
       .userListContainer {
@@ -57,6 +57,12 @@ class InternApp extends Route_Mixin(LitElement) {
         font-size: 15px;
       }
 
+      .routingContainer {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+      }
+
       /* Nav Bar Styles */
       body {
         margin: 0;
@@ -73,7 +79,7 @@ class InternApp extends Route_Mixin(LitElement) {
         width: 100%;
         display: inline-flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-around;
       }
 
       li {
@@ -99,6 +105,10 @@ class InternApp extends Route_Mixin(LitElement) {
       * {
         font-family: "Helvetica", Times, serif;
       }
+
+      .centered {
+        text-align: center;
+      }
     `;
   }
 
@@ -123,6 +133,9 @@ class InternApp extends Route_Mixin(LitElement) {
         <ul>
           <li>
             <a href="/create-user">Create User</a>
+          </li>
+          <li>
+            <a href="/">Home</a>
           </li>
         </ul>
       </header>

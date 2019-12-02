@@ -30,8 +30,8 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
       .card {
         padding: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        margin-bottom: 15px;
-        margin-top: 15px;
+        margin-bottom: 12px;
+        margin-top: 12px;
         max-width: 300px;
         min-width: 200px;
       }
@@ -105,7 +105,9 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
               </div>
               <h2 class="div-center">User Profile</h2>
               <div class="div-center">
-                <img src="${this.user.img}" alt="Faker Avatar" height="96" width="96">
+                <a href="/edit-user">
+                  <img src="${this.user.img}" alt="Faker Avatar" height="96" width="96">
+                </a>
               </div>
               <table class="container card">
                   <tr>
@@ -137,7 +139,9 @@ class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElem
               </div>
               <h3 class="div-center">User Profile</h3>
               <div class="div-center">
-                <img src="${this.user.img}" alt="Faker Avatar" height="64" width="64">
+                <a href="/edit-user">
+                  <img src="${this.user.img}" alt="Faker Avatar" height="64" width="64">
+                </a>
               </div>
               <table class="container card">
                 <tr>

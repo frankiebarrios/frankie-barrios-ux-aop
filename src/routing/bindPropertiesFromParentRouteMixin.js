@@ -50,9 +50,9 @@ export default function bindPropertiesFromParentRouteMixin (Superclass) {
         const observerFunctionName = this._getPropertyObserverFunctionName(property);
         this.parentElement[observerFunctionName] = this._createObserverFunction(property);
         // create complex observer for the property
-        // this.parentElement._createMethodObserver(
-        //   `${observerFunctionName}(${property}, ${property}.*)`
-        // );
+        this.parentElement._createMethodObserver(
+          `${observerFunctionName}(${property}, ${property}.*)`
+        );
       });
     }
 

@@ -6,78 +6,76 @@ import 'node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.ht
 class CreateUser extends RouteMixin(LitElement) {
   static get styles() {
     return css`
-      :host {
-        display: block
-      }
+    :host {
+      display: block
+    }
 
-      .div-center {
-        text-align: center;
-      }
+    .div-center {
+      text-align: center;
+    }
 
-      input[type=text],
-      select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
+    input[type=text],
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
-      div {
-        border-radius: 5px;
-        margin: auto;
-        width: 40%;
-      }
+    div {
+      border-radius: 5px;
+      margin: auto;
+      width: 40%;
+    }
 
-      .container {
-        padding: 10px 16px;
-        width: 45%;
-        border: 3px outset #6495ED;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      }
+    .container {
+      padding: 10px 16px;
+      width: 80%;
+    }
 
-      .container::after,
-      .row::after {
-        content: "";
-        clear: both;
-        display: table;
-      }
+    .container::after,
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
 
-      .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        padding-top: initial;
-        margin-top: 65px;
-      }
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding-top: initial;
+      margin-top: 65px;
+    }
 
-      .icon {
-        fill: #6495ED;
-        height: 44px;
-        width: 44px;
-      }
+    .icon {
+      fill: #6495ED;
+      height: 44px;
+      width: 44px;
+    }
 
-      .formIcons {
-        width: 100%;
-        display: inline-flex;
-        flex-direction: row;
-        justify-content: space-around;
-        padding-top: 6%;
-      }
+    .formIcons {
+      width: 100%;
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: space-around;
+      padding-top: 6%;
+    }
 
-      .textContainer {
-        width: 100%;
-        display: inline-flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
+    .textContainer {
+      width: 100%;
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
 
-      .hasError {
-        border: solid 2px red;
-      }
+    .hasError {
+      border: solid 2px red;
+    }
 
-      * {
-        font-family: "Helvetica", Times, serif;
-      }
+    * {
+      font-family: "Helvetica", Times, serif;
+    }
     `;
   }
 
@@ -173,6 +171,7 @@ class CreateUser extends RouteMixin(LitElement) {
 
   constructor() {
     super();
+    this.storage = '',
     this.user = {
       firstName: '',
       lastName: '',
@@ -204,6 +203,18 @@ class CreateUser extends RouteMixin(LitElement) {
             <label>First Name</label>
             <input type="text" id="firstName" .hasError=${this.hasError} .placeholder="${this.firstNamePlaceholder}"
               .value="${this.user.firstName}" .class=${this.firstNameClass}>
+
+            <label>Last Name</label>
+            <input type="text" id="lastName" .hasError=${this.hasError} .placeholder="${this.lastNamePlaceholder}"
+              .value="${this.user.lastName}" .class=${this.lastNameClass}>
+
+            <label>Phone</label>
+            <input type="text" id="phone" .hasError=${this.hasError} .placeholder="${this.phonePlaceholder}"
+            .value="${this.user.phone}" .class=${this.phoneClass}>
+
+            <label>Email</label>
+            <input type="text" id="email" .hasError=${this.hasError} .placeholder="${this.emailPlaceholder}"
+            .value="${this.user.email}" .class=${this.emailClass}>
           </form>
           <div class="formIcons">
             <jha-icon-delete-outline class="icon" @click=${this.deleteAllUsers}></jha-icon-delete-outline>
@@ -253,7 +264,7 @@ class CreateUser extends RouteMixin(LitElement) {
   }
 
   deleteAllUsers() {
-    alert('Bella Is Cool');
+    alert('Need Safety Check To Avoid Deleting All Data If Triggered');
     //this.storage.deleteAllUsers();
     // By dispatching this event here were triggering any listener functions
     // elsewhere in the app that will update the user list without reloading the page
