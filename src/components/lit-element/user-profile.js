@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-const Route_Mixin = require('node_modules/@banno/web-component-router/routing-mixin');
+const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
 import bindPropertiesFromParentRouteMixin from '@app/routing/bindPropertiesFromParentRouteMixin';
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-circle-minus-outline.html';
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-circle-plus-outline.html';
@@ -7,7 +7,7 @@ import 'node_modules/@banno/jha-design-components/icons/jha-icon-edit-outline.ht
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html';
 
 
-class UserProfile extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement)) {
+class UserProfile extends RouteMixin(LitElement) {
   static get styles() {
     return css`
       .div-center {

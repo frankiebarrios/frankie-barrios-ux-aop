@@ -3,7 +3,7 @@ import bindPropertiesFromParentRouteMixin from '@app/routing/bindPropertiesFromP
 import './user-profile';
 const Route_Mixin = require('node_modules/@banno/web-component-router/routing-mixin');
 
-class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement)) {
+class UserList extends Route_Mixin(LitElement) {
   static get styles() {
     return css`
       .container {
@@ -18,7 +18,7 @@ class UserList extends bindPropertiesFromParentRouteMixin(Route_Mixin(LitElement
 
   static get properties() {
     return {
-      users: Object,
+      users: {type: Object },
       storage: { type: Object }
     };
   }

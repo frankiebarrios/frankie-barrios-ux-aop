@@ -3,7 +3,8 @@ import bindPropertiesFromParentRouteMixin from '@app/routing/bindPropertiesFromP
 const RouteMixin = require('node_modules/@banno/web-component-router/routing-mixin');
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-delete-outline.html';
 import 'node_modules/@banno/jha-design-components/icons/jha-icon-save-outline.html';
-class CreateUser extends bindPropertiesFromParentRouteMixin(LitElement) {
+
+class CreateUser extends bindPropertiesFromParentRouteMixin(RouteMixin(LitElement)) {
   static get styles() {
     return css`
     :host {
