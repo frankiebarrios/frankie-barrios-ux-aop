@@ -173,7 +173,6 @@ class UserProfile extends RouteMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    console.log('Storage at User Profile: ', this.storage);
     this.addEventListener('updateUserList', this.editButtonClick);
   }
 

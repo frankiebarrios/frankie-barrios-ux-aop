@@ -150,7 +150,6 @@ class InternApp extends RouteMixin(PropertyEffects(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
-    console.log('Storage at Intern-App', this.storage);
     router.routeTree = routeTree;
     router.routeTree.getValue().element = this;
     router.start();
