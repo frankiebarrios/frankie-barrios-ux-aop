@@ -49,7 +49,7 @@ module.exports = env => {
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
-      port: 1820,
+      port: 1337,
       historyApiFallback: true
     },
     devtool: 'source-map',
